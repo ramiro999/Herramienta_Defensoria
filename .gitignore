@@ -1,0 +1,26 @@
+# Node.js and npm
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Compiled files
+/dist/
+/tmp/
+/out-tsc/
+
+# Environment variables
+src/environments/environment.ts
+src/environments/environment.prod.ts
+
+# IDE settings (optional, adjust to your preferences)
+.vscode/
+.idea/
+
+# Local build artifacts
+*.js
+*.js.map
+*.d.ts
+
+# Dependency lock files
+package-lock.json
+yarn.lock

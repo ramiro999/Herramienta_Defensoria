@@ -1,0 +1,37 @@
+/* main-form.component.css */
+/* archivo.component.css */
+.container {
+    position: relative;
+    background-image: url('src/assets/img/Fondo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+  }
+  
+  .navbar {
+    position: absolute;
+    top: 10px; /* Ajusta la posición vertical de la navbar según tus necesidades */
+    left: 10px; /* Ajusta la posición horizontal de la navbar según tus necesidades */
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    width: 50px; /* Ajusta el tamaño de la imagen del botón según tus necesidades */
+    height: auto;
+    cursor: pointer;
+  }
+  
+  /* Estilos para hacer la navbar responsive */
+  @media screen and (max-width: 768px) {
+    .navbar {
+      top: 5px;
+      left: 5px;
+    }
+  
+    .logo img {
+      width: 30px;
+    }
+  }
+  
