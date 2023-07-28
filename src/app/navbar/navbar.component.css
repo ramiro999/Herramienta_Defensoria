@@ -1,0 +1,14 @@
+/* navbar.component.css */
+/* navbar.component.css */
+
+.navbar {
+    background-image: url("../assets/img/Fondo.png");
+    background-size: cover;
+    /* Puedes ajustar otros estilos según tus necesidades */
+  }
+  
+  /* Estilos para los enlaces del navbar (opcional) */
+  .navbar-light .navbar-nav .nav-link {
+    color: #333; /* Color de los enlaces */
+  }
+  

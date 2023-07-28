@@ -1,19 +1,7 @@
-<!-- archivo.component.html -->
+<app-navbar></app-navbar>
+
 <div class="container">
-
-  <!-- Navbar -->
-  <nav class="container"> <!-- tenia la clase navbar pero se mostraba abajo el logo-->
-    <div class="logo">
-      <img src="assets/img/favicon.png" alt="Botón" (click)="onMenuButtonClick()">
-    </div>
-    <!-- Agrega aquí otros elementos de la navbar si los necesitas -->
-  </nav>
-  
-  <!-- Div #2 -->
-  <div class="content" style="top: 200px; left: 200px;">
-    Contenido del div #2
-    -----
+  <div class="row">
+    <router-outlet></router-outlet>  
   </div>
-
 </div>
-

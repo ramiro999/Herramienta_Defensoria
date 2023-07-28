@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'formulario-pdf'`, () => {
+  it(`should have as title 'Herramienta-defensoria'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('formulario-pdf');
+    expect(app.title).toEqual('Herramienta-defensoria');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('formulario-pdf app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('Herramienta-defensoria app is running!');
   });
 });

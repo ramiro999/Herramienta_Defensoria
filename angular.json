@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "formulario-pdf": {
+    "Herramienta-defensoria": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/formulario-pdf",
+            "outputPath": "dist/herramienta-defensoria",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -22,16 +22,16 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/assets/favicon.png"
             ],
             "styles": [
               "src/styles.css",
-              "./node_modules/bootstrap/dist/css/bootstrap.min.css" 
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+
             ],
             "scripts": [
-              "./node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/@popperjs/core/dist/umd/popper.min.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "formulario-pdf:build:production"
+              "browserTarget": "Herramienta-defensoria:build:production"
             },
             "development": {
-              "browserTarget": "formulario-pdf:build:development"
+              "browserTarget": "Herramienta-defensoria:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "formulario-pdf:build"
+            "browserTarget": "Herramienta-defensoria:build"
           }
         },
         "test": {
@@ -101,6 +101,6 @@
     }
   },
   "cli": {
-    "analytics": "fc2e3f06-bf28-4c3c-9b5f-a8c591146303"
+    "analytics": false
   }
 }
