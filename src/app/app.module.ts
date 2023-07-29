@@ -14,6 +14,9 @@ import { AccionDeCumplimientoComponent } from './accion-de-cumplimiento/accion-d
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
+import { RequestService } from './services/request.service';
+import { DocgeneratorService } from './services/docgenerator.service';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -37,7 +40,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [RequestService, DocgeneratorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
