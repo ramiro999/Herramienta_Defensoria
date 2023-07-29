@@ -24,3 +24,5 @@ src/environments/environment.prod.ts
 # Dependency lock files
 package-lock.json
 yarn.lock
+
+/.angular/
