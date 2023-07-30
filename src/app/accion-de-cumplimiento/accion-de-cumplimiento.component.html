@@ -1,24 +1,391 @@
 <div class="container mt-5">
-    <h2>Contact Form</h2>
-    <form [formGroup]="AccionDeCumplimiento" (ngSubmit)="onSubmit()">
-
+  <h3>Diligencie el siguiente formulario</h3>
+  <form [formGroup]="AccionDeCumplimiento" (ngSubmit)="onSubmit()">
+    <!-- Numeral 1-->
+    <div class="d-flex align-items-start mt-5">
+      <div class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center" style="width: 25px; height: 25px;">
+        <strong>1</strong>
+      </div>
       <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" formControlName="name" required>
+        <!-- Label: ¿A quién va dirigida esta acción de cumplimiento? -->
+        <label class="text-primary" for="destinatario"><strong>¿A quién va dirigida esta acción de cumplimiento?</strong></label>
+        <div id="destinatarioHelpBlock" class="form-text">
+          Indica en los siguientes campos los datos de la entidad a la que se dirige
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Input para la Ciudad -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="ciudad"><strong>Ciudad</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="input-group">
+            <input type="text" class="form-control" formControlName="ciudad" id="ciudad" placeholder="Ingresa la ciudad" required>
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <div class="input-group-append">
+              <span class="input-group-text custom-tooltip" data-toggle="tooltip" data-placement="top" title="La ciudad de quien escribe y la fecha en la que se escribe dejan constancia del lugar y la fecha en la que se firma el acta de cumplimiento.">
+                <i class="fas fa-exclamation-circle text-primary"></i>
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" formControlName="email" required>
+      <!-- Input para la Fecha -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="fecha"><strong>Fecha</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="input-group">
+            <input type="text" class="form-control" formControlName="fecha" id="fecha" placeholder="dd/mm/aaaa" required>
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <div class="input-group-append">
+              <span class="input-group-text custom-tooltip" data-toggle="tooltip" data-placement="top" title="IMPORTANTE: La fecha más relevante es aquella en la que se presenta en la petición ante la entidad. La fecha en la que se envía por correo electrónico o la fecha en la que se presenta en la ventanilla.">
+                <i class="fas fa-exclamation-circle text-primary"></i>
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
 
-      <div class="form-group">
-        <label for="message">Message</label>
-        <textarea class="form-control" id="message" formControlName="message" rows="4" required></textarea>
+   <!-- Input para la Localidad Juez administrativo -->
+   <div class="form-group mt-2">
+    <label for="localidadJuez"><strong>Localidad Juez administrativo</strong></label>
+    <!-- Icono de alerta y mensaje de ayuda -->
+    <div class="input-group">
+      <input type="text" class="form-control" formControlName="localidadJuez" id="localidadJuez" placeholder="Juez administrativo que recibe el acta de cumplimiento" required>
+      <div class="input-group-prepend">
+        <span class="input-group-text custom-tooltip" data-toggle="tooltip" data-placement="top" title="Juez administrativo">
+          <i class="fas fa-exclamation-circle text-primary"></i>
+        </span>
       </div>
-      
-      <button type="submit" class="btn btn-primary">Submit</button>
-
-    </form>
+    </div>
   </div>
-  
+
+  <!-- Input para la Localidad Juez administrativo -->
+  <div class="form-group mt-2">
+    <label for="nombreDemandado"><strong>Persona o entidad a la que demanda</strong></label>
+    <!-- Icono de alerta y mensaje de ayuda -->
+    <div class="input-group">
+      <input type="text" class="form-control" formControlName="nombreDemandado" id="nombreDemandado" placeholder="Nombre de la persona o entidad a la que demanda" required>
+      <div class="input-group-prepend">
+        <span class="input-group-text custom-tooltip" data-toggle="tooltip" data-placement="top" title="Al ser una persona ingrese los nombres y apellidos, si es una empresa su respectivo nombre">
+          <i class="fas fa-exclamation-circle text-primary"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+
+
+   <!-- Numeral 2-->
+   <div class="d-flex align-items-start mt-5">
+    <div class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center" style="width: 25px; height: 25px;">
+      <strong>2</strong>
+    </div>
+    <div class="form-group">
+      <!-- Label: Datos de la persona que hace esta accion de cumplimiento -->
+      <label class="text-primary" for="destinatario"><strong>Datos de la persona que hace esta acción de cumplimiento </strong></label>
+      <div id="destinatarioHelpBlock" class="form-text">
+        Indica en los siguientes campos los datos de la persona que hace esta acción de cumplimiento
+      </div>
+    </div>
+  </div>
+
+
+   <!-- Input para los nombres y apellidos del demandante -->
+ <div class="form-group mt-2">
+  <label for="nombreDemandante"><strong>Nombre(s) y apellido(s)</strong> -</label> <label class="text-primary"><strong>(requerido)</strong></label>
+  <!-- Icono de alerta y mensaje de ayuda -->
+  <div class="input-group">
+    <input type="text" class="form-control" formControlName="nombreDemandante" id="nombreDemandante" placeholder="Nombre de quien hace esta acción de cumplimiento" required>
+    <div class="input-group-prepend">
+      <span class="input-group-text custom-tooltip" data-toggle="tooltip" data-placement="top" title="Todo documento jurídico debe iniciar por identificar a la persona que hace la petición. Con nombre y apellidos.">
+        <i class="fas fa-exclamation-circle text-primary"></i>
+      </span>
+    </div>
+  </div>
+</div>
+
+
+
+
+  <div class="row">
+    <!-- Input para el numero de cedula  -->
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="cedulaDemandante"><strong>Número de cédula</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
+        <div class="input-group">
+          <input type="number" class="form-control" formControlName="cedulaDemandante" id="cedulaDemandante" placeholder="Solo números sin espacios" required pattern="[0-9]+">
+          <!-- Icono de alerta y mensaje de ayuda -->
+          <div class="input-group-append">
+            <span class="input-group-text custom-tooltip" data-toggle="tooltip" data-placement="top" title="La identificación debe ir con cédula.">
+              <i class="fas fa-exclamation-circle text-primary"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input para la ciudad de expedicion -->
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="ciudadCedula"><strong>Ciudad de expedición de cédula</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
+        <div class="input-group">
+          <input type="text" class="form-control" formControlName="ciudadCedula" id="ciudadCedula" placeholder="Ejemplo: Bogotá" required>
+          <!-- Icono de alerta y mensaje de ayuda -->
+          <div class="input-group-append">
+            <span class="input-group-text custom-tooltip" data-toggle="tooltip" data-placement="top" title="La identificación debe ir con la ciudad de expedición de la cédula.">
+              <i class="fas fa-exclamation-circle text-primary"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Numeral 3-->
+  <div class="d-flex align-items-start mt-5">
+    <div class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center" style="width: 25px; height: 25px;">
+      <strong>3</strong>
+    </div>
+    <div class="form-group">
+      <!-- Label: Datos de las acciones incumplidas -->
+      <label class="text-primary" for="destinatario"><strong>Datos de las acciones incumplidas</strong></label>
+      <div id="destinatarioHelpBlock" class="form-text">
+        Indica en los siguientes campos la descripcion de las acciones incumplidas
+      </div>
+    </div>
+  </div>
+
+
+   <!-- Campo para la norma incumplida -->
+ <div class="form-group mt-2">
+  <label for="normaIncumplida"><strong>NORMA INCUMPLIDA</strong> -</label> <label class="text-primary"><strong>(requerido)</strong></label>
+  <!-- Icono de alerta y mensaje de ayuda -->
+  <div class="input-group">
+    <textarea rows="6" class="form-control" formControlName="normaIncumplida" id="normaIncumplida" placeholder="Especifique la ley o del acto administrativo que se demanda como incumplido" required></textarea>
+    <div class="input-group-prepend">
+      <span class="input-group-text custom-tooltip" data-toggle="tooltip" data-placement="top" title="Especifique la ley o del acto administrativo que se demanda como incumplido.">
+        <i class="fas fa-exclamation-circle text-primary"></i>
+      </span>
+    </div>
+  </div>
+</div>
+
+
+<!-- Campo para los hechos -->
+<div class="form-group mt-2">
+  <label for="hechos"><strong>HECHOS </strong> - </label><label class="text-primary"><strong>(requerido)</strong></label>
+  <!-- Icono de alerta y mensaje de ayuda -->
+  <div class="input-group">
+  <textarea rows="6" class="form-control" formControlName="hechos" id="hechos" placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma" required></textarea>
+  <div class="input-group-prepend">
+    <span class="input-group-text custom-tooltip" data-toggle="tooltip" data-placement="top" title="Hacer el relato de los hechos que configuran el incumplimiento de la norma">
+      <i class="fas fa-exclamation-circle text-primary"></i>
+    </span>
+  </div>
+  </div>
+</div>
+
+<!-- Campo para la autoridad que incumple -->
+<div class="form-group mt-2">
+  <label for="autoridadIncumple"><strong>AUTORIDAD QUE INCUMPLE </strong> - </label><label class="text-primary"><strong>(requerido)</strong></label>
+  <!-- Icono de alerta y mensaje de ayuda -->
+  <div class="input-group">
+  <textarea rows="6" class="form-control" formControlName="autoridadIncumple" id="autoridadIncumple" placeholder="Identificar la autoridad o el particular que ejerce funciones públicas a quien corresponde el cumplimiento y ejecución de las normas o actos administrativos acusados como incumplidos " required></textarea>
+  <div class="input-group-prepend">
+    <span class="input-group-text custom-tooltip" data-toggle="tooltip" data-placement="top" title="Especifique la autoridad que incumple la norma">
+      <i class="fas fa-exclamation-circle text-primary"></i>
+    </span>
+  </div>
+  </div>
+</div>
+
+<!-- Campo para la pretension-->
+<div class="form-group mt-2">
+  <label for="pretension"><strong>PRETENSIÓN </strong> - </label><label class="text-primary"><strong>(requerido)</strong></label>
+  <!-- Icono de alerta y mensaje de ayuda -->
+  <div class="input-group">
+  <textarea rows="6" class="form-control" formControlName="pretension" id="pretension" placeholder="Autoridad o particular encargada de cumplir o hacer cumplir la norma" required></textarea>
+  <div class="input-group-prepend">
+    <span class="input-group-text custom-tooltip" data-toggle="tooltip" data-placement="top" title="Autoridad o particular encargada de cumplir o hacer cumplir la norma">
+      <i class="fas fa-exclamation-circle text-primary"></i>
+    </span>
+  </div>
+  </div>
+</div>
+
+<!-- Numeral 4-->
+<div class="d-flex align-items-start mt-5">
+  <div class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center" style="width: 25px; height: 25px;">
+    <strong>4</strong>
+  </div>
+  <div class="form-group">
+    <!-- Label: Notificaciones  -->
+    <label class="text-primary" for="destinatario"><strong>Notificaciones al accionado</strong></label>
+    <div id="destinatarioHelpBlock" class="form-text">
+      Indica en los siguientes campos los datos del accionado que se le notificara la accion de cumplimiento
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <!-- Input para la Ciudad de residencia del accionado -->
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="ciudadDemandado"><strong>Ciudad</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
+      <div class="input-group">
+        <input type="text" class="form-control" formControlName="ciudadDemandado" id="ciudadDemandado" placeholder="Ciudad del demandado." required>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group-append">
+          <span class="input-group-text custom-tooltip" data-toggle="tooltip" data-placement="top" title="Ciudad a la que se le notificara la acción de cumplimiento al demandado.">
+            <i class="fas fa-exclamation-circle text-primary"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input para la direccion -->
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="direccionDemandado"><strong>Dirección</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
+      <div class="input-group">
+        <input type="text" class="form-control" formControlName="direccionDemandado" id="direccionDemandado" placeholder="Direccón del demandado." required>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group-append">
+          <span class="input-group-text custom-tooltip" data-toggle="tooltip" data-placement="top" title="Direccón de residencia  a la que se le notificara la acción de cumplimiento al demandado.">
+            <i class="fas fa-exclamation-circle text-primary"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <!-- Input para el telefono del accinado -->
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="telefonoDemandado"><strong>Teléfono</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
+      <div class="input-group">
+        <input type="number" class="form-control" formControlName="telefonoDemandado" id="telefonoDemandado" placeholder="Teléfono del demandado." required>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group-append">
+          <span class="input-group-text custom-tooltip" data-toggle="tooltip" data-placement="top" title="Teléfono que se le notificara la acción de cumplimiento al demandado.">
+            <i class="fas fa-exclamation-circle text-primary"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input para el correo electronico -->
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="correoDemandado"><strong>Correo Electrónico</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
+      <div class="input-group">
+        <input type="text" class="form-control" formControlName="correoDemandado" id="correoDemandado" placeholder="Correo electrónico del demandado." required>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group-append">
+          <span class="input-group-text custom-tooltip" data-toggle="tooltip" data-placement="top" title="Correo electrónico se le notificara la acción de cumplimiento al demandado.">
+            <i class="fas fa-exclamation-circle text-primary"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Numeral 5-->
+<div class="d-flex align-items-start mt-5">
+  <div class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center" style="width: 25px; height: 25px;">
+    <strong>4</strong>
+  </div>
+  <div class="form-group">
+    <!-- Label: Notificaciones  -->
+    <label class="text-primary" for="destinatario"><strong>Notificaciones al accionante</strong></label>
+    <div id="destinatarioHelpBlock" class="form-text">
+      Indica en los siguientes campos los datos del accionante que se le notificara la accion de cumplimiento
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <!-- Input para la Ciudad de residencia del accionado -->
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="ciudadDemandante"><strong>Ciudad</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
+      <div class="input-group">
+        <input type="text" class="form-control" formControlName="ciudadDemandante" id="ciudadDemandante" placeholder="Ciudad del demandante." required>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group-append">
+          <span class="input-group-text custom-tooltip" data-toggle="tooltip" data-placement="top" title="Ciudad a la que se le notificara la acción de cumplimiento al demandante.">
+            <i class="fas fa-exclamation-circle text-primary"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input para la direccion -->
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="direccionDemandante"><strong>Dirección</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
+      <div class="input-group">
+        <input type="text" class="form-control" formControlName="direccionDemandante" id="direccionDemandante" placeholder="Direccón del demandante." required>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group-append">
+          <span class="input-group-text custom-tooltip" data-toggle="tooltip" data-placement="top" title="Direccón de residencia  a la que se le notificara la acción de cumplimiento al demandante.">
+            <i class="fas fa-exclamation-circle text-primary"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <!-- Input para el telefono del accinado -->
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="telefonoDemandante"><strong>Teléfono</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
+      <div class="input-group">
+        <input type="number" class="form-control" formControlName="telefonoDemandante" id="telefonoDemandante" placeholder="Teléfono del demandante." required>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group-append">
+          <span class="input-group-text custom-tooltip" data-toggle="tooltip" data-placement="top" title="Teléfono que se le notificara la acción de cumplimiento al demandante.">
+            <i class="fas fa-exclamation-circle text-primary"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input para el correo electronico -->
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="correoDemandante"><strong>Correo Electrónico</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
+      <div class="input-group">
+        <input type="text" class="form-control" formControlName="correoDemandante" id="correoDemandante" placeholder="Correo electrónico del demandante." required>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group-append">
+          <span class="input-group-text custom-tooltip" data-toggle="tooltip" data-placement="top" title="Correo electrónico se le notificara la acción de cumplimiento al demandante.">
+            <i class="fas fa-exclamation-circle text-primary"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Botón de envío -->
+    <button type="submit" class="btn btn-primary" [disabled]="!AccionDeCumplimiento.valid">Enviar</button>
+  </form>
+</div>
+

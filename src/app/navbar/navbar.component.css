@@ -1,9 +1,25 @@
 /* navbar.component.css */
 /* navbar.component.css */
 
+body {
+  background-image: url("../assets/img/Fondo.png");
+  background-size: cover;
+  color: #fff;
+}
+
 .navbar {
     background-image: url("../assets/img/Fondo.png");
     background-size: cover;
+    color: #fff;
+    /* Puedes ajustar otros estilos según tus necesidades */
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    padding: 60px;
     /* Puedes ajustar otros estilos según tus necesidades */
   }
   

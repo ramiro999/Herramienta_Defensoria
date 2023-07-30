@@ -1,0 +1,9 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('../assets/img/Fondo.png'); /* Reemplaza 'ruta_del_degradado.jpg' con la ruta de tu imagen de fondo */
+    background-size: cover;
+    background-position: center;
+  }
+
+  
