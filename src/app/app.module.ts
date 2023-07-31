@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DerechoDePeticionComponent } from './derecho-de-peticion/derecho-de-peticion.component';
@@ -18,6 +19,8 @@ import { RequestService } from './services/request.service';
 import { DocgeneratorService } from './services/docgenerator.service';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [RequestService, DocgeneratorService],
   bootstrap: [AppComponent]

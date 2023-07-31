@@ -1,7 +1,7 @@
 /* navbar.component.css */
 /* navbar.component.css */
 
-body {
+.container{
   background-image: url("../assets/img/Fondo.png");
   background-size: cover;
   color: #fff;

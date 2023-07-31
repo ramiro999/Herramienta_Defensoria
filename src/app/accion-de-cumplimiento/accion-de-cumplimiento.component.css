@@ -1,8 +1,0 @@
-.custom-tooltip {
-    animation-duration: 0.1s; /* Cambia la velocidad de la animación a 0.3 segundos (ajusta según lo desees) */
-  }
-  
-  .custom-tooltip .tooltip-inner {
-    background-color: #007bff; /* Cambia el color de fondo del tooltip a azul (#007bff) */
-  }
-  

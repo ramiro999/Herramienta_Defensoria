@@ -1,12 +1,13 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, AfterViewInit} from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { RequestService } from '../services/request.service';
 
 import { DocgeneratorService } from '../services/docgenerator.service';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
-
+declare var bootstrap: any; 
 @Component({
   selector: 'app-accion-de-cumplimiento',
   templateUrl: './accion-de-cumplimiento.component.html',
@@ -14,14 +15,41 @@ import { DocgeneratorService } from '../services/docgenerator.service';
 })
 export class AccionDeCumplimientoComponent {
 
-  AccionDeCumplimiento!: FormGroup;
+  model: string | null = null; // Para almacenar la fecha seleccionada
 
-  constructor(private readonly fb: FormBuilder, private docGenerator: DocgeneratorService) { }
+  toggleDatepicker() {
+    const dateInput = document.getElementById('fecha') as HTMLInputElement;
+    if (dateInput) {
+      dateInput.click(); // Abre el datepicker
+    }
+  }
+
+  onDateChange(event: Event) {
+    const dateInput = event.target as HTMLInputElement;
+    this.model = dateInput.value; // Almacena la fecha seleccionada en la variable 'model'
+  }
+
+
+  AccionDeCumplimiento!: FormGroup;
+  
+  constructor(
+    private readonly fb: FormBuilder, 
+    private docGenerator: DocgeneratorService,
+    ) {}
 
   ngOnInit(): void {
     this.AccionDeCumplimiento = this.initForm();
+    // Configurar el contenido personalizado para el tooltip
 
   }
+
+  ngAfterViewInit(): void {
+    // Inicializar los tooltips
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = Array.from(tooltipTriggerList).map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+  }
+
+
 
   
   
