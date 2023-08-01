@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit} from '@angular/core';
 
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 
 import { RequestService } from '../services/request.service';
 
@@ -13,6 +13,7 @@ declare var bootstrap: any;
   templateUrl: './accion-de-cumplimiento.component.html',
   styleUrls: ['./accion-de-cumplimiento.component.css']
 })
+
 export class AccionDeCumplimientoComponent {
 
   model: string | null = null; // Para almacenar la fecha seleccionada
@@ -50,11 +51,6 @@ export class AccionDeCumplimientoComponent {
   }
 
 
-
-  
-  
-
-
   onSubmit() {
     this.docGenerator.generateDocx(
       'http://localhost:4200/assets/formats/template-accion-de-cumplimiento.docx',
@@ -76,7 +72,6 @@ export class AccionDeCumplimientoComponent {
       cedulaDemandante: [''],
       ciudadCedula: [''],
       normaIncumplida: [''],
-      hechos: [''],
       autoridadIncumple: [''],
       pretension: [''],
       ciudadDemandado: [''],
@@ -86,12 +81,27 @@ export class AccionDeCumplimientoComponent {
       ciudadDemandante: [''],
       direccionDemandante: [''],
       telefonoDemandante: [''],
-      correoDemandante: ['']
+      correoDemandante: [''],
+      hechos: this.fb.array( [ this.fb.group({contenido: ''}) ] ),
     });
   }
 
   // https://drive.google.com/uc?id=1JMQiqx0ORMZsz57C4SSRNLoFnb8NmQ1_
 
+  crearHechoFormGroup(): FormGroup {
+    return this.fb.group({
+      contenido: ''
+    });
+  }
 
+  agregarHecho() {
+    const hechosArray = this.AccionDeCumplimiento.get('hechos') as FormArray;
+    hechosArray.push(this.crearHechoFormGroup());
+  }
+
+  get hechos(): FormArray {
+    return this.AccionDeCumplimiento.get('hechos') as FormArray;
+  }
+  
 
 }

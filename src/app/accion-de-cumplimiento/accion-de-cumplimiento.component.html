@@ -161,19 +161,72 @@
 </div>
 
 
+
+
 <!-- Campo para los hechos -->
 <div class="form-group mt-2">
-  <label for="hechos"><strong>HECHOS </strong> - </label><label class="text-primary"><strong>(requerido)</strong></label>
+
+  <label for="hechos">
+    <strong>HECHOS </strong> - </label><label class="text-primary"><strong>(requerido)</strong>
+  </label>
   <!-- Icono de alerta y mensaje de ayuda -->
-  <div class="input-group">
-  <textarea rows="6" class="form-control" formControlName="hechos" id="hechos" placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma" required></textarea>
-  <div>
-    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Hacer el relato de los hechos que configuran el incumplimiento de la norma.">
-      <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px;"></i>
-    </button>
-  </div>
-  </div>
+
+    
+    <ng-container formArrayName="hechos" *ngFor="let row of hechos.controls; index as i ; first as isFirst ; last as isLast" class="input-group">
+
+      <ng-container *ngIf="isFirst"  [formGroupName]="i">
+        
+        <div class="input-group">
+          <textarea rows="6" class="form-control" formControlName="contenido" id="hechos{{ i }}" placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma" required></textarea>
+
+        
+          <div class="d-flex flex-column">
+            <div class="mb-2">
+              <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Hacer el relato de los hechos que configuran el incumplimiento de la norma.">
+                <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px;"></i>
+              </button>
+            </div>
+            <div *ngIf="isLast" class="mb-2">
+              <!-- Botón para agregar un nuevo campo -->
+              <button type="button" class="btn btn-primary mt-2" (click)="agregarHecho()">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+  
+        </div>
+
+      </ng-container>
+
+
+      <ng-container *ngIf="!isFirst" [formGroupName]="i">
+        <div class="input-group">
+        <textarea rows="6" class="form-control" formControlName="contenido" id="hechos{{ i }}" placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma" required></textarea>
+        <div *ngIf="isLast" class="mb-2">
+          <!-- Botón para agregar un nuevo campo -->
+          <button type="button" class="btn btn-primary mt-2" (click)="agregarHecho()">
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+      </div>
+      </ng-container>
+
+
+    </ng-container>
+  
+  
+
+    
 </div>
+
+
+
+
+
+
+
+
+
 
 <!-- Campo para la autoridad que incumple -->
 <div class="form-group mt-2">
@@ -355,7 +408,7 @@
 
     <!-- Botón de envío -->
     <div class="d-flex justify-content-center align-items-center mt-3 p-5">
-      <button type="submit" class="btn btn-primary btn-icon" [disabled]="!AccionDeCumplimiento.valid">
+      <button type="submit" class="btn btn-primary btn-icon">
         <i class="fas fa-file-alt me-2"></i> Descargar documento
       </button>
     </div>
