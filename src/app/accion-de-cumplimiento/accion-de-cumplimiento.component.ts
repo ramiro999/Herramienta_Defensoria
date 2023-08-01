@@ -2,8 +2,6 @@ import { Component, OnInit, AfterViewInit} from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 
-import { RequestService } from '../services/request.service';
-
 import { DocgeneratorService } from '../services/docgenerator.service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
@@ -29,7 +27,6 @@ export class AccionDeCumplimientoComponent {
     const dateInput = event.target as HTMLInputElement;
     this.model = dateInput.value; // Almacena la fecha seleccionada en la variable 'model'
   }
-
 
   AccionDeCumplimiento!: FormGroup;
   
@@ -64,24 +61,24 @@ export class AccionDeCumplimientoComponent {
 
   initForm(): FormGroup {
     return this.fb.group({
-      ciudad: [''],
-      fecha: [''],
+      ciudad: ['', Validators.required],
+      fecha: ['', Validators.required],
       localidadJuez: [''],
       nombreDemandado: [''],
-      nombreDemandante: [''],
-      cedulaDemandante: [''],
-      ciudadCedula: [''],
-      normaIncumplida: [''],
-      autoridadIncumple: [''],
-      pretension: [''],
-      ciudadDemandado: [''],
-      direccionDemandado: [''],
-      telefonoDemandado: [''],
-      correoDemandado: [''],
-      ciudadDemandante: [''],
-      direccionDemandante: [''],
-      telefonoDemandante: [''],
-      correoDemandante: [''],
+      nombreDemandante: ['', Validators.required],
+      cedulaDemandante: ['', Validators.required],
+      ciudadCedula: ['', Validators.required],
+      normaIncumplida: ['', Validators.required],
+      autoridadIncumple: ['', Validators.required],
+      pretension: ['', Validators.required],
+      ciudadDemandado: ['', Validators.required],
+      direccionDemandado: ['', Validators.required],
+      telefonoDemandado: ['', Validators.required],
+      correoDemandado: ['', [Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      ciudadDemandante: ['', Validators.required],
+      direccionDemandante: ['', Validators.required],
+      telefonoDemandante: ['', Validators.required],
+      correoDemandante: ['', [Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
       hechos: this.fb.array( [ this.fb.group({contenido: ''}) ] ),
     });
   }
@@ -90,18 +87,23 @@ export class AccionDeCumplimientoComponent {
 
   crearHechoFormGroup(): FormGroup {
     return this.fb.group({
-      contenido: ''
+      contenido: ['', Validators.required]
     });
   }
 
   agregarHecho() {
     const hechosArray = this.AccionDeCumplimiento.get('hechos') as FormArray;
     hechosArray.push(this.crearHechoFormGroup());
+    console.log(this.AccionDeCumplimiento.controls)
   }
 
   get hechos(): FormArray {
     return this.AccionDeCumplimiento.get('hechos') as FormArray;
   }
-  
+
+ // get inputValid(inputName: string) {
+  //  const input = this.AccionDeCumplimiento.get(inputName)?.invalid;
+   // return input && this.AccionDeCumplimiento.get(inputName)?.touched;
+ // }
 
 }

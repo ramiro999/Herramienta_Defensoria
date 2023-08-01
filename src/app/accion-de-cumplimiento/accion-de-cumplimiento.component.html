@@ -1,5 +1,6 @@
 <div class="container mt-5">
   <h3>Diligencie el siguiente formulario</h3>
+
   <form [formGroup]="AccionDeCumplimiento" (ngSubmit)="onSubmit()">
     <!-- Numeral 1-->
     <div class="d-flex align-items-start mt-5">
@@ -21,12 +22,15 @@
         <div class="form-group">
           <label for="ciudad"><strong>Ciudad</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
           <div class="input-group">
-            <input type="text" class="form-control" formControlName="ciudad" id="ciudad" placeholder="Ingresa la ciudad" required>
+            <input type="text" class="form-control" formControlName="ciudad" id="ciudad" placeholder="Ingresa la ciudad" [class.is-invalid]="AccionDeCumplimiento.get('ciudad')?.invalid && AccionDeCumplimiento.get('ciudad')?.touched" required>
             <!-- Icono de alerta y mensaje de ayuda -->
             <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="La ciudad de quien escribe y la fecha en la que se escribe dejan constancia del lugar y la fecha en la que se firma.">
               <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px;"></i>
             </button>
           </div>
+          <small *ngIf="AccionDeCumplimiento.get('ciudad')?.invalid && AccionDeCumplimiento.get('ciudad')?.touched" class="text-danger">
+            La ciudad es obligatoria
+          </small>
         </div>
       </div>
 
@@ -35,13 +39,16 @@
         <div class="form-group">
           <label for="fecha"><strong>Fecha</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
           <div class="input-group">
-            <input class="form-control" type="date" formControlName="fecha" name="fecha" id="fecha" required (input)="onDateChange($event)">
+            <input class="form-control" type="date" formControlName="fecha" name="fecha" id="fecha" required (input)="onDateChange($event)"  [class.is-invalid]="AccionDeCumplimiento.get('fecha')?.invalid && AccionDeCumplimiento.get('fecha')?.touched">
             <!-- Icono de alerta y mensaje de ayuda -->
             <button class="btn btn-primary" (click)="toggleDatepicker()" type="button"></button>
             <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="IMPORTANTE: La fecha más relevante es aquella en la que se presenta en la petición ante la entidad. La fecha en la que se envía por correo electrónico o la fecha en la que se presenta en la ventanilla.">
               <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px;"></i>
             </button>
           </div>
+          <small *ngIf="AccionDeCumplimiento.get('fecha')?.invalid && AccionDeCumplimiento.get('fecha')?.touched" class="text-danger">
+            La fecha es obligatoria
+          </small>
         </div>
       </div>
     </div>
@@ -51,7 +58,7 @@
     <label for="localidadJuez"><strong>Localidad Juez administrativo</strong></label>
     <!-- Icono de alerta y mensaje de ayuda -->
     <div class="input-group">
-      <input type="text" class="form-control" formControlName="localidadJuez" id="localidadJuez" placeholder="Juez administrativo que recibe el acta de cumplimiento" required>
+      <input type="text" class="form-control" formControlName="localidadJuez" id="localidadJuez" placeholder="Juez administrativo que recibe el acta de cumplimiento">
       <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Juez administrativo.">
         <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px;"></i>
       </button>
@@ -63,7 +70,7 @@
     <label for="nombreDemandado"><strong>Persona o entidad a la que demanda</strong></label>
     <!-- Icono de alerta y mensaje de ayuda -->
     <div class="input-group">
-      <input type="text" class="form-control" formControlName="nombreDemandado" id="nombreDemandado" placeholder="Nombre de la persona o entidad a la que demanda" required>
+      <input type="text" class="form-control" formControlName="nombreDemandado" id="nombreDemandado" placeholder="Nombre de la persona o entidad a la que demanda">
       <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Al ser una persona ingrese los nombres y apellidos, si es una empresa su respectivo nombre.">
         <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px;"></i>
       </button>
@@ -91,11 +98,14 @@
   <label for="nombreDemandante"><strong>Nombre(s) y apellido(s)</strong> -</label> <label class="text-primary"><strong>(requerido)</strong></label>
   <!-- Icono de alerta y mensaje de ayuda -->
   <div class="input-group">
-    <input type="text" class="form-control" formControlName="nombreDemandante" id="nombreDemandante" placeholder="Nombre de quien hace esta acción de cumplimiento" required>
+    <input type="text" class="form-control" formControlName="nombreDemandante" id="nombreDemandante" placeholder="Nombre de quien hace esta acción de cumplimiento" [class.is-invalid]="AccionDeCumplimiento.get('nombreDemandante')?.invalid && AccionDeCumplimiento.get('nombreDemandante')?.touched" required>
     <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Todo documento jurídico debe iniciar por identificar a la persona que hace la petición. Con nombre y apellidos.">
       <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px;"></i>
     </button>
   </div>
+  <small *ngIf="AccionDeCumplimiento.get('nombreDemandante')?.invalid && AccionDeCumplimiento.get('nombreDemandante')?.touched" class="text-danger">
+    Los nombres y apellidos son obligatorios
+  </small>
 </div>
 
 
@@ -107,12 +117,15 @@
       <div class="form-group">
         <label for="cedulaDemandante"><strong>Número de cédula</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
         <div class="input-group">
-          <input type="number" class="form-control" formControlName="cedulaDemandante" id="cedulaDemandante" placeholder="Solo números sin espacios" required pattern="[0-9]+">
+          <input type="number" class="form-control" formControlName="cedulaDemandante" id="cedulaDemandante" placeholder="Solo números sin espacios" required pattern="[0-9]+"  [class.is-invalid]="AccionDeCumplimiento.get('cedulaDemandante')?.invalid && AccionDeCumplimiento.get('cedulaDemandante')?.touched">
           <!-- Icono de alerta y mensaje de ayuda -->
           <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="La identificación debe ir con cédula.">
             <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px;"></i>
           </button>
         </div>
+        <small *ngIf="AccionDeCumplimiento.get('cedulaDemandante')?.invalid && AccionDeCumplimiento.get('cedulaDemandante')?.touched" class="text-danger">
+          El numero de cedula es obligatorio
+        </small>
       </div>
     </div>
     
@@ -121,12 +134,15 @@
       <div class="form-group">
         <label for="ciudadCedula"><strong>Ciudad de expedición de cédula</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
         <div class="input-group">
-          <input type="text" class="form-control" formControlName="ciudadCedula" id="ciudadCedula" placeholder="Ejemplo: Bogotá" required>
+          <input type="text" class="form-control" formControlName="ciudadCedula" id="ciudadCedula" placeholder="Ejemplo: Bogotá" required  [class.is-invalid]="AccionDeCumplimiento.get('ciudadCedula')?.invalid && AccionDeCumplimiento.get('ciudadCedula')?.touched">
           <!-- Icono de alerta y mensaje de ayuda -->
           <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="La identificación debe ir con la ciudad de expedición de la cédula.">
             <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px;"></i>
           </button>
         </div>
+        <small *ngIf="AccionDeCumplimiento.get('ciudadCedula')?.invalid && AccionDeCumplimiento.get('ciudadCedula')?.touched" class="text-danger">
+          La ciudad de expedicion es obligatoria
+        </small>
       </div>
     </div>
   </div>
@@ -151,16 +167,17 @@
   <label for="normaIncumplida"><strong>NORMA INCUMPLIDA</strong> -</label> <label class="text-primary"><strong>(requerido)</strong></label>
   <!-- Icono de alerta y mensaje de ayuda -->
   <div class="input-group">
-    <textarea rows="6" class="form-control" formControlName="normaIncumplida" id="normaIncumplida" placeholder="Especifique la ley o del acto administrativo que se demanda como incumplido" required></textarea>
+    <textarea rows="6" class="form-control" formControlName="normaIncumplida" id="normaIncumplida" placeholder="Especifique la ley o del acto administrativo que se demanda como incumplido" required  [class.is-invalid]="AccionDeCumplimiento.get('normaIncumplida')?.invalid && AccionDeCumplimiento.get('normaIncumplida')?.touched"></textarea>
     <div>
       <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Especifique la ley o del acto administrativo que se demanda como incumplido.">
         <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px;"></i>
       </button>
     </div>
   </div>
+  <small *ngIf="AccionDeCumplimiento.get('normaIncumplida')?.invalid && AccionDeCumplimiento.get('normaIncumplida')?.touched" class="text-danger">
+    La norma incumplida es obligatoria
+  </small>
 </div>
-
-
 
 
 <!-- Campo para los hechos -->
@@ -177,7 +194,7 @@
       <ng-container *ngIf="isFirst"  [formGroupName]="i">
         
         <div class="input-group">
-          <textarea rows="6" class="form-control" formControlName="contenido" id="hechos{{ i }}" placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma" required></textarea>
+          <textarea  [class.is-invalid]="AccionDeCumplimiento.get('hechos')?.invalid && AccionDeCumplimiento.get('hechos')?.touched && isLast" rows="6" class="form-control" formControlName="contenido" id="hechos{{ i }}" placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma" required></textarea>
 
         
           <div class="d-flex flex-column">
@@ -195,13 +212,16 @@
           </div>
   
         </div>
+        <small *ngIf="AccionDeCumplimiento.get('hechos')?.invalid && AccionDeCumplimiento.get('hechos')?.touched && isLast" class="text-danger">
+          Los hechos son obliogatorios
+        </small>
 
       </ng-container>
 
 
       <ng-container *ngIf="!isFirst" [formGroupName]="i">
         <div class="input-group">
-        <textarea rows="6" class="form-control" formControlName="contenido" id="hechos{{ i }}" placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma" required></textarea>
+        <textarea [class.is-invalid]="AccionDeCumplimiento.get('hechos')?.invalid && AccionDeCumplimiento.get('hechos')?.touched && isLast" rows="6" class="form-control" formControlName="contenido" id="hechos{{ i }}" placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma" required></textarea>
         <div *ngIf="isLast" class="mb-2">
           <!-- Botón para agregar un nuevo campo -->
           <button type="button" class="btn btn-primary mt-2" (click)="agregarHecho()">
@@ -209,23 +229,14 @@
           </button>
         </div>
       </div>
+      <small *ngIf="AccionDeCumplimiento.get('hechos')?.invalid && AccionDeCumplimiento.get('hechos')?.touched && isLast" class="text-danger">
+        Los hechos son obliogatorios
+      </small>
       </ng-container>
 
-
     </ng-container>
-  
-  
-
     
 </div>
-
-
-
-
-
-
-
-
 
 
 <!-- Campo para la autoridad que incumple -->
@@ -233,13 +244,16 @@
   <label for="autoridadIncumple"><strong>AUTORIDAD QUE INCUMPLE </strong> - </label><label class="text-primary"><strong>(requerido)</strong></label>
   <!-- Icono de alerta y mensaje de ayuda -->
   <div class="input-group">
-  <textarea rows="6" class="form-control" formControlName="autoridadIncumple" id="autoridadIncumple" placeholder="Identificar la autoridad o el particular que ejerce funciones públicas a quien corresponde el cumplimiento y ejecución de las normas o actos administrativos acusados como incumplidos " required></textarea>
+  <textarea [class.is-invalid]="AccionDeCumplimiento.get('autoridadIncumple')?.invalid && AccionDeCumplimiento.get('autoridadIncumple')?.touched" rows="6" class="form-control" formControlName="autoridadIncumple" id="autoridadIncumple" placeholder="Identificar la autoridad o el particular que ejerce funciones públicas a quien corresponde el cumplimiento y ejecución de las normas o actos administrativos acusados como incumplidos " required></textarea>
   <div>
     <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Especifique la autoridad que incumple la norma.">
       <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px;"></i>
     </button>
   </div>
   </div>
+  <small *ngIf="AccionDeCumplimiento.get('autoridadIncumple')?.invalid && AccionDeCumplimiento.get('autoridadIncumple')?.touched" class="text-danger">
+    La autoridad que incumple es obligatoria
+  </small>
 </div>
 
 <!-- Campo para la pretension-->
@@ -247,13 +261,16 @@
   <label for="pretension"><strong>PRETENSIÓN </strong> - </label><label class="text-primary"><strong>(requerido)</strong></label>
   <!-- Icono de alerta y mensaje de ayuda -->
   <div class="input-group">
-  <textarea rows="6" class="form-control" formControlName="pretension" id="pretension" placeholder="Autoridad o particular encargada de cumplir o hacer cumplir la norma" required></textarea>
+  <textarea [class.is-invalid]="AccionDeCumplimiento.get('pretension')?.invalid && AccionDeCumplimiento.get('pretension')?.touched"  rows="6" class="form-control" formControlName="pretension" id="pretension" placeholder="Autoridad o particular encargada de cumplir o hacer cumplir la norma" required></textarea>
   <div>
     <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Autoridad o particular encargada de cumplir o hacer cumplir la norma.">
       <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px;"></i>
     </button>
   </div>
   </div>
+  <small *ngIf="AccionDeCumplimiento.get('pretension')?.invalid && AccionDeCumplimiento.get('pretension')?.touched" class="text-danger">
+    La pretension es obligatoria
+  </small>
 </div>
 
 <!-- Numeral 4-->
@@ -276,12 +293,15 @@
     <div class="form-group">
       <label for="ciudadDemandado"><strong>Ciudad</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
       <div class="input-group">
-        <input type="text" class="form-control" formControlName="ciudadDemandado" id="ciudadDemandado" placeholder="Ciudad del demandado." required>
+        <input [class.is-invalid]="AccionDeCumplimiento.get('ciudadDemandado')?.invalid && AccionDeCumplimiento.get('ciudadDemandado')?.touched" type="text" class="form-control" formControlName="ciudadDemandado" id="ciudadDemandado" placeholder="Ciudad del demandado." required>
         <!-- Icono de alerta y mensaje de ayuda -->
           <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Ciudad de residencia  a la que se le notificara la acción de cumplimiento al demandado.">
             <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px;"></i>
           </button>
       </div>
+      <small *ngIf="AccionDeCumplimiento.get('ciudadDemandado')?.invalid && AccionDeCumplimiento.get('ciudadDemandado')?.touched" class="text-danger">
+        La ciudad es obligatoria
+      </small>
     </div>
   </div>
 
@@ -290,12 +310,15 @@
     <div class="form-group">
       <label for="direccionDemandado"><strong>Dirección</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
       <div class="input-group">
-        <input type="text" class="form-control" formControlName="direccionDemandado" id="direccionDemandado" placeholder="Direccón del demandado." required>
+        <input  [class.is-invalid]="AccionDeCumplimiento.get('direccionDemandado')?.invalid && AccionDeCumplimiento.get('direccionDemandado')?.touched" type="text" class="form-control" formControlName="direccionDemandado" id="direccionDemandado" placeholder="Direccón del demandado." required>
         <!-- Icono de alerta y mensaje de ayuda -->
         <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Direccón de residencia  a la que se le notificara la acción de cumplimiento al demandado.">
           <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px;"></i>
         </button>
       </div>
+      <small *ngIf="AccionDeCumplimiento.get('direccionDemandado')?.invalid && AccionDeCumplimiento.get('direccionDemandado')?.touched" class="text-danger">
+        La direccion es obligatoria
+      </small>
     </div>
   </div>
 </div>
@@ -307,12 +330,15 @@
     <div class="form-group">
       <label for="telefonoDemandado"><strong>Teléfono</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
       <div class="input-group">
-        <input type="number" class="form-control" formControlName="telefonoDemandado" id="telefonoDemandado" placeholder="Teléfono del demandado." required>
+        <input  [class.is-invalid]="AccionDeCumplimiento.get('telefonoDemandado')?.invalid && AccionDeCumplimiento.get('telefonoDemandado')?.touched"  type="number" class="form-control" formControlName="telefonoDemandado" id="telefonoDemandado" placeholder="Teléfono del demandado." required>
         <!-- Icono de alerta y mensaje de ayuda -->
         <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Teléfono que se le notificara la acción de cumplimiento al demandado.">
           <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px;"></i>
         </button>
       </div>
+      <small *ngIf="AccionDeCumplimiento.get('telefonoDemandado')?.invalid && AccionDeCumplimiento.get('telefonoDemandado')?.touched" class="text-danger">
+        El telefono es obligatorio
+      </small>
     </div>
   </div>
   
@@ -321,12 +347,15 @@
     <div class="form-group">
       <label for="correoDemandado"><strong>Correo Electrónico</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
       <div class="input-group">
-        <input type="text" class="form-control" formControlName="correoDemandado" id="correoDemandado" placeholder="Correo electrónico del demandado." required>
+        <input [class.is-invalid]="AccionDeCumplimiento.get('correoDemandado')?.invalid && AccionDeCumplimiento.get('correoDemandado')?.touched" type="text" class="form-control" formControlName="correoDemandado" id="correoDemandado" placeholder="Correo electrónico del demandado." required>
         <!-- Icono de alerta y mensaje de ayuda -->
         <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Correo electrónico se le notificara la acción de cumplimiento al demandado.">
           <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px;"></i>
         </button>
       </div>
+      <small *ngIf="AccionDeCumplimiento.get('correoDemandado')?.invalid && AccionDeCumplimiento.get('correoDemandado')?.touched" class="text-danger">
+        El correo es obligatorio
+      </small>
     </div>
   </div>
 </div>
@@ -351,12 +380,15 @@
     <div class="form-group">
       <label for="ciudadDemandante"><strong>Ciudad</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
       <div class="input-group">
-        <input type="text" class="form-control" formControlName="ciudadDemandante" id="ciudadDemandante" placeholder="Ciudad del demandante." required>
+        <input  [class.is-invalid]="AccionDeCumplimiento.get('ciudadDemandante')?.invalid && AccionDeCumplimiento.get('ciudadDemandante')?.touched" type="text" class="form-control" formControlName="ciudadDemandante" id="ciudadDemandante" placeholder="Ciudad del demandante." required>
         <!-- Icono de alerta y mensaje de ayuda -->
         <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Ciudad a la que se le notificara la acción de cumplimiento al demandante.">
           <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px;"></i>
         </button>
       </div>
+      <small *ngIf="AccionDeCumplimiento.get('ciudadDemandante')?.invalid && AccionDeCumplimiento.get('ciudadDemandante')?.touched" class="text-danger">
+        La ciudad es obligatoria
+      </small>
     </div>
   </div>
   
@@ -365,12 +397,15 @@
     <div class="form-group">
       <label for="direccionDemandante"><strong>Dirección</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
       <div class="input-group">
-        <input type="text" class="form-control" formControlName="direccionDemandante" id="direccionDemandante" placeholder="Direccón del demandante." required>
+        <input [class.is-invalid]="AccionDeCumplimiento.get('direccionDemandante')?.invalid && AccionDeCumplimiento.get('direccionDemandante')?.touched" type="text" class="form-control" formControlName="direccionDemandante" id="direccionDemandante" placeholder="Direccón del demandante." required>
         <!-- Icono de alerta y mensaje de ayuda -->
         <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Direccón de residencia a la que se le notificara la acción de cumplimiento al demandante.">
           <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px;"></i>
         </button>
       </div>
+      <small *ngIf="AccionDeCumplimiento.get('direccionDemandante')?.invalid && AccionDeCumplimiento.get('direccionDemandante')?.touched" class="text-danger">
+        La direccion es obligatoria
+      </small>
     </div>
   </div>
 </div>
@@ -382,12 +417,15 @@
     <div class="form-group">
       <label for="telefonoDemandante"><strong>Teléfono</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
       <div class="input-group">
-        <input type="number" class="form-control" formControlName="telefonoDemandante" id="telefonoDemandante" placeholder="Teléfono del demandante." required>
+        <input [class.is-invalid]="AccionDeCumplimiento.get('telefonoDemandante')?.invalid && AccionDeCumplimiento.get('telefonoDemandante')?.touched" type="number" class="form-control" formControlName="telefonoDemandante" id="telefonoDemandante" placeholder="Teléfono del demandante." required>
         <!-- Icono de alerta y mensaje de ayuda -->
         <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Teléfono que se le notificara la acción de cumplimiento al demandante.">
           <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px;"></i>
         </button>
       </div>
+      <small *ngIf="AccionDeCumplimiento.get('telefonoDemandante')?.invalid && AccionDeCumplimiento.get('telefonoDemandante')?.touched" class="text-danger">
+        El telefono es obligatorio
+      </small>
     </div>
   </div>
   
@@ -396,23 +434,27 @@
     <div class="form-group">
       <label for="correoDemandante"><strong>Correo Electrónico</strong> -</label><label class="text-primary"><strong>(requerido)</strong></label>
       <div class="input-group">
-        <input type="text" class="form-control" formControlName="correoDemandante" id="correoDemandante" placeholder="Correo electrónico del demandante." required>
+        <input [class.is-invalid]="AccionDeCumplimiento.get('correoDemandante')?.invalid && AccionDeCumplimiento.get('correoDemandante')?.touched" type="text" class="form-control" formControlName="correoDemandante" id="correoDemandante" placeholder="Correo electrónico del demandante." required>
         <!-- Icono de alerta y mensaje de ayuda -->
         <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Correo electrónico se le notificara la acción de cumplimiento al demandante.">
           <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px;"></i>
         </button>
       </div>
+      <small *ngIf="AccionDeCumplimiento.get('correoDemandante')?.invalid && AccionDeCumplimiento.get('correoDemandante')?.touched" class="text-danger">
+        El correo es obligatorio
+      </small>
     </div>
   </div>
 </div>
 
     <!-- Botón de envío -->
     <div class="d-flex justify-content-center align-items-center mt-3 p-5">
-      <button type="submit" class="btn btn-primary btn-icon">
+      <button type="submit" class="btn btn-primary btn-icon"  [disabled]="!AccionDeCumplimiento.valid">
         <i class="fas fa-file-alt me-2"></i> Descargar documento
       </button>
     </div>
     
   </form>
+
 </div>
 
