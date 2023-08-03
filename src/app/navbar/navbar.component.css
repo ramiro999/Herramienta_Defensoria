@@ -1,14 +1,14 @@
 /* navbar.component.css */
 /* navbar.component.css */
 
-.container{
-  background-image: url("../assets/img/Fondo.png");
+.main{
+  background-image: url("/../assets/img/Fondo.png") !important;
   background-size: cover;
   color: #fff;
 }
 
 .navbar {
-    background-image: url("../assets/img/Fondo.png");
+
     background-size: cover;
     color: #fff;
     /* Puedes ajustar otros estilos según tus necesidades */
