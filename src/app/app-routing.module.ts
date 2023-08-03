@@ -8,7 +8,7 @@ import { DerechoDePeticionComponent } from './derecho-de-peticion/derecho-de-pet
 import { HabeasCorpusComponent } from './habeas-corpus/habeas-corpus.component';
 import { HabeasDataComponent } from './habeas-data/habeas-data.component';
 import { HomeComponent } from './home/home.component';
-
+import { CartaRenuenciaAcComponent } from './carta-renuencia-ac/carta-renuencia-ac.component'; 
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -19,8 +19,8 @@ const routes: Routes = [
   { path: 'derecho-de-peticion', component: DerechoDePeticionComponent },
   { path: 'habeas-corpus', component: HabeasCorpusComponent },
   { path: 'habeas-data', component: HabeasDataComponent },
-  { path: 'home', component: HomeComponent }
-
+  { path: 'home', component: HomeComponent },
+  { path: 'carta-renuencia-ac', component: CartaRenuenciaAcComponent}
 ]
 
 @NgModule({   

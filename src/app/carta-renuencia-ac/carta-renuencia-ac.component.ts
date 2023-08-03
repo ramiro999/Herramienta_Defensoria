@@ -1,19 +1,17 @@
-import { Component, OnInit, AfterViewInit} from '@angular/core';
-
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 
 import { DocgeneratorService } from '../services/docgenerator.service';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
-declare var bootstrap: any; 
+declare var bootstrap: any;
+
 @Component({
-  selector: 'app-accion-de-cumplimiento',
-  templateUrl: './accion-de-cumplimiento.component.html',
-  styleUrls: ['./accion-de-cumplimiento.component.css']
+  selector: 'app-carta-renuencia-ac',
+  templateUrl: './carta-renuencia-ac.component.html',
+  styleUrls: ['./carta-renuencia-ac.component.css']
 })
-
-export class AccionDeCumplimientoComponent {
-
+export class CartaRenuenciaAcComponent {
+  
   model: string | null = null; // Para almacenar la fecha seleccionada
 
   toggleDatepicker() {
@@ -27,16 +25,16 @@ export class AccionDeCumplimientoComponent {
     const dateInput = event.target as HTMLInputElement;
     this.model = dateInput.value; // Almacena la fecha seleccionada en la variable 'model'
   }
-
-  AccionDeCumplimiento!: FormGroup;
   
+  CartaRenuenciaAc!: FormGroup;
+
   constructor(
-    private readonly fb: FormBuilder, 
+    private readonly fb: FormBuilder,
     private docGenerator: DocgeneratorService,
     ) {}
 
   ngOnInit(): void {
-    this.AccionDeCumplimiento = this.initForm();
+    this.CartaRenuenciaAc = this.initForm();
     // Configurar el contenido personalizado para el tooltip
 
   }
@@ -47,40 +45,34 @@ export class AccionDeCumplimientoComponent {
     const tooltipList = Array.from(tooltipTriggerList).map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
   }
 
-
   onSubmit() {
     this.docGenerator.generateDocx(
-      'http://localhost:4200/assets/formats/template-accion-de-cumplimiento.docx',
+      'http://localhost:4200/assets/formats/template-carta-renuencia-ac.docx',
       //"https://drive.google.com/uc?id=1JMQiqx0ORMZsz57C4SSRNLoFnb8NmQ1_",
-      this.AccionDeCumplimiento.value,
-      'accion-de-cumplimiento');
+      this.CartaRenuenciaAc.value,
+      'carta-renuencia-ac');
 
 
-    console.log('Formulario enviado', this.AccionDeCumplimiento.value);
+    console.log('Formulario enviado', this.CartaRenuenciaAc.value);
   }
 
   initForm(): FormGroup {
     return this.fb.group({
-      ciudad: ['', Validators.required],
       fecha: ['', Validators.required],
-      ciudadJuez: ['', Validators.required],
-      direccionJuez: ['', Validators.required],
-      nombreDemandado: ['', Validators.required],
-      nombreDemandante: ['', Validators.required],
-      cedulaDemandante: ['', Validators.required],
-      ciudadCedula: ['', Validators.required],
-      normaIncumplida: ['', Validators.required],
+      ciudad: ['', Validators.required],
+      nombreAutoridad: ['', Validators.required],
+      ciudadAutoridad: ['', Validators.required],
+      direccionAutoridad: ['', Validators.required],
+      articuloIncumplido: ['', Validators.required],
       autoridadIncumple: ['', Validators.required],
-      pretension: ['', Validators.required],
-      ciudadDemandado: ['', Validators.required],
-      direccionDemandado: ['', Validators.required],
-      telefonoDemandado: ['', Validators.required],
-      correoDemandado: ['', [Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-      ciudadDemandante: ['', Validators.required],
-      direccionDemandante: ['', Validators.required],
-      telefonoDemandante: ['', Validators.required],
-      correoDemandante: ['', [Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
       hechos: this.fb.array( [ this.fb.group({contenido: ''}) ] ),
+      nombreSolicitante: ['', Validators.required],
+      cedulaSolicitante: ['', Validators.required],
+      telefonoSolicitante: ['', Validators.required],
+      direccionSolicitante: ['', Validators.required],
+      cedulaExpedicion: ['', Validators.required],
+      ciudadSolicitante: ['', Validators.required],
+
     });
   }
 
@@ -93,18 +85,19 @@ export class AccionDeCumplimientoComponent {
   }
 
   agregarHecho() {
-    const hechosArray = this.AccionDeCumplimiento.get('hechos') as FormArray;
+    const hechosArray = this.CartaRenuenciaAc.get('hechos') as FormArray;
     hechosArray.push(this.crearHechoFormGroup());
-    console.log(this.AccionDeCumplimiento.controls)
+    console.log(this.CartaRenuenciaAc.controls)
   }
 
   get hechos(): FormArray {
-    return this.AccionDeCumplimiento.get('hechos') as FormArray;
+    return this.CartaRenuenciaAc.get('hechos') as FormArray;
   }
 
  // get inputValid(inputName: string) {
   //  const input = this.AccionDeCumplimiento.get(inputName)?.invalid;
    // return input && this.AccionDeCumplimiento.get(inputName)?.touched;
  // }
+
 
 }

@@ -1,0 +1,743 @@
+<div class="container mt-5">
+  <h3>Carta constitución renuencia para acción de cumplimiento</h3>
+  <p>
+    La carta de renuencia puede referirse a la negativa o resistencia de una
+    autoridad o entidad para cumplir con una obligación o mandato establecido
+    por la ley o una sentencia judicial
+  </p>
+
+  <form [formGroup]="CartaRenuenciaAc" (ngSubmit)="onSubmit()">
+    <!-- Numeral 1 -->
+    <div class="d-flex align-items-start mt-5">
+      <div
+        class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+        style="width: 25px; height: 25px"
+      >
+        <strong>1</strong>
+      </div>
+      <div class="form-group">
+        <!-- Label: ¿A quién va dirigida carta? -->
+        <label class="text-primary" for="destinatario"
+          ><strong>¿A quién va dirigida esta carta?</strong></label
+        >
+        <div id="destinatarioHelpBlock" class="form-text">
+          Indica en los siguientes los campos la entidad administrativa a la que
+          se dirige.
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Input para la Ciudad -->
+      <div class="col-md-6">
+        <div class="form-group mt-2">
+          <label for="ciudad"><strong>Ciudad</strong> -</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="ciudad"
+              id="ciudad"
+              placeholder="Ingresa la ciudad"
+              [class.is-invalid]="
+                CartaRenuenciaAc.get('ciudad')?.invalid &&
+                CartaRenuenciaAc.get('ciudad')?.touched
+              "
+              required
+            />
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="La ciudad de quien escribe y la fecha en la que se escribe dejan constancia del lugar y la fecha en la que se firma."
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+          <small
+            *ngIf="
+              CartaRenuenciaAc.get('ciudad')?.invalid &&
+              CartaRenuenciaAc.get('ciudad')?.touched
+            "
+            class="text-danger"
+          >
+            La ciudad es obligatoria
+          </small>
+        </div>
+      </div>
+
+      <!-- Input para la Fecha -->
+      <div class="col-md-6 mt-2">
+        <div class="form-group">
+          <label for="fecha"><strong>Fecha</strong> -</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="input-group">
+            <input
+              class="form-control"
+              type="date"
+              formControlName="fecha"
+              name="fecha"
+              id="fecha"
+              required
+              (input)="onDateChange($event)"
+              [class.is-invalid]="
+                CartaRenuenciaAc.get('fecha')?.invalid &&
+                CartaRenuenciaAc.get('fecha')?.touched
+              "
+            />
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <button
+              class="btn btn-primary"
+              (click)="toggleDatepicker()"
+              type="button"
+            ></button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="IMPORTANTE: La fecha más relevante es aquella en la que se presenta en la petición ante la entidad. La fecha en la que se envía por correo electrónico o la fecha en la que se presenta en la ventanilla."
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+          <small
+            *ngIf="
+              CartaRenuenciaAc.get('fecha')?.invalid &&
+              CartaRenuenciaAc.get('fecha')?.touched
+            "
+            class="text-danger"
+          >
+            La fecha es obligatoria
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input para el nombre de la entidad -->
+    <div class="form-group mt-2">
+      <label for="nombreAutoridad"
+        ><strong>Autoridad administrativa que debe hacer cumplir la norma</strong>-</label
+      ><label class="text-primary"><strong>(requerido)</strong></label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="nombreAutoridad"
+          id="nombreAutoridad"
+          placeholder="Autoridad administrativa que debe hacer cumplir la norma (ley Acto Administrativo)"
+        />
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-custom-class="custom-tooltip"
+          data-bs-title="Autoridad administrativa que debe hacer cumplir la norma (ley Acto Administrativo)."
+        >
+          <i
+            class="fas fa-exclamation-circle text-white"
+            style="width: 25px; height: 25px"
+          ></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Input para la ciudad de la entidad -->
+    <div class="form-group mt-2">
+        <label for="ciudadAutoridad"
+          ><strong>Ciudad de la autoridad administrativa</strong>-</label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="ciudadAutoridad"
+            id="ciudadAutoridad"
+            placeholder="Ciudad de la autoridad administrativa que recibe la carta"
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Ciudad de la autoridad administrativa que recibe la carta."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+      </div>
+  
+      <!-- Input para la direccion Juez administrativo -->
+      <div class="form-group mt-2">
+        <label for="direccionAutoridad"
+          ><strong>Dirección de la autoridad administrativa</strong>-</label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="direccionAutoridad"
+            id="direccionAutoridad"
+            placeholder="Dirección de la autoridad administrativa que recibe la carta"
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Dirección de la autoridad administrativa que recibe la carta."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+      </div>
+      <!-- Numeral 2 -->
+    <div class="d-flex align-items-start mt-5">
+        <div
+            class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+            style="width: 25px; height: 25px"
+        >
+            <strong>2</strong>
+        </div>
+        <div class="form-group">
+            <!-- Label: Ley o acto incumplido  -->
+            <label class="text-primary" for="destinatario"
+            ><strong>Ley o acto incumplido</strong></label
+            >
+            <div id="destinatarioHelpBlock" class="form-text">
+            Indica en los siguientes los campos la ley o acto administrativo que no se ha cumplido.
+            </div>
+        </div>
+    </div>
+
+    <!-- Input para la ley o acto incumplido -->
+    <div class="form-group mt-2">
+        <label for="articuloIncumplido"
+          ><strong>Articulo de la ley incumplido o acto administrativo incumplido</strong>-</label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="articuloIncumplido"
+            id="articuloIncumplido"
+            placeholder="Ejemplo: Artículo 8.º de la Ley 393 del 29 de julio de 1997"
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Especifique el articulo de la le ley como por ejemplo: Artículo 8.º de la Ley 393 del 29 de julio de 1997. De otro manera indique el acto administrativo incumplido."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Input de la autoridad que incumple -->
+    <div class="form-group mt-2">
+        <label for="autoridadIncumple"
+          ><strong>Nombre de la autoridad o particular que está incumpliendo</strong>-</label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="autoridadIncumple"
+            id="autoridadIncumple"
+            placeholder="Ejemplo: Empresa S.A.S"
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Especifique el nombre de la autoridad o particular que está incumpliendo."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+      </div>
+      
+
+      <!-- Numeral 3-->
+    <div class="d-flex align-items-start mt-5">
+        <div
+            class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+            style="width: 25px; height: 25px"
+        >
+            <strong>3</strong>
+        </div>
+        <div class="form-group">
+            <!-- Label: Hechos -->
+            <label class="text-primary" for="destinatario"
+            ><strong>Hechos</strong></label
+            >
+            <div id="destinatarioHelpBlock" class="form-text">
+            Indica en los siguientes los campos las razones de incumplimiento.
+            </div>
+        </div>
+    </div>
+
+    <!-- Campo para los hechos -->
+    <div class="form-group mt-2">
+        <label for="hechos"> <strong>HECHOS </strong> - </label
+        ><label class="text-primary"><strong>(requerido)</strong> </label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+  
+        <ng-container
+          formArrayName="hechos"
+          *ngFor="
+            let row of hechos.controls;
+            index as i;
+            first as isFirst;
+            last as isLast
+          "
+          class="input-group"
+        >
+          <ng-container *ngIf="isFirst" [formGroupName]="i">
+            <div class="input-group">
+              <textarea
+                [class.is-invalid]="
+                  CartaRenuenciaAc.get('hechos')?.invalid &&
+                  CartaRenuenciaAc.get('hechos')?.touched &&
+                  isLast
+                "
+                rows="6"
+                class="form-control"
+                formControlName="contenido"
+                id="hechos{{ i }}"
+                placeholder="Hacer el relato de las razones que fundamentan el incumplimiento"
+                required
+              ></textarea>
+  
+              <div class="d-flex flex-column">
+                <div class="mb-2">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip"
+                    data-bs-title="Hacer el relato de los hechos que configuran el incumplimiento de la norma."
+                  >
+                    <i
+                      class="fas fa-exclamation-circle text-white"
+                      style="width: 25px; height: 25px"
+                    ></i>
+                  </button>
+                </div>
+                <div *ngIf="isLast" class="mb-2">
+                  <!-- Botón para agregar un nuevo campo -->
+                  <button
+                    type="button"
+                    class="btn btn-primary mt-2"
+                    (click)="agregarHecho()"
+                  >
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <small
+              *ngIf="
+                CartaRenuenciaAc.get('hechos')?.invalid &&
+                CartaRenuenciaAc.get('hechos')?.touched &&
+                isLast
+              "
+              class="text-danger"
+            >
+              Los hechos son obliogatorios
+            </small>
+          </ng-container>
+  
+          <ng-container *ngIf="!isFirst" [formGroupName]="i">
+            <div class="input-group">
+              <textarea
+                [class.is-invalid]="
+                  CartaRenuenciaAc.get('hechos')?.invalid &&
+                  CartaRenuenciaAc.get('hechos')?.touched &&
+                  isLast
+                "
+                rows="6"
+                class="form-control"
+                formControlName="contenido"
+                id="hechos{{ i }}"
+                placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma"
+                required
+              ></textarea>
+              <div *ngIf="isLast" class="mb-2">
+                <!-- Botón para agregar un nuevo campo -->
+                <button
+                  type="button"
+                  class="btn btn-primary mt-2"
+                  (click)="agregarHecho()"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </div>
+            <small
+              *ngIf="
+                CartaRenuenciaAc.get('hechos')?.invalid &&
+                CartaRenuenciaAc.get('hechos')?.touched &&
+                isLast
+              "
+              class="text-danger"
+            >
+              Los hechos son obliogatorios
+            </small>
+          </ng-container>
+        </ng-container>
+      </div>
+
+      <!-- Numeral 4-->
+    <div class="d-flex align-items-start mt-5">
+        <div
+            class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+            style="width: 25px; height: 25px"
+        >
+            <strong>4</strong>
+        </div>
+        <div class="form-group">
+            <!-- Label: Datos de la persona que hace la solicitud -->
+            <label class="text-primary" for="destinatario"
+            ><strong>Datos de la persona que hace esta solicitud</strong></label
+            >
+            <div id="destinatarioHelpBlock" class="form-text">
+            Indica en los siguientes los campos los datos de la persona que hace esta solicitud.
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Input para los datos del solicitante-->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="nombreSolicitante"><strong>Nombre(s) y Apellido(s)</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                [class.is-invalid]="
+                  CartaRenuenciaAc.get('nombreSolicitante')?.invalid &&
+                  CartaRenuenciaAc.get('nombreSolicitante')?.touched
+                "
+                type="text"
+                class="form-control"
+                formControlName="nombreSolicitante"
+                id="nombreSolicitante"
+                placeholder="Ej: Juan Perez"
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Nombres y apellidos de la persona que hace la solicitud"
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                CartaRenuenciaAc.get('nombreSolicitante')?.invalid &&
+                CartaRenuenciaAc.get('nombreSolicitante')?.touched
+              "
+              class="text-danger"
+            >
+              La ciudad es obligatoria
+            </small>
+          </div>
+        </div>
+  
+        <!-- Input para la cedula -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="cedulaSolicitante"><strong>Cédula de Ciudadanía</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                [class.is-invalid]="
+                  CartaRenuenciaAc.get('cedulaSolicitante')?.invalid &&
+                  CartaRenuenciaAc.get('cedulaSolicitante')?.touched
+                "
+                type="number"
+                class="form-control"
+                formControlName="cedulaSolicitante"
+                id="cedulaSolicitante"
+                placeholder="Solo numeros, sin espacios"
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Solo numeros, sin espacios."
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                CartaRenuenciaAc.get('cedulaSolicitante')?.invalid &&
+                CartaRenuenciaAc.get('cedulaSolicitante')?.touched
+              "
+              class="text-danger"
+            >
+              La direccion es obligatoria
+            </small>
+          </div>
+        </div>
+      </div>
+
+      
+  
+      <div class="row">
+        <!-- Input para la expedicion de la cedula -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="cedulaExpedicion"><strong>Ciudad de expedición de la cédula</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                [class.is-invalid]="
+                  CartaRenuenciaAc.get('cedulaExpedicion')?.invalid &&
+                  CartaRenuenciaAc.get('cedulaExpedicion')?.touched
+                "
+                type="text"
+                class="form-control"
+                formControlName="cedulaExpedicion"
+                id="cedulaExpedicion"
+                placeholder="Ciudad de expedición de la cédula."
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Ciudad de expedición de la cédula."
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                CartaRenuenciaAc.get('cedulaExpedicion')?.invalid &&
+                CartaRenuenciaAc.get('cedulaExpedicion')?.touched
+              "
+              class="text-danger"
+            >
+              El telefono es obligatorio
+            </small>
+          </div>
+        </div>
+  
+        <!-- Input para la direccion del solicitante -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="direccionSolicitante"
+              ><strong>Dirección de residencia</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                [class.is-invalid]="
+                  CartaRenuenciaAc.get('direccionSolicitante')?.invalid &&
+                  CartaRenuenciaAc.get('direccionSolicitante')?.touched
+                "
+                type="text"
+                class="form-control"
+                formControlName="direccionSolicitante"
+                id="direccionSolicitante"
+                placeholder="Dirección de residencia del solicitante"
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Dirección de residencia del solicitante"
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                CartaRenuenciaAc.get('direccionSolicitante')?.invalid &&
+                CartaRenuenciaAc.get('direccionSolicitante')?.touched
+              "
+              class="text-danger"
+            >
+              El correo es obligatorio
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Input para el telefono -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="telefonoSolicitante"><strong>Teléfono</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                [class.is-invalid]="
+                  CartaRenuenciaAc.get('telefonoSolicitante')?.invalid &&
+                  CartaRenuenciaAc.get('telefonoSolicitante')?.touched
+                "
+                type="number"
+                class="form-control"
+                formControlName="telefonoSolicitante"
+                id="telefonoSolicitante"
+                placeholder="Solo numeros."
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Telefono al que se le notificara la carta al solicitante."
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                CartaRenuenciaAc.get('telefonoSolicitante')?.invalid &&
+                CartaRenuenciaAc.get('telefonoSolicitante')?.touched
+              "
+              class="text-danger"
+            >
+              El telefono es obligatorio
+            </small>
+          </div>
+        </div>
+  
+        <!-- Input para la ciudad del solicitante -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="ciudadSolicitante"
+              ><strong>Ciudad de residencia</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                [class.is-invalid]="
+                  CartaRenuenciaAc.get('ciudadSolicitante')?.invalid &&
+                  CartaRenuenciaAc.get('ciudadSolicitante')?.touched
+                "
+                type="text"
+                class="form-control"
+                formControlName="ciudadSolicitante"
+                id="ciudadSolicitante"
+                placeholder="Ej: Bogotá D.C."
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Ciudad de residencia del solicitante"
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                CartaRenuenciaAc.get('ciudadSolicitante')?.invalid &&
+                CartaRenuenciaAc.get('ciudadSolicitante')?.touched
+              "
+              class="text-danger"
+            >
+              El correo es obligatorio
+            </small>
+          </div>
+        </div>
+      </div>
+
+
+
+  
+      <!-- Botón de envío -->
+      <div class="d-flex justify-content-center align-items-center mt-3 p-5">
+        <button
+          type="submit"
+          class="btn btn-primary btn-icon"
+          [disabled]="!CartaRenuenciaAc.valid"
+        >
+          <i class="fas fa-file-alt me-2"></i> Descargar documento
+        </button>
+      </div>
+
+
+  </form>
+</div>

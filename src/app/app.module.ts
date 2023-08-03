@@ -20,6 +20,7 @@ import { DocgeneratorService } from './services/docgenerator.service';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CartaRenuenciaAcComponent } from './carta-renuencia-ac/carta-renuencia-ac.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CartaConstitucionComponent,
     AccionDeCumplimientoComponent,
     HomeComponent,
-    NavbarComponent,        
+    NavbarComponent,
+    CartaRenuenciaAcComponent,        
 
   ],
   imports: [
