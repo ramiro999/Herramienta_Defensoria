@@ -1,1 +1,390 @@
-<p>habeas-corpus works!</p>
+<div class="container mt-5">
+  <h3>Habeas corpus</h3>
+  <p>
+    El habeas corpus es una figura legal que garantiza la libertad personal y
+    protege contra la detención arbitraria o ilegal. Su objetivo es asegurar que
+    cualquier persona detenida sea llevada ante un tribunal o autoridad judicial
+    para determinar la legalidad de su detención. En otras palabras, es un
+    recurso legal que permite a los individuos impugnar su detención y solicitar
+    ser liberados si su privación de libertad es ilegal
+  </p>
+
+  <div
+    class="btn-group"
+    role="group"
+    aria-label="Basic radio toggle button group"
+  >
+    <input
+      type="radio"
+      class="btn-check"
+      name="btnradio"
+      id="btnradio1"
+      autocomplete="off"
+      [(ngModel)]="selectedOption"
+      value="privacion"
+    />
+    <label class="btn btn-outline-primary" for="btnradio1"
+      >Habeas corpus por privacion ilegal de la libertad</label
+    >
+
+    <input
+      type="radio"
+      class="btn-check"
+      name="btnradio"
+      id="btnradio2"
+      autocomplete="off"
+      [(ngModel)]="selectedOption"
+      value="prolongacion"
+    />
+    <label class="btn btn-outline-primary" for="btnradio2"
+      >Habeas corpus por prolongación ilegal de la privación de la
+      libertad</label
+    >
+  </div>
+
+  <!-- Formulario para Habeas Corpus por privación ilegal de la libertad -->
+  <div *ngIf="selectedOption === 'privacion'">
+    <form [formGroup]="HabeasCorpus" (ngSubmit)="onSubmit()">
+      <h3 class="mt-3">Habeas corpus por privación ilegal de la libertad</h3>
+
+      <!-- Campos necesarios para el formulario de privación ilegal -->
+      <!-- Numeral 1 -->
+      <div class="d-flex align-items-start mt-5">
+        <div
+          class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+          style="width: 25px; height: 25px"
+        >
+          <strong>1</strong>
+        </div>
+        <div class="form-group">
+          <!-- Label: ¿A quién sva dirigida carta? -->
+          <label class="text-primary" for="destinatario"
+            ><strong>¿A quién va dirigida esta carta?</strong></label
+          >
+          <div id="destinatarioHelpBlock" class="form-text">
+            Indica en los siguientes los campos al juez al
+            que se dirige.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Input para la Ciudad -->
+        <div class="col-md-6">
+          <div class="form-group mt-2">
+            <label for="ciudad"><strong>Ciudad</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="ciudad"
+                id="ciudad"
+                placeholder="Ingresa la ciudad"
+                [class.is-invalid]="
+                  HabeasCorpus.get('ciudad')?.invalid &&
+                  HabeasCorpus.get('ciudad')?.touched
+                "
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="La ciudad de quien escribe y la fecha en la que se escribe dejan constancia del lugar y la fecha en la que se firma."
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                HabeasCorpus.get('ciudad')?.invalid &&
+                HabeasCorpus.get('ciudad')?.touched
+              "
+              class="text-danger"
+            >
+              La ciudad es obligatoria
+            </small>
+          </div>
+        </div>
+  
+        <!-- Input para la Fecha -->
+        <div class="col-md-6 mt-2">
+          <div class="form-group">
+            <label for="fecha"><strong>Fecha</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                class="form-control"
+                type="date"
+                formControlName="fecha"
+                name="fecha"
+                id="fecha"
+                required
+                (input)="onDateChange($event)"
+                [class.is-invalid]="
+                  HabeasCorpus.get('fecha')?.invalid &&
+                  HabeasCorpus.get('fecha')?.touched
+                "
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                class="btn btn-primary"
+                (click)="toggleDatepicker()"
+                type="button"
+              ></button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="IMPORTANTE: La fecha más relevante es aquella en la que se presenta en la petición ante la entidad. La fecha en la que se envía por correo electrónico o la fecha en la que se presenta en la ventanilla."
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                HabeasCorpus.get('fecha')?.invalid &&
+                HabeasCorpus.get('fecha')?.touched
+              "
+              class="text-danger"
+            >
+              La fecha es obligatoria
+            </small>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Input para el nombre de la entidad -->
+      <div class="form-group mt-2">
+        <label for="juez"
+          ><strong>Juez al que se dirige</strong>-</label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="juez"
+            id="juez"
+            placeholder="Promiscuo Municipal, Penal Municipal, Penal del Circuito, Promiscuo del Circuito, Magistrado del Tribunal"
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Promiscuo Municipal, Penal Municipal, Penal del Circuito, Promiscuo del Circuito, Magistrado del Tribunal"
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+      </div>
+  
+      <!-- Input para la ciudad del juez -->
+      <div class="form-group mt-2">
+          <label for="ciudadJuez"
+            ><strong>Ciudad del juez</strong>-</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <!-- Icono de alerta y mensaje de ayuda -->
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="ciudadJuez"
+              id="ciudadJuez"
+              placeholder="Ciudad del juez que recibe el habeas corpus."
+            />
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="Ciudad del juez que recibe el habeas corpus."
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+        </div>
+    
+        <!-- Input para la direccion Juez administrativo -->
+        <div class="form-group mt-2">
+          <label for="direccionJuez"
+            ><strong>Dirección del juez</strong>-</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <!-- Icono de alerta y mensaje de ayuda -->
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="direccionJuez"
+              id="direccionJuez"
+              placeholder="Dirección del juez que recibe el habeas corpus"
+            />
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="Dirección del juez que recibe el habeas corpus."
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+        </div>
+        <!-- Numeral 2-->
+        <div class="d-flex align-items-start mt-5">
+            <div
+            class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+            style="width: 25px; height: 25px"
+            >
+            <strong>2</strong>
+            </div>
+            <div class="form-group">
+            <!-- Label: ¿Quienes son los involucrados? -->
+            <label class="text-primary" for="destinatario"
+                ><strong>¿Quienes son los involucrados?</strong></label
+            >
+            <div id="destinatarioHelpBlock" class="form-text">
+                Indica en los siguientes los campos las personas involucradas en esta acción de habeas corpus.
+            </div>
+            </div>
+        </div>
+
+        <!-- Input para el nombre de la persona privada de libertad -->
+        <div class="form-group mt-2">
+            <label for="nombrePrivada"
+            ><strong>Nombre(s) y apellido(s) de la persona que se encuentra privada de la libertad</strong>-</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <div class="input-group">
+            <input
+                type="text"
+                class="form-control"
+                formControlName="nombrePrivada"
+                id="nombrePrivada"
+                placeholder="Nombre(s) y apellido(s) de la persona que se encuentra privada de la libertad."
+            />
+            <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Nombre(s) y apellido(s) de la persona que se encuentra privada de la libertad."
+            >
+                <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+                ></i>
+            </button>
+            </div>
+        </div>
+        
+        <!-- Nombre de la persona que hace la solicitud -->
+        <div class="form-group mt-2">
+            <label for="nombrePeticionario"
+            ><strong>Nombre(s) y apellido(s) de la persona que hace la solicitud</strong>-</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <div class="input-group">
+            <input
+                type="text"
+                class="form-control"
+                formControlName="nombrePeticionario"
+                id="nombrePeticionario"
+                placeholder="Nombre(s) y apellido(s) de la persona que hace la solicitud."
+            />
+            <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Nombre(s) y apellido(s) de la persona que hace la solicitud."
+            >
+                <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+                ></i>
+            </button>
+            </div>
+        </div>
+
+        <!-- En mi calidad de:-->
+        <div class="form-group mt-2">
+            <label for="calidad"
+            ><strong>La persona que hace la solicitud se encuentra en calidad de:</strong> -</label
+            ><label class="text-primary"><strong> (requerido) </strong></label>
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <div class="input-group">
+            <input
+                type="text"
+                class="form-control"
+                formControlName="calidad"
+                id="calidad"
+                placeholder="(afectado, pariente, tercero o apoderado)"
+            />
+            <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="(afectado, pariente, tercero o apoderado)"
+            >
+                <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+                ></i>
+            </button>
+            </div>
+        </div>
+
+      
+    </form>
+  </div>
+
+  <!-- Formulario para Habeas Corpus por prolongación ilegal de la privación de la libertad -->
+  <div *ngIf="selectedOption === 'prolongacion'">
+    <form [formGroup]="HabeasCorpus" (ngSubmit)="onSubmit()">
+      <h3 class="mt-3">Habeas corpus por prolongación ilegal de la libertad</h3>
+
+      <!-- Aquí puedes agregar los campos necesarios para el formulario de prolongación ilegal -->
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Apellido:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nombre"
+          formControlName="nombre"
+          required
+        />
+      </div>
+      <!-- Otros campos aquí -->
+    </form>
+  </div>
+</div>
