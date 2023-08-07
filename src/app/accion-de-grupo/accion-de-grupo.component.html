@@ -95,9 +95,129 @@
           </small>
         </div>
       </div>
+
+      <div class="col-md-6">
+      <div class="form-group ">
+        <label for="nombreDemandado"
+          ><strong>Persona o entidad a la que demanda</strong>-</label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="nombreDemandado"
+            id="nombreDemandado"
+            placeholder="Nombre de la persona o entidad a la que demanda"
+                [class.is-invalid]="
+                AccionDeGrupo.get('nombreDemandado')?.invalid &&
+                AccionDeGrupo.get('nombreDemandado')?.touched
+              "
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Al ser una persona ingrese los nombres y apellidos, si es una empresa su respectivo nombre."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+         <small
+            *ngIf="
+              AccionDeGrupo.get('nombreDemandado')?.invalid &&
+              AccionDeGrupo.get('nombreDemandado')?.touched
+            "
+            class="text-danger"
+          >
+            El nombre del demandado es obligatorio
+          </small>
+      </div>
     </div>
 
+    </div>
 
+    <div class="row">
+      <!-- Input para la Ciudad -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="ciudad"
+            ><strong>¿Como esta legalmente constituido?</strong> -</label
+          >
+          <label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="legalmenteConstituido"
+              value="persona natural"
+            />
+            <label class="form-check-label" for="flexRadioDefault1">
+              Persona natural
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="legalmenteConstituido"
+              value="persona juridica"
+            />
+            <label class="form-check-label" for="flexRadioDefault2">
+              Persona juridica
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="legalmenteConstituido"
+              value="entidad publica"
+            />
+            <label class="form-check-label" for="flexRadioDefault2">
+              Entidad publica
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="ciudad"
+            ><strong>¿Por que se demanda?</strong> -</label
+          >
+          <label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="razonDemanda"
+              value="acciones"
+            />
+            <label class="form-check-label" for="flexRadioDefault1">
+              Por acciones
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="razonDemanda"
+              value="omiciones"
+            />
+            <label class="form-check-label" for="flexRadioDefault2">
+              Por omociones
+            </label>
+          </div>
+        </div>
+      </div>
+
+    </div>
 
 
     <div class="d-flex align-items-start mt-5">
@@ -110,20 +230,1754 @@
         <div class="form-group">
           <!-- Label: ¿A quién va dirigida esta acción de grupo? -->
           <label class="text-primary" for="destinatario">
-            <strong>Datos del demandado</strong>
+            <strong>Datos del demandante</strong>
           </label>
           <div id="destinatarioHelpBlock" class="form-text">
-            Seleccion la opcion segun a quien vaya diriga la accion de grupo
+            Seleccion la opcion segun los daos del abogado demandante
           </div>
         </div>
       </div>
 
 
 
+      <div class="row">
+        <!-- Input para la Ciudad -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="ciudad"><strong>Nombre del demandante</strong> -</label>
+            <label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="nombreDemandante"
+                id="nombre"
+                placeholder="nombre de la persona que demanda"
+                [class.is-invalid]="
+                  AccionDeGrupo.get('nombreDemandante')?.invalid &&
+                  AccionDeGrupo.get('nombreDemandante')?.touched
+                "
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Nombre de la persona que realiza la accion de grupo."
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                AccionDeGrupo.get('nombreDemandante')?.invalid &&
+                AccionDeGrupo.get('nombreDemandante')?.touched
+              "
+              class="text-danger"
+            >
+              La ciudad es obligatoria
+            </small>
+          </div>
+        </div>
+  
+        <div class="col-md-6">
+        <div class="form-group ">
+          <label for="nombreDemandado"
+            ><strong>Nombre del abogado</strong>-</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <!-- Icono de alerta y mensaje de ayuda -->
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="nombreAbogado"
+              id="nombreAbogado"
+              placeholder="Nombre de el abogado responsable de la accion de grupo"
+                  [class.is-invalid]="
+                  AccionDeGrupo.get('nombreAbogado')?.invalid &&
+                  AccionDeGrupo.get('nombreAbogado')?.touched
+                "
+            />
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="Nombre del abogado que respalda la accion de grupo"
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+           <small
+              *ngIf="
+                AccionDeGrupo.get('nombreAbogado')?.invalid &&
+                AccionDeGrupo.get('nombreAbogado')?.touched
+              "
+              class="text-danger"
+            >
+              El nombre del abogado es obligatorio
+            </small>
+        </div>
+      </div>
+  
+      </div>
 
 
 
 
+      <div class="row">
+        <!-- Input para la Ciudad -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="ciudad"><strong>Ciudad</strong> -</label>
+            <label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="ciudadAbogado"
+                id="ciudadAbogado"
+                placeholder="ciudad del abogado."
+                [class.is-invalid]="
+                  AccionDeGrupo.get('ciudadAbogado')?.invalid &&
+                  AccionDeGrupo.get('ciudadAbogado')?.touched
+                "
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Ciudad donde reside el abogado responsable de la accion de grupo."
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                AccionDeGrupo.get('ciudadAbogado')?.invalid &&
+                AccionDeGrupo.get('ciudadAbogado')?.touched
+              "
+              class="text-danger"
+            >
+              La ciudad del abogado es obligatoria
+            </small>
+          </div>
+        </div>
+  
+        <div class="col-md-6">
+        <div class="form-group ">
+          <label for="nombreDemandado"
+            ><strong>Cedula</strong>-</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <!-- Icono de alerta y mensaje de ayuda -->
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="cedulaAbogado"
+              id="cedulaAbogado"
+              placeholder="cedula del abogado"
+                  [class.is-invalid]="
+                  AccionDeGrupo.get('cedulaAbogado')?.invalid &&
+                  AccionDeGrupo.get('cedulaAbogado')?.touched
+                "
+            />
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="Cedula del abogado responsable de la accion de grupo"
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+           <small
+              *ngIf="
+                AccionDeGrupo.get('cedulaAbogado')?.invalid &&
+                AccionDeGrupo.get('cedulaAbogado')?.touched
+              "
+              class="text-danger"
+            >
+              La ciudad del abogado es obligatorio
+            </small>
+        </div>
+      </div>
+  
+      </div>
+
+
+
+
+      <div class="row">
+        <!-- Input para la Ciudad -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="ciudad"><strong>Ciudad expedicion</strong> -</label>
+            <label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="ciudadExpedicionAbogado"
+                id="ciudadExpedicionAbogado"
+                placeholder="ciudad del abogado."
+                [class.is-invalid]="
+                  AccionDeGrupo.get('ciudadExpedicionAbogado')?.invalid &&
+                  AccionDeGrupo.get('ciudadExpedicionAbogado')?.touched
+                "
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Ciudad donde se expidio la cedula."
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                AccionDeGrupo.get('ciudadExpedicionAbogado')?.invalid &&
+                AccionDeGrupo.get('ciudadExpedicionAbogado')?.touched
+              "
+              class="text-danger"
+            >
+              La ciudad de expedicion del abogado es obligatoria
+            </small>
+          </div>
+        </div>
+  
+        <div class="col-md-6">
+        <div class="form-group ">
+          <label for="nombreDemandado"
+            ><strong>tarjeta profesional</strong>-</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <!-- Icono de alerta y mensaje de ayuda -->
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="tarjetaProfesional"
+              id="tarjetaProfesional"
+              placeholder="cedula del abogado"
+                  [class.is-invalid]="
+                  AccionDeGrupo.get('tarjetaProfesional')?.invalid &&
+                  AccionDeGrupo.get('tarjetaProfesional')?.touched
+                "
+            />
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="Numero de la tarjeta profesional"
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+           <small
+              *ngIf="
+                AccionDeGrupo.get('tarjetaProfesional')?.invalid &&
+                AccionDeGrupo.get('tarjetaProfesional')?.touched
+              "
+              class="text-danger"
+            >
+              La tarjeta profesional abogado es obligatoria
+              
+            </small>
+        </div>
+      </div>
+  
+      </div>
+
+
+
+
+      <div class="d-flex align-items-start mt-5">
+        <div
+          class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+          style="width: 25px; height: 25px"
+        >
+          <strong>3</strong>
+        </div>
+        <div class="form-group">
+          <!-- Label: ¿A quién va dirigida esta acción de grupo? -->
+          <label class="text-primary" for="destinatario">
+            <strong>Relacion de los demandantes</strong>
+          </label>
+          <div id="destinatarioHelpBlock" class="form-text">
+            Rellene cada una de las personas involucradas, recuerde, son minimo 20 personas
+          </div>
+        </div>
+      </div>
+
+
+
+      <ng-container
+        formArrayName="demandantes"
+        *ngFor="
+          let row of demandantes.controls;
+          index as i;
+          first as isFirst;
+          last as isLast
+        "
+        class="input-group"
+      >
+
+      <div class="row">
+        <!-- Input para la Ciudad -->
+        <div class="col-md-6  d-flex">
+
+          <div
+          class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+          style="width: 25px; height: 25px"
+        >
+          <strong>{{ i + 1 }}</strong>
+        </div>
+
+          <div class="form-group w-100">
+
+
+
+            <label for="ciudad"><strong>Nombre</strong> -</label>
+            <label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group" [formGroupName]="i">
+              <input
+                type="text"
+                class="form-control "
+                formControlName="nombre"
+                id="nombre"
+                placeholder="nombre del abogado."
+                [class.is-invalid]="
+                  AccionDeGrupo.get('nombre')?.invalid &&
+                  AccionDeGrupo.get('nombre')?.touched
+                "
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="nombre de la persona."
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+              
+            </div>
+
+            <small
+              *ngIf="
+                AccionDeGrupo.get('nombre')?.invalid &&
+                AccionDeGrupo.get('nombre')?.touched
+              "
+              class="text-danger"
+            >
+              El no de expedicion del abogado es obligatoria
+            </small>
+          </div>
+        </div>
+  
+        <div class="col-md-6">
+        <div class="form-group ">
+          <label for="nombreDemandado"
+            ><strong>Cedula</strong>-</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <!-- Icono de alerta y mensaje de ayuda -->
+          <div class="input-group"  [formGroupName]="i">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="cedula"
+              id="tarjetaProfesional"
+              placeholder="cedula del abogado"
+                  [class.is-invalid]="
+                  AccionDeGrupo.get('cedula')?.invalid &&
+                  AccionDeGrupo.get('cedula')?.touched
+                "
+            />
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="cedula"
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+            
+            <div *ngIf="isLast" class="float-end ms-2">
+              <!-- Botón para agregar un nuevo campo -->
+              <button
+                type="button"
+                class="btn btn-primary mt-2"
+                (click)="agregarDemandante()"
+              >
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          
+          </div>
+
+           <small
+              *ngIf="
+                AccionDeGrupo.get('cedula')?.invalid &&
+                AccionDeGrupo.get('cedula')?.touched
+              "
+              class="text-danger"
+            >
+              La tarjeta profesional abogado es obligatoria
+              
+            </small>
+        </div>
+      </div>
+  
+      </div>
+
+    </ng-container>
+
+
+
+
+
+
+
+    <div class="d-flex align-items-start mt-5">
+      <div
+        class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+        style="width: 25px; height: 25px"
+      >
+        <strong>4</strong>
+      </div>
+      <div class="form-group">
+        <!-- Label: ¿A quién va dirigida esta acción de grupo? -->
+        <label class="text-primary" for="destinatario">
+          <strong>Datos de las acciones</strong>
+        </label>
+        <div id="destinatarioHelpBlock" class="form-text">
+          Rellene cada una de las personas involucradas, recuerde, son minimo 20 personas
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group mt-2">
+      <label for="hechos"> <strong>HECHOS </strong> - </label
+      ><label class="text-primary"><strong>(requerido)</strong> </label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+
+      <ng-container
+        formArrayName="hechos"
+        *ngFor="
+          let row of hechos.controls;
+          index as i;
+          first as isFirst;
+          last as isLast
+        "
+        class="input-group"
+      >
+        <ng-container *ngIf="isFirst" [formGroupName]="i">
+          <div class="input-group">
+            <textarea
+              [class.is-invalid]="
+              AccionDeGrupo.get('hechos')?.invalid &&
+              AccionDeGrupo.get('hechos')?.touched &&
+                isLast
+              "
+              rows="6"
+              class="form-control"
+              formControlName="contenido"
+              id="hechos{{ i }}"
+              placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma"
+              required
+            ></textarea>
+
+            <div class="d-flex flex-column">
+              <div class="mb-2">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-custom-class="custom-tooltip"
+                  data-bs-title="Hacer el relato de los hechos que configuran el incumplimiento de la norma."
+                >
+                  <i
+                    class="fas fa-exclamation-circle text-white"
+                    style="width: 25px; height: 25px"
+                  ></i>
+                </button>
+              </div>
+              <div *ngIf="isLast" class="mb-2">
+                <!-- Botón para agregar un nuevo campo -->
+                <button
+                  type="button"
+                  class="btn btn-primary mt-2"
+                  (click)="agregarHecho()"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <small
+            *ngIf="
+            AccionDeGrupo.get('hechos')?.invalid &&
+            AccionDeGrupo.get('hechos')?.touched &&
+              isLast
+            "
+            class="text-danger"
+          >
+            Los hechos son obliogatorios
+          </small>
+        </ng-container>
+
+        <ng-container *ngIf="!isFirst" [formGroupName]="i">
+          <div class="input-group">
+            <textarea
+              [class.is-invalid]="
+              AccionDeGrupo.get('hechos')?.invalid &&
+              AccionDeGrupo.get('hechos')?.touched &&
+                isLast
+              "
+              rows="6"
+              class="form-control"
+              formControlName="contenido"
+              id="hechos{{ i }}"
+              placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma"
+              required
+            ></textarea>
+            <div *ngIf="isLast" class="mb-2">
+              <!-- Botón para agregar un nuevo campo -->
+              <button
+                type="button"
+                class="btn btn-primary mt-2"
+                (click)="agregarHecho()"
+              >
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          <small
+            *ngIf="
+            AccionDeGrupo.get('hechos')?.invalid &&
+            AccionDeGrupo.get('hechos')?.touched &&
+              isLast
+            "
+            class="text-danger"
+          >
+            Los hechos son obliogatorios
+          </small>
+        </ng-container>
+      </ng-container>
+    </div>
+
+
+
+
+    <div class="form-group mt-2">
+      <label for="pretension"><strong>PRETENSIÓN </strong> - </label
+      ><label class="text-primary"><strong>(requerido)</strong></label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+      <div class="input-group">
+        <textarea
+          [class.is-invalid]="
+          AccionDeGrupo.get('pretension')?.invalid &&
+            AccionDeGrupo.get('pretension')?.touched
+          "
+          rows="6"
+          class="form-control"
+          formControlName="pretension"
+          id="pretension"
+          placeholder="Autoridad o particular encargada de cumplir o hacer cumplir la norma"
+          required
+        ></textarea>
+        <div>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Autoridad o particular encargada de cumplir o hacer cumplir la norma."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+      </div>
+      <small
+        *ngIf="
+        AccionDeGrupo.get('pretension')?.invalid &&
+        AccionDeGrupo.get('pretension')?.touched
+        "
+        class="text-danger"
+      >
+        La pretension es obligatoria
+      </small>
+    </div>
+
+
+
+
+    <div class="form-group mt-2">
+      <label for="pretension"><strong>Valor </strong> - </label
+      ><label class="text-primary"><strong>(requerido)</strong></label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+      <div class="input-group">
+        <input
+          [class.is-invalid]="
+          AccionDeGrupo.get('valorPretension')?.invalid &&
+            AccionDeGrupo.get('valorPretension')?.touched
+          "
+          class="form-control"
+          formControlName="valorPretension"
+          id="valorPretension"
+          placeholder="valor pretension"
+          required
+        >
+        <div>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="valor pretension."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+      </div>
+      <small
+        *ngIf="
+        AccionDeGrupo.get('valorPretension')?.invalid &&
+        AccionDeGrupo.get('valorPretension')?.touched
+        "
+        class="text-danger"
+      >
+        La pretension es obligatoria
+      </small>
+    </div>
+
+
+
+
+
+    <div class="form-group mt-2">
+      <label for="perjuicios"><strong>Perjuicios causados </strong> - </label
+      ><label class="text-primary"><strong>(requerido)</strong></label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+      <div class="input-group">
+        <textarea
+          [class.is-invalid]="
+          AccionDeGrupo.get('perjuicios')?.invalid &&
+            AccionDeGrupo.get('perjuicios')?.touched
+          "
+          rows="6"
+          class="form-control"
+          formControlName="perjuicios"
+          id="perjuicios"
+          placeholder="perjuicios"
+          required
+        ></textarea>
+        <div>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="perjuicios."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+      </div>
+      <small
+        *ngIf="
+        AccionDeGrupo.get('perjuicios')?.invalid &&
+        AccionDeGrupo.get('perjuicios')?.touched
+        "
+        class="text-danger"
+      >
+        El perjuicio es obligatorio
+      </small>
+    </div>
+
+
+    <div class="form-group mt-2">
+      <label for="criterios"><strong>Criterios para identificar a los integrantes del grupo </strong> - </label
+      ><label class="text-primary"><strong>(requerido)</strong></label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+      <div class="input-group">
+        <textarea
+          [class.is-invalid]="
+          AccionDeGrupo.get('criterios')?.invalid &&
+            AccionDeGrupo.get('criterios')?.touched
+          "
+          rows="6"
+          class="form-control"
+          formControlName="criterios"
+          id="criterios"
+          placeholder="criterios"
+          required
+        ></textarea>
+        <div>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="criterios."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+      </div>
+      <small
+        *ngIf="
+        AccionDeGrupo.get('criterios')?.invalid &&
+        AccionDeGrupo.get('criterios')?.touched
+        "
+        class="text-danger"
+      >
+        El perjuicio es obligatorio
+      </small>
+    </div>
+
+
+
+    <div class="form-group mt-2">
+      <label for="idefAccionada"><strong>Identificacion de la parte accionada</strong> - </label
+      ><label class="text-primary"><strong>(requerido)</strong></label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+      <div class="input-group">
+        <textarea
+          [class.is-invalid]="
+          AccionDeGrupo.get('idefAccionada')?.invalid &&
+            AccionDeGrupo.get('idefAccionada')?.touched
+          "
+          rows="6"
+          class="form-control"
+          formControlName="idefAccionada"
+          id="idefAccionada"
+          placeholder="identificacion"
+          required
+        ></textarea>
+        <div>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="criterios."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+      </div>
+      <small
+        *ngIf="
+        AccionDeGrupo.get('idefAccionada')?.invalid &&
+        AccionDeGrupo.get('idefAccionada')?.touched
+        "
+        class="text-danger"
+      >
+      La identificacion de la parte accionada es obligatoria
+      </small>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class="form-group mt-2">
+      <label for="procedencia"> <strong>Procedencia de la accion de grupo </strong> - </label
+      ><label class="text-primary"><strong>(requerido)</strong> </label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+
+      <ng-container
+        formArrayName="procedencia"
+        *ngFor="
+          let row of procedencia.controls;
+          index as i;
+          first as isFirst;
+          last as isLast
+        "
+        class="input-group"
+      >
+        <ng-container *ngIf="isFirst" [formGroupName]="i">
+          <div class="input-group">
+            <textarea
+              [class.is-invalid]="
+              AccionDeGrupo.get('procedencia')?.invalid &&
+              AccionDeGrupo.get('procedencia')?.touched &&
+                isLast
+              "
+              rows="6"
+              class="form-control"
+              formControlName="contenido"
+              id="procedencia{{ i }}"
+              placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma"
+              required
+            ></textarea>
+
+            <div class="d-flex flex-column">
+              <div class="mb-2">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-custom-class="custom-tooltip"
+                  data-bs-title="Procedencia de la accion."
+                >
+                  <i
+                    class="fas fa-exclamation-circle text-white"
+                    style="width: 25px; height: 25px"
+                  ></i>
+                </button>
+              </div>
+              <div *ngIf="isLast" class="mb-2">
+                <!-- Botón para agregar un nuevo campo -->
+                <button
+                  type="button"
+                  class="btn btn-primary mt-2"
+                  (click)="agregarProcedencia()"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <small
+            *ngIf="
+            AccionDeGrupo.get('procedencia')?.invalid &&
+            AccionDeGrupo.get('procedencia')?.touched &&
+              isLast
+            "
+            class="text-danger"
+          >
+            La procedencia son obliogatoria
+          </small>
+        </ng-container>
+
+        <ng-container *ngIf="!isFirst" [formGroupName]="i">
+          <div class="input-group">
+            <textarea
+              [class.is-invalid]="
+              AccionDeGrupo.get('procedencia')?.invalid &&
+              AccionDeGrupo.get('procedencia')?.touched &&
+                isLast
+              "
+              rows="6"
+              class="form-control"
+              formControlName="contenido"
+              id="procedencia{{ i }}"
+              placeholder="Procedencia de la accion"
+              required
+            ></textarea>
+            <div *ngIf="isLast" class="mb-2">
+              <!-- Botón para agregar un nuevo campo -->
+              <button
+                type="button"
+                class="btn btn-primary mt-2"
+                (click)="agregarProcedencia()"
+              >
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          <small
+            *ngIf="
+            AccionDeGrupo.get('procedencia')?.invalid &&
+            AccionDeGrupo.get('procedencia')?.touched &&
+              isLast
+            "
+            class="text-danger"
+          >
+            La procedencia son obliogatorios
+          </small>
+        </ng-container>
+      </ng-container>
+    </div>
+
+
+
+
+
+
+    <div class="form-group mt-2">
+      <label for="caducidad"><strong>Fecha caducidad </strong> - </label
+      ><label class="text-primary"><strong>(requerido)</strong></label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+      <div class="input-group">
+        <input
+          [class.is-invalid]="
+          AccionDeGrupo.get('caducidad')?.invalid &&
+            AccionDeGrupo.get('caducidad')?.touched
+          "
+          type="date"
+          class="form-control"
+          formControlName="caducidad"
+          id="caducidad"
+          placeholder="fecha de la caducidad"
+          required
+        >
+        <div>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="la fecha del hecho o de la ultima acción que produjo el daño"
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+      </div>
+      <small
+        *ngIf="
+        AccionDeGrupo.get('caducidad')?.invalid &&
+        AccionDeGrupo.get('caducidad')?.touched
+        "
+        class="text-danger"
+      >
+        La pretension es obligatoria
+      </small>
+    </div>
+
+
+
+
+
+
+    <div class="d-flex align-items-start mt-5">
+      <div
+        class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+        style="width: 25px; height: 25px"
+      >
+        <strong>5</strong>
+      </div>
+      <div class="form-group">
+        <!-- Label: ¿A quién va dirigida esta acción de grupo? -->
+        <label class="text-primary" for="destinatario">
+          <strong>Pruebas</strong>
+        </label>
+        <div id="destinatarioHelpBlock" class="form-text">
+          Enumerar una a una las pruebas que se aportan y las que se solicitan al Juez que decrete por no tenerlas en su poder
+        </div>
+      </div>
+    </div>
+
+
+    
+
+
+
+
+
+
+    <div class="form-group mt-2">
+      <label for="documentales"> <strong>Documentales aportados</strong> - </label
+      ><label class="text-primary"><strong>(requerido)</strong> </label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+
+      <ng-container
+        formArrayName="documentales"
+        *ngFor="
+          let row of documentales.controls;
+          index as i;
+          first as isFirst;
+          last as isLast
+        "
+        class="input-group"
+      >
+        <ng-container *ngIf="isFirst" [formGroupName]="i">
+          <div class="input-group">
+            <textarea
+              [class.is-invalid]="
+              AccionDeGrupo.get('documentales')?.invalid &&
+              AccionDeGrupo.get('documentales')?.touched &&
+                isLast
+              "
+              rows="6"
+              class="form-control"
+              formControlName="contenido"
+              id="documentales{{ i }}"
+              placeholder="documentales de la accion"
+              required
+            ></textarea>
+
+            <div class="d-flex flex-column">
+              <div class="mb-2">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-custom-class="custom-tooltip"
+                  data-bs-title="Procedencia de la accion."
+                >
+                  <i
+                    class="fas fa-exclamation-circle text-white"
+                    style="width: 25px; height: 25px"
+                  ></i>
+                </button>
+              </div>
+              <div *ngIf="isLast" class="mb-2">
+                <!-- Botón para agregar un nuevo campo -->
+                <button
+                  type="button"
+                  class="btn btn-primary mt-2"
+                  (click)="agregarDocumental()"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <small
+            *ngIf="
+            AccionDeGrupo.get('documentales')?.invalid &&
+            AccionDeGrupo.get('documentales')?.touched &&
+              isLast
+            "
+            class="text-danger"
+          >
+            Los documentales son obliogatorios
+          </small>
+        </ng-container>
+
+        <ng-container *ngIf="!isFirst" [formGroupName]="i">
+          <div class="input-group">
+            <textarea
+              [class.is-invalid]="
+              AccionDeGrupo.get('documentales')?.invalid &&
+              AccionDeGrupo.get('documentales')?.touched &&
+                isLast
+              "
+              rows="6"
+              class="form-control"
+              formControlName="contenido"
+              id="documentales{{ i }}"
+              placeholder="documentales de la accion"
+              required
+            ></textarea>
+            <div *ngIf="isLast" class="mb-2">
+              <!-- Botón para agregar un nuevo campo -->
+              <button
+                type="button"
+                class="btn btn-primary mt-2"
+                (click)="agregarDocumental()"
+              >
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          <small
+            *ngIf="
+            AccionDeGrupo.get('documentales')?.invalid &&
+            AccionDeGrupo.get('documentales')?.touched &&
+              isLast
+            "
+            class="text-danger"
+          >
+            Los documentales son obligatorios
+          </small>
+        </ng-container>
+      </ng-container>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="form-group mt-2">
+      <label for="documentalesSOLI"> <strong>Documentales Solicitados</strong> - </label
+      ><label class="text-primary"><strong>(requerido)</strong> </label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+
+      <ng-container
+        formArrayName="documentalesSOLI"
+        *ngFor="
+          let row of documentalesSOLI.controls;
+          index as i;
+          first as isFirst;
+          last as isLast
+        "
+        class="input-group"
+      >
+        <ng-container *ngIf="isFirst" [formGroupName]="i">
+          <div class="input-group">
+            <textarea
+              [class.is-invalid]="
+              AccionDeGrupo.get('documentalesSOLI')?.invalid &&
+              AccionDeGrupo.get('documentalesSOLI')?.touched &&
+                isLast
+              "
+              rows="6"
+              class="form-control"
+              formControlName="contenido"
+              id="documentalesSOLI{{ i }}"
+              placeholder="documentales solicitados"
+              required
+            ></textarea>
+
+            <div class="d-flex flex-column">
+              <div class="mb-2">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-custom-class="custom-tooltip"
+                  data-bs-title="documental asociado."
+                >
+                  <i
+                    class="fas fa-exclamation-circle text-white"
+                    style="width: 25px; height: 25px"
+                  ></i>
+                </button>
+              </div>
+              <div *ngIf="isLast" class="mb-2">
+                <!-- Botón para agregar un nuevo campo -->
+                <button
+                  type="button"
+                  class="btn btn-primary mt-2"
+                  (click)="agregarDocumentalSOLI()"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <small
+            *ngIf="
+            AccionDeGrupo.get('documentalesSOLI')?.invalid &&
+            AccionDeGrupo.get('documentalesSOLI')?.touched &&
+              isLast
+            "
+            class="text-danger"
+          >
+            Los documentales son obligatorios
+          </small>
+        </ng-container>
+
+        <ng-container *ngIf="!isFirst" [formGroupName]="i">
+          <div class="input-group">
+            <textarea
+              [class.is-invalid]="
+              AccionDeGrupo.get('documentalesSOLI')?.invalid &&
+              AccionDeGrupo.get('documentalesSOLI')?.touched &&
+                isLast
+              "
+              rows="6"
+              class="form-control"
+              formControlName="contenido"
+              id="documentalesSOLI{{ i }}"
+              placeholder="documentales asociados"
+              required
+            ></textarea>
+            <div *ngIf="isLast" class="mb-2">
+              <!-- Botón para agregar un nuevo campo -->
+              <button
+                type="button"
+                class="btn btn-primary mt-2"
+                (click)="agregarDocumentalSOLI()"
+              >
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          <small
+            *ngIf="
+            AccionDeGrupo.get('documentalesSOLI')?.invalid &&
+            AccionDeGrupo.get('documentalesSOLI')?.touched &&
+              isLast
+            "
+            class="text-danger"
+          >
+            Los documentales son obligatorios
+          </small>
+        </ng-container>
+      </ng-container>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <div class="form-group mt-2">
+      <label for="periciales"> <strong>Periciales o tecnicas</strong> - </label
+      ><label class="text-primary"><strong>(requerido)</strong> </label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+
+      <ng-container
+        formArrayName="periciales"
+        *ngFor="
+          let row of periciales.controls;
+          index as i;
+          first as isFirst;
+          last as isLast
+        "
+        class="input-group"
+      >
+        <ng-container *ngIf="isFirst" [formGroupName]="i">
+          <div class="input-group">
+            <textarea
+              [class.is-invalid]="
+              AccionDeGrupo.get('periciales')?.invalid &&
+              AccionDeGrupo.get('periciales')?.touched &&
+                isLast
+              "
+              rows="6"
+              class="form-control"
+              formControlName="contenido"
+              id="periciales{{ i }}"
+              placeholder="periciales solicitados"
+              required
+            ></textarea>
+
+            <div class="d-flex flex-column">
+              <div class="mb-2">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-custom-class="custom-tooltip"
+                  data-bs-title="pericial asociado."
+                >
+                  <i
+                    class="fas fa-exclamation-circle text-white"
+                    style="width: 25px; height: 25px"
+                  ></i>
+                </button>
+              </div>
+              <div *ngIf="isLast" class="mb-2">
+                <!-- Botón para agregar un nuevo campo -->
+                <button
+                  type="button"
+                  class="btn btn-primary mt-2"
+                  (click)="agregarPericial()"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <small
+            *ngIf="
+            AccionDeGrupo.get('periciales')?.invalid &&
+            AccionDeGrupo.get('periciales')?.touched &&
+              isLast
+            "
+            class="text-danger"
+          >
+            Los periciales son obligatorios
+          </small>
+        </ng-container>
+
+        <ng-container *ngIf="!isFirst" [formGroupName]="i">
+          <div class="input-group">
+            <textarea
+              [class.is-invalid]="
+              AccionDeGrupo.get('periciales')?.invalid &&
+              AccionDeGrupo.get('periciales')?.touched &&
+                isLast
+              "
+              rows="6"
+              class="form-control"
+              formControlName="contenido"
+              id="periciales{{ i }}"
+              placeholder="periciales asociados"
+              required
+            ></textarea>
+            <div *ngIf="isLast" class="mb-2">
+              <!-- Botón para agregar un nuevo campo -->
+              <button
+                type="button"
+                class="btn btn-primary mt-2"
+                (click)="agregarPericial()"
+              >
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          <small
+            *ngIf="
+            AccionDeGrupo.get('periciales')?.invalid &&
+            AccionDeGrupo.get('periciales')?.touched &&
+              isLast
+            "
+            class="text-danger"
+          >
+            Los periciales son obligatorios
+          </small>
+        </ng-container>
+      </ng-container>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="form-group mt-2">
+      <label for="testimoniales"> <strong>Testimoniales</strong> - </label
+      ><label class="text-primary"><strong>(requerido)</strong> </label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+
+      <ng-container
+        formArrayName="testimoniales"
+        *ngFor="
+          let row of testimoniales.controls;
+          index as i;
+          first as isFirst;
+          last as isLast
+        "
+        class="input-group"
+      >
+        <ng-container *ngIf="isFirst" [formGroupName]="i">
+          <div class="input-group">
+            <textarea
+              [class.is-invalid]="
+              AccionDeGrupo.get('testimoniales')?.invalid &&
+              AccionDeGrupo.get('testimoniales')?.touched &&
+                isLast
+              "
+              rows="6"
+              class="form-control"
+              formControlName="contenido"
+              id="testimoniales{{ i }}"
+              placeholder="testimoniales solicitados"
+              required
+            ></textarea>
+
+            <div class="d-flex flex-column">
+              <div class="mb-2">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-custom-class="custom-tooltip"
+                  data-bs-title="testimonial asociado."
+                >
+                  <i
+                    class="fas fa-exclamation-circle text-white"
+                    style="width: 25px; height: 25px"
+                  ></i>
+                </button>
+              </div>
+              <div *ngIf="isLast" class="mb-2">
+                <!-- Botón para agregar un nuevo campo -->
+                <button
+                  type="button"
+                  class="btn btn-primary mt-2"
+                  (click)="agregarTestimonial()"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <small
+            *ngIf="
+            AccionDeGrupo.get('testimoniales')?.invalid &&
+            AccionDeGrupo.get('testimoniales')?.touched &&
+              isLast
+            "
+            class="text-danger"
+          >
+            Los testimoniales son obligatorios
+          </small>
+        </ng-container>
+
+        <ng-container *ngIf="!isFirst" [formGroupName]="i">
+          <div class="input-group">
+            <textarea
+              [class.is-invalid]="
+              AccionDeGrupo.get('testimoniales')?.invalid &&
+              AccionDeGrupo.get('testimoniales')?.touched &&
+                isLast
+              "
+              rows="6"
+              class="form-control"
+              formControlName="contenido"
+              id="testimoniales{{ i }}"
+              placeholder="testimoniales asociados"
+              required
+            ></textarea>
+            <div *ngIf="isLast" class="mb-2">
+              <!-- Botón para agregar un nuevo campo -->
+              <button
+                type="button"
+                class="btn btn-primary mt-2"
+                (click)="agregarTestimonial()"
+              >
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          <small
+            *ngIf="
+            AccionDeGrupo.get('testimoniales')?.invalid &&
+            AccionDeGrupo.get('testimoniales')?.touched &&
+              isLast
+            "
+            class="text-danger"
+          >
+            Los testimoniales son obligatorios
+          </small>
+        </ng-container>
+      </ng-container>
+    </div>
+
+
+
+
+
+
+
+    <div class="d-flex align-items-start mt-5">
+      <div
+        class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+        style="width: 25px; height: 25px"
+      >
+        <strong>6</strong>
+      </div>
+      <div class="form-group">
+        <!-- Label: ¿A quién va dirigida esta acción de grupo? -->
+        <label class="text-primary" for="destinatario">
+          <strong>Notificaciones</strong>
+        </label>
+        <div id="destinatarioHelpBlock" class="form-text">
+          Datos para las respectivas notificaciones
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="row">
+      <!-- Input para la Ciudad -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="domicilioDemandado"><strong>Domicilio demandado</strong> -</label>
+          <label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="domicilioDemandado"
+              id="domicilioDemandado"
+              placeholder="Ingresa el domicilio del demandado"
+              [class.is-invalid]="
+                AccionDeGrupo.get('domicilioDemandado')?.invalid &&
+                AccionDeGrupo.get('domicilioDemandado')?.touched
+              "
+              required
+            />
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="El domicilio."
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+          <small
+            *ngIf="
+              AccionDeGrupo.get('domicilioDemandado')?.invalid &&
+              AccionDeGrupo.get('domicilioDemandado')?.touched
+            "
+            class="text-danger"
+          >
+            El domicilio es obligatorio
+          </small>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+      <div class="form-group ">
+        <label for="ciudadDemandado"
+          ><strong>Ciudad demandado</strong>-</label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="ciudadDemandado"
+            id="ciudadDemandado"
+            placeholder="Ciudad en la que reside el demandado"
+                [class.is-invalid]="
+                AccionDeGrupo.get('ciudadDemandado')?.invalid &&
+                AccionDeGrupo.get('ciudadDemandado')?.touched
+              "
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="ciudad del demandado."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+         <small
+            *ngIf="
+              AccionDeGrupo.get('ciudadDemandado')?.invalid &&
+              AccionDeGrupo.get('ciudadDemandado')?.touched
+            "
+            class="text-danger"
+          >
+            La ciudad del demandado es obligatorio
+          </small>
+      </div>
+    </div>
+
+    </div>
+
+
+
+
+
+    <div class="row">
+      <!-- Input para la Ciudad -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="domicilioDemandante"><strong>Domicilio demandante</strong> -</label>
+          <label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="domicilioDemandante"
+              id="domicilioDemandante"
+              placeholder="Ingresa el domicilio del demandante"
+              [class.is-invalid]="
+                AccionDeGrupo.get('domicilioDemandante')?.invalid &&
+                AccionDeGrupo.get('domicilioDemandante')?.touched
+              "
+              required
+            />
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="El domicilio."
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+          <small
+            *ngIf="
+              AccionDeGrupo.get('domicilioDemandante')?.invalid &&
+              AccionDeGrupo.get('domicilioDemandante')?.touched
+            "
+            class="text-danger"
+          >
+            El domicilio es obligatorio
+          </small>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+      <div class="form-group ">
+        <label for="ciudadDemandante"
+          ><strong>Ciudad demandante</strong>-</label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="ciudadDemandante"
+            id="ciudadDemandante"
+            placeholder="Ciudad en la que reside el demandante"
+                [class.is-invalid]="
+                AccionDeGrupo.get('ciudadDemandante')?.invalid &&
+                AccionDeGrupo.get('ciudadDemandante')?.touched
+              "
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="ciudad del demandante."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+         <small
+            *ngIf="
+              AccionDeGrupo.get('ciudadDemandante')?.invalid &&
+              AccionDeGrupo.get('ciudadDemandante')?.touched
+            "
+            class="text-danger"
+          >
+            La ciudad del demandante es obligatorio
+          </small>
+      </div>
+    </div>
+
+    </div>
+
+
+
+
+
+
+    
+    <div class="form-group mt-2">
+      <label for="abogadoSuscrito"><strong>Lugar subscripcion abogado </strong> - </label
+      ><label class="text-primary"><strong>(requerido)</strong></label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+      <div class="input-group">
+        <input
+          [class.is-invalid]="
+          AccionDeGrupo.get('abogadoSuscrito')?.invalid &&
+            AccionDeGrupo.get('abogadoSuscrito')?.touched
+          "
+          class="form-control"
+          formControlName="abogadoSuscrito"
+          id="abogadoSuscrito"
+          placeholder="donde esta suscrito el abogado"
+          required
+        >
+        <div>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="donde esta suscrito el abogado."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+      </div>
+      <small
+        *ngIf="
+        AccionDeGrupo.get('abogadoSuscrito')?.invalid &&
+        AccionDeGrupo.get('abogadoSuscrito')?.touched
+        "
+        class="text-danger"
+      >
+        el lugar es obligatorio
+      </small>
+    </div>
 
 
 
