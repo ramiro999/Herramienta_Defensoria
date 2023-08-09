@@ -7,8 +7,19 @@
   color: #fff;
 }
 
-.navbar {
+/*.navbar navbar-expand-lg navbar-light{
+  margin:0%;
+  padding:0%;
+}*/
 
+.container{
+  margin: 0px 20px;
+  padding: 0px 10px;
+} 
+
+
+.navbar {
+    width: 100%;
     background-size: cover;
     color: #fff;
     /* Puedes ajustar otros estilos según tus necesidades */
@@ -22,9 +33,12 @@
     padding: 60px;
     /* Puedes ajustar otros estilos según tus necesidades */
   }
-  
-  /* Estilos para los enlaces del navbar (opcional) */
-  .navbar-light .navbar-nav .nav-link {
-    color: #333; /* Color de los enlaces */
+  .navbar-nav .nav-link {
+    color: #fff !important;
+    margin: 0 5px;
   }
+  
+ 
+  
+  
   
