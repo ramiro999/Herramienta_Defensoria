@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl} from '@angular/forms';
 
 import { DocgeneratorService } from '../services/docgenerator.service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
