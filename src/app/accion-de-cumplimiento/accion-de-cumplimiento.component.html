@@ -444,7 +444,9 @@
       <label for="hechos"> <strong>HECHOS </strong> - </label
       ><label class="text-primary"><strong>(requerido)</strong> </label>
       <!-- Icono de alerta y mensaje de ayuda -->
-
+      <div id="destinatarioHelpBlock" class="form-text">
+        Para agregar mas hechos use el boton de + para eliminar use -
+      </div>
       <ng-container
         formArrayName="hechos"
         *ngFor="
@@ -496,6 +498,13 @@
                 >
                   <i class="fas fa-plus"></i>
                 </button>
+                <button
+                type="button"
+                class="btn btn-primary mt-2"
+                (click)="eliminarHecho()"
+              >
+                <i class="fas fa-minus"></i>
+              </button>
               </div>
             </div>
           </div>
@@ -535,6 +544,13 @@
               >
                 <i class="fas fa-plus"></i>
               </button>
+              <button
+              type="button"
+              class="btn btn-primary mt-2"
+              (click)="eliminarHecho()"
+            >
+              <i class="fas fa-minus"></i>
+            </button>
             </div>
           </div>
           <small

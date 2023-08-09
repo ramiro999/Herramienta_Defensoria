@@ -98,6 +98,13 @@ export class AccionDeCumplimientoComponent {
     console.log(this.AccionDeCumplimiento.controls)
   }
 
+  eliminarHecho() {
+    const hechosArray = this.AccionDeCumplimiento.get('hechos') as FormArray;
+    if (hechosArray.length > 1) {
+      hechosArray.removeAt(hechosArray.length - 1);
+    }
+  }
+
   get hechos(): FormArray {
     return this.AccionDeCumplimiento.get('hechos') as FormArray;
   }
