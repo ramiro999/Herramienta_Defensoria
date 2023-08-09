@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 import { DocgeneratorService } from '../services/docgenerator.service';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 declare var bootstrap: any;
 @Component({
@@ -38,13 +39,38 @@ export class HabeasCorpusComponent implements OnInit {
     this.HabeasCorpus = this.initForm();
   }
 
+  ngAfterViewInit(): void {
+    // Inicializar los tooltips
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = Array.from(tooltipTriggerList).map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+  }
+
+
   initForm(): FormGroup {
     return this.fb.group({
-      nombre: ['', Validators.required],
-      edad: ['', Validators.required],
-      motivoDetencion: ['', Validators.required],
-      descripcionDetencion: ['', Validators.required],
-      ubicacionDetencion: ['', Validators.required],
+      ciudad: ['', Validators.required],
+      fecha: ['', Validators.required],
+      juez: ['', Validators.required],
+      ciudadJuez: ['', Validators.required],
+      direccionJuez: ['', Validators.required],
+      nombrePrivada: ['', Validators.required],
+      nombrePeticionario: ['', Validators.required],
+      calidad: ['', Validators.required],
+      hechos: this.fb.array([this.crearHechoFormGroup()]),
+      autoridad: ['', Validators.required],
+      fechaAprehendido: ['', Validators.required],
+      autoridadOrden: ['', Validators.required],
+      dias: ['', Validators.required],
+      sitioReclusion: ['', Validators.required],
+      fechaReclusion: ['', Validators.required],
+      funcionario: ['', Validators.required],
+      cargoFuncionario: ['', Validators.required],
+      nombreSolicitante: ['', Validators.required],
+      direccionSolicitante: ['', Validators.required],
+      telefonoSolicitante: ['', Validators.required],
+      correoSolicitante: ['', Validators.required],
+      cedulaSolicitante: ['', Validators.required],
+      cedulaExpedicion: ['', Validators.required],
     });
   }
 
@@ -53,7 +79,7 @@ export class HabeasCorpusComponent implements OnInit {
     let docName: string;
 
     if (this.selectedOption === 'privacion') {
-      templateURL = 'http://localhost:4200/assets/formats/template-habeas-corpus-privacion.docx';
+      templateURL = 'http://localhost:4200/assets/formats/template-habeas-corpus-1.docx';
       docName = 'habeas-corpus-privacion';
     } else {
       templateURL = 'http://localhost:4200/assets/formats/template-habeas-corpus-prolongacion.docx';
@@ -64,5 +90,24 @@ export class HabeasCorpusComponent implements OnInit {
 
     console.log('Formulario enviado', this.HabeasCorpus.value);
   }
+
+  crearHechoFormGroup(): FormGroup {
+    return this.fb.group({
+      contenido: ['', Validators.required]
+    });
+  }
+
+  agregarHecho() {
+    const hechosArray = this.HabeasCorpus.get('hechos') as FormArray;
+    hechosArray.push(this.crearHechoFormGroup());
+    console.log(this.HabeasCorpus.controls)
+  }
+
+  get hechos(): FormArray {
+    return this.HabeasCorpus.get('hechos') as FormArray;
+  }
+
+
+
 }
 
