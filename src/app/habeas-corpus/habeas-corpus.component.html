@@ -57,13 +57,12 @@
           <strong>1</strong>
         </div>
         <div class="form-group">
-          <!-- Label: ¿A quién sva dirigida carta? -->
+          <!-- Label: ¿A quién va dirigida carta? -->
           <label class="text-primary" for="destinatario"
             ><strong>¿A quién va dirigida esta carta?</strong></label
           >
           <div id="destinatarioHelpBlock" class="form-text">
-            Indica en los siguientes los campos al juez al
-            que se dirige.
+            Indica en los siguientes los campos al juez al que se dirige.
           </div>
         </div>
       </div>
@@ -113,7 +112,7 @@
             </small>
           </div>
         </div>
-  
+
         <!-- Input para la Fecha -->
         <div class="col-md-6 mt-2">
           <div class="form-group">
@@ -134,24 +133,21 @@
                 "
               />
               <!-- Icono de alerta y mensaje de ayuda -->
-              <button
-                class="btn btn-primary"
-                (click)="toggleDatepicker()"
-                type="button"
-              ></button>
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                data-bs-custom-class="custom-tooltip"
-                data-bs-title="IMPORTANTE: La fecha más relevante es aquella en la que se presenta en la petición ante la entidad. La fecha en la que se envía por correo electrónico o la fecha en la que se presenta en la ventanilla."
-              >
-                <i
-                  class="fas fa-exclamation-circle text-white"
-                  style="width: 25px; height: 25px"
-                ></i>
-              </button>
+              <div>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-custom-class="custom-tooltip"
+                  data-bs-title="La fecha en que escribe la carta deja constancia de la fecha en la que se firma."
+                >
+                  <i
+                    class="fas fa-exclamation-circle text-white"
+                    style="width: 25px; height: 25px"
+                  ></i>
+                </button>
+              </div>
             </div>
             <small
               *ngIf="
@@ -165,20 +161,90 @@
           </div>
         </div>
       </div>
-  
+
       <!-- Input para el nombre de la entidad -->
+      <!--Promiscuo Municipal, Penal Municipal, Penal del Circuito, Promiscuo del Circuito, Magistrado del Tribunal-->
       <div class="form-group mt-2">
-        <label for="juez"
-          ><strong>Juez al que se dirige</strong>-</label
+        <label for="juez"><strong>Juez al que se dirige</strong>-</label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="juez"
+            value="Promiscuo Municipal"
+          />
+          <label class="form-check-label" for="flexRadioDefault1">
+            Promiscuo Municipal
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="juez"
+            value="Penal Municipal"
+          />
+          <label class="form-check-label" for="flexRadioDefault2">
+            Penal Municipal
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="juez"
+            value="Penal del Circuito"
+          />
+          <label class="form-check-label" for="flexRadioDefault3">
+            Penal del Circuito
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="juez"
+            value="Promiscuo del Circuito"
+          />
+          <label class="form-check-label" for="flexRadioDefault4">
+            Promiscuo del Circuito
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="juez"
+            value="Magistrado del Tribunal"
+          />
+          <label class="form-check-label" for="flexRadioDefault5">
+            Magistrado del Tribunal
+          </label>
+        </div>
+      </div>
+
+      <!-- Input para la ciudad del juez -->
+      <div class="form-group mt-2">
+        <label for="ciudadJuez"><strong>Ciudad del juez</strong>-</label
         ><label class="text-primary"><strong>(requerido)</strong></label>
         <!-- Icono de alerta y mensaje de ayuda -->
         <div class="input-group">
           <input
             type="text"
             class="form-control"
-            formControlName="juez"
-            id="juez"
-            placeholder="Promiscuo Municipal, Penal Municipal, Penal del Circuito, Promiscuo del Circuito, Magistrado del Tribunal"
+            formControlName="ciudadJuez"
+            id="ciudadJuez"
+            placeholder="Ciudad del juez que recibe el habeas corpus."
+            [class.is-invalid]="
+              HabeasCorpus.get('ciudadJuez')?.invalid &&
+              HabeasCorpus.get('ciudadJuez')?.touched
+            "
+            required
           />
           <button
             type="button"
@@ -186,7 +252,7 @@
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             data-bs-custom-class="custom-tooltip"
-            data-bs-title="Promiscuo Municipal, Penal Municipal, Penal del Circuito, Promiscuo del Circuito, Magistrado del Tribunal"
+            data-bs-title="Ciudad del juez que recibe el habeas corpus."
           >
             <i
               class="fas fa-exclamation-circle text-white"
@@ -194,29 +260,461 @@
             ></i>
           </button>
         </div>
+        <small
+          *ngIf="
+            HabeasCorpus.get('ciudadJuez')?.invalid &&
+            HabeasCorpus.get('ciudadJuez')?.touched
+          "
+          class="text-danger"
+        >
+          La ciudad del juez es obligatoria.
+        </small>
       </div>
-  
-      <!-- Input para la ciudad del juez -->
+
+      <!-- Input para la direccion Juez administrativo -->
       <div class="form-group mt-2">
-          <label for="ciudadJuez"
-            ><strong>Ciudad del juez</strong>-</label
-          ><label class="text-primary"><strong>(requerido)</strong></label>
+        <label for="direccionJuez"><strong>Dirección del juez</strong>-</label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="direccionJuez"
+            id="direccionJuez"
+            placeholder="Dirección del juez que recibe el habeas corpus"
+            [class.is-invalid]="
+              HabeasCorpus.get('direccionJuez')?.invalid &&
+              HabeasCorpus.get('direccionJuez')?.touched
+            "
+            required
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Dirección del juez que recibe el habeas corpus."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+        <small
+          *ngIf="
+            HabeasCorpus.get('direccionJuez')?.invalid &&
+            HabeasCorpus.get('direccionJuez')?.touched
+          "
+          class="text-danger"
+        >
+          La dirección del juez es obligatoria.
+        </small>
+      </div>
+
+      <!-- Numeral 2-->
+      <div class="d-flex align-items-start mt-5">
+        <div
+          class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+          style="width: 25px; height: 25px"
+        >
+          <strong>2</strong>
+        </div>
+        <div class="form-group">
+          <!-- Label: ¿Quienes son los involucrados? -->
+          <label class="text-primary" for="destinatario"
+            ><strong>¿Quienes son los involucrados?</strong></label
+          >
+          <div id="destinatarioHelpBlock" class="form-text">
+            Indica en los siguientes los campos las personas involucradas en
+            esta acción de habeas corpus.
+          </div>
+        </div>
+      </div>
+
+      <!-- Input para el nombre de la persona privada de libertad -->
+      <div class="form-group mt-2">
+        <label for="nombrePrivada"
+          ><strong
+            >Nombre(s) y apellido(s) de la persona que se encuentra privada de
+            la libertad</strong
+          >-</label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="nombrePrivada"
+            id="nombrePrivada"
+            placeholder="Nombre(s) y apellido(s) de la persona que se encuentra privada de la libertad."
+            [class.is-invalid]="
+              HabeasCorpus.get('nombrePrivada')?.invalid &&
+              HabeasCorpus.get('nombrePrivada')?.touched
+            "
+            required
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Nombre(s) y apellido(s) de la persona que se encuentra privada de la libertad."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+        <small
+          *ngIf="
+            HabeasCorpus.get('nombrePrivada')?.invalid &&
+            HabeasCorpus.get('nombrePrivada')?.touched
+          "
+          class="text-danger"
+        >
+          El nombre de la persona privada de la libertad es obligatorio.
+        </small>
+      </div>
+
+      <!-- Nombre de la persona que hace la solicitud -->
+      <div class="form-group mt-2">
+        <label for="nombrePeticionario"
+          ><strong
+            >Nombre(s) y apellido(s) de la persona que hace la solicitud</strong
+          >-</label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="nombrePeticionario"
+            id="nombrePeticionario"
+            placeholder="Nombre(s) y apellido(s) de la persona que hace la solicitud."
+            [class.invalid-input]="
+              HabeasCorpus.get('nombrePeticionario')?.invalid &&
+              HabeasCorpus.get('nombrePeticionario')?.touched
+            "
+            required
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Nombre(s) y apellido(s) de la persona que hace la solicitud."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+        <small
+          *ngIf="
+            HabeasCorpus.get('nombrePeticionario')?.invalid &&
+            HabeasCorpus.get('nombrePeticionario')?.touched
+          "
+          class="text-danger"
+        >
+          El nombre de la persona que hace la solicitud es obligatorio.
+        </small>
+      </div>
+
+      <!-- En mi calidad de:-->
+      <div class="form-group mt-2">
+        <label for="calidad"
+          ><strong
+            >La persona que hace la solicitud se encuentra en calidad
+            de:</strong
+          >
+          -</label
+        ><label class="text-primary"><strong> (requerido) </strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="calidad"
+            value="Afectado"
+          />
+          <label class="form-check-label" for="flexRadioDefault1">
+            Afectado
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="calidad"
+            value="Pariente"
+          />
+          <label class="form-check-label" for="flexRadioDefault2">
+            Pariente
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="calidad"
+            value="Tercero"
+          />
+          <label class="form-check-label" for="flexRadioDefault3">
+            Tercero
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="calidad"
+            value="Apoderado"
+          />
+          <label class="form-check-label" for="flexRadioDefault4">
+            Apoderado
+          </label>
+        </div>
+      </div>
+
+      <!--Numeral 3-->
+      <div class="d-flex align-items-start mt-5">
+        <div
+          class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+          style="width: 25px; height: 25px"
+        >
+          <strong>3</strong>
+        </div>
+        <div class="form-group">
+          <!-- Label: ¿Quienes son los involucrados? -->
+          <label class="text-primary" for="destinatario"
+            ><strong>Hechos</strong></label
+          >
+          <div id="destinatarioHelpBlock" class="form-text">
+            Indica en los siguientes los hechos en este caso de privación ilegal
+            de la libertad.
+          </div>
+        </div>
+      </div>
+
+      <!-- Campo para los hechos -->
+      <div class="form-group mt-2">
+        <label for="hechos"> <strong>HECHOS </strong> - </label
+        ><label class="text-primary"><strong>(requerido)</strong> </label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+
+        <ng-container
+          formArrayName="hechos"
+          *ngFor="
+            let row of hechos.controls;
+            index as i;
+            first as isFirst;
+            last as isLast
+          "
+          class="input-group"
+        >
+          <ng-container *ngIf="isFirst" [formGroupName]="i">
+            <div class="input-group">
+              <textarea
+                [class.is-invalid]="
+                  HabeasCorpus.get('hechos')?.invalid &&
+                  HabeasCorpus.get('hechos')?.touched &&
+                  isLast
+                "
+                rows="6"
+                class="form-control"
+                formControlName="contenido"
+                id="hechos{{ i }}"
+                placeholder="Hacer el relato de las razones que fundamentan el incumplimiento"
+                required
+              ></textarea>
+
+              <div class="d-flex flex-column">
+                <div class="mb-2">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip"
+                    data-bs-title="Hacer el relato de los hechos que configuran el incumplimiento de la norma."
+                  >
+                    <i
+                      class="fas fa-exclamation-circle text-white"
+                      style="width: 25px; height: 25px"
+                    ></i>
+                  </button>
+                </div>
+                <div *ngIf="isLast" class="mb-2">
+                  <!-- Botón para agregar un nuevo campo -->
+                  <button
+                    type="button"
+                    class="btn btn-primary mt-2"
+                    (click)="agregarHecho()"
+                  >
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <small
+              *ngIf="
+                HabeasCorpus.get('hechos')?.invalid &&
+                HabeasCorpus.get('hechos')?.touched &&
+                isLast
+              "
+              class="text-danger"
+            >
+              Los hechos son obliogatorios
+            </small>
+          </ng-container>
+
+          <ng-container *ngIf="!isFirst" [formGroupName]="i">
+            <div class="input-group">
+              <textarea
+                [class.is-invalid]="
+                  HabeasCorpus.get('hechos')?.invalid &&
+                  HabeasCorpus.get('hechos')?.touched &&
+                  isLast
+                "
+                rows="6"
+                class="form-control"
+                formControlName="contenido"
+                id="hechos{{ i }}"
+                placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma"
+                required
+              ></textarea>
+              <div *ngIf="isLast" class="mb-2">
+                <!-- Botón para agregar un nuevo campo -->
+                <button
+                  type="button"
+                  class="btn btn-primary mt-2"
+                  (click)="agregarHecho()"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </div>
+            <small
+              *ngIf="
+                HabeasCorpus.get('hechos')?.invalid &&
+                HabeasCorpus.get('hechos')?.touched &&
+                isLast
+              "
+              class="text-danger"
+            >
+              Los hechos son obliogatorios
+            </small>
+          </ng-container>
+        </ng-container>
+      </div>
+
+      <!-- Numeral 4 -->
+      <div class="d-flex align-items-start mt-5">
+        <div
+          class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+          style="width: 25px; height: 25px"
+        >
+          <strong>4</strong>
+        </div>
+        <div class="form-group">
+          <!-- Label: ¿Qué se solicita? -->
+          <label class="text-primary" for="destinatario"
+            ><strong>Ordenes</strong></label
+          >
+          <div id="destinatarioHelpBlock" class="form-text">
+            Si el habeas corpus se invoca por privación ilegal de la libertad
+            diligencie los siguientes campos.
+          </div>
+        </div>
+      </div>
+
+      <!-- Input para la orden de libertad -->
+      <div class="form-group mt-2">
+        <label for="autoridad"
+          ><strong
+            >Autoridad que aprehendio a la persona que se encuenta privada de la
+            libertad</strong
+          >
+          -</label
+        ><label class="text-primary"><strong> (requerido) </strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="autoridad"
+            id="autoridad"
+            placeholder="Autoridad que viola el derecho de la libertad"
+            [class.is-invalid]="
+              HabeasCorpus.get('autoridad')?.invalid &&
+              HabeasCorpus.get('autoridad')?.touched
+            "
+            required
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Autoridad que viola el derecho de la libertad"
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+        <small
+          *ngIf="
+            HabeasCorpus.get('autoridad')?.invalid &&
+            HabeasCorpus.get('autoridad')?.touched
+          "
+          class="text-danger"
+        >
+          La autoridad que viola el derecho de la libertad es obligatoria.
+        </small>
+      </div>
+
+      <!-- Input para la fecha que fue aprehendido de la libertad -->
+      <div class="form-group mt-2">
+        <label for="fechaAprehendido"
+          ><strong
+            >Indica la fecha que la persona fue privada de la libertad</strong
+          >
+          -</label
+        >
+        <label class="text-primary"><strong> (requerido) </strong></label>
+        <div class="input-group">
+          <input
+            class="form-control"
+            type="date"
+            formControlName="fechaAprehendido"
+            name="fechaAprehendido"
+            id="fechaAprehendido"
+            required
+            (input)="onDateChange($event)"
+            [class.is-invalid]="
+              HabeasCorpus.get('fechaAprehendido')?.invalid &&
+              HabeasCorpus.get('fechaAprehendido')?.touched
+            "
+          />
           <!-- Icono de alerta y mensaje de ayuda -->
-          <div class="input-group">
-            <input
-              type="text"
-              class="form-control"
-              formControlName="ciudadJuez"
-              id="ciudadJuez"
-              placeholder="Ciudad del juez que recibe el habeas corpus."
-            />
+          <div>
             <button
               type="button"
               class="btn btn-primary"
               data-bs-toggle="tooltip"
               data-bs-placement="top"
               data-bs-custom-class="custom-tooltip"
-              data-bs-title="Ciudad del juez que recibe el habeas corpus."
+              data-bs-title="La fecha en que escribe la carta deja constancia de la fecha en la que se firma."
             >
               <i
                 class="fas fa-exclamation-circle text-white"
@@ -225,28 +723,180 @@
             </button>
           </div>
         </div>
-    
-        <!-- Input para la direccion Juez administrativo -->
-        <div class="form-group mt-2">
-          <label for="direccionJuez"
-            ><strong>Dirección del juez</strong>-</label
-          ><label class="text-primary"><strong>(requerido)</strong></label>
+        <small
+          *ngIf="
+            HabeasCorpus.get('fechaAprehendido')?.invalid &&
+            HabeasCorpus.get('fechaAprehendido')?.touched
+          "
+          class="text-danger"
+        >
+          La fecha es obligatoria
+        </small>
+      </div>
+
+      <!-- Input para la autoridad que ordeno la captura -->
+      <div class="form-group mt-2">
+        <label for="autoridadOrden"
+          ><strong>Autoridad que ordeno la captura</strong> -</label
+        ><label class="text-primary"><strong> (requerido) </strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="autoridadOrden"
+            id="autoridadOrden"
+            placeholder="Autoridad que ordeno la captura"
+            [class.is-invalid]="
+              HabeasCorpus.get('autoridadOrden')?.invalid &&
+              HabeasCorpus.get('autoridadOrden')?.touched
+            "
+            required
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Autoridad que ordeno la captura"
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+        <small
+          *ngIf="
+            HabeasCorpus.get('autoridadOrden')?.invalid &&
+            HabeasCorpus.get('autoridadOrden')?.touched
+          "
+          class="text-danger"
+        >
+          La autoridad que ordeno la captura es obligatoria.
+        </small>
+      </div>
+
+      <!-- Input para los dias que han transcurrido desde la captura -->
+      <div class="form-group mt-2">
+        <label for="dias"
+          ><strong>Días que han transcurrido desde la captura</strong> -</label
+        ><label class="text-primary"><strong> (requerido) </strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="number"
+            class="form-control"
+            formControlName="dias"
+            id="dias"
+            placeholder="Solo el numero de días, sin espacios"
+            [class.is-invalid]="
+              HabeasCorpus.get('dias')?.invalid &&
+              HabeasCorpus.get('dias')?.touched
+            "
+            required
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Solo el numero de días, sin espacios"
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+        <small
+          *ngIf="
+            HabeasCorpus.get('dias')?.invalid &&
+            HabeasCorpus.get('dias')?.touched
+          "
+          class="text-danger"
+        >
+          Los días que han transcurrido desde la captura son obligatorios.
+        </small>
+      </div>
+
+      <!-- Input para el sitio de reclusion-->
+      <div class="form-group mt-2">
+        <label for="sitioReclusion"><strong>Sitio de reclusión</strong> -</label
+        ><label class="text-primary"><strong> (requerido) </strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="sitioReclusion"
+            id="sitioReclusion"
+            placeholder="Sitio de reclusión"
+            [class.invalid-input]="
+              HabeasCorpus.get('sitioReclusion')?.invalid &&
+              HabeasCorpus.get('sitioReclusion')?.touched
+            "
+            required
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Sitio de reclusión"
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+        <small
+          *ngIf="
+            HabeasCorpus.get('sitioReclusion')?.invalid &&
+            HabeasCorpus.get('sitioReclusion')?.touched
+          "
+          class="text-danger"
+        >
+          El sitio de reclusión es obligatorio.
+        </small>
+      </div>
+
+      <!-- Fecha desde que se encuentra en el sitio de reclusion-->
+      <div class="form-group mt-2">
+        <label for="fechaReclusion"
+          ><strong
+            >Fecha desde que se encuentra en el sitio de reclusión</strong
+          >
+          -</label
+        ><label class="text-primary"><strong> (requerido) </strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            class="form-control"
+            type="date"
+            formControlName="fechaReclusion"
+            name="fechaReclusion"
+            id="fechaReclusion"
+            required
+            (input)="onDateChange($event)"
+            [class.is-invalid]="
+              HabeasCorpus.get('fechaReclusion')?.invalid &&
+              HabeasCorpus.get('fechaReclusion')?.touched
+            "
+          />
           <!-- Icono de alerta y mensaje de ayuda -->
-          <div class="input-group">
-            <input
-              type="text"
-              class="form-control"
-              formControlName="direccionJuez"
-              id="direccionJuez"
-              placeholder="Dirección del juez que recibe el habeas corpus"
-            />
+          <div>
             <button
               type="button"
               class="btn btn-primary"
               data-bs-toggle="tooltip"
               data-bs-placement="top"
               data-bs-custom-class="custom-tooltip"
-              data-bs-title="Dirección del juez que recibe el habeas corpus."
+              data-bs-title="La fecha en que escribe la carta deja constancia de la fecha en la que se firma."
             >
               <i
                 class="fas fa-exclamation-circle text-white"
@@ -255,116 +905,417 @@
             </button>
           </div>
         </div>
-        <!-- Numeral 2-->
-        <div class="d-flex align-items-start mt-5">
-            <div
-            class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
-            style="width: 25px; height: 25px"
-            >
-            <strong>2</strong>
-            </div>
-            <div class="form-group">
-            <!-- Label: ¿Quienes son los involucrados? -->
-            <label class="text-primary" for="destinatario"
-                ><strong>¿Quienes son los involucrados?</strong></label
-            >
-            <div id="destinatarioHelpBlock" class="form-text">
-                Indica en los siguientes los campos las personas involucradas en esta acción de habeas corpus.
-            </div>
-            </div>
-        </div>
+        <small
+          *ngIf="
+            HabeasCorpus.get('fechaReclusion')?.invalid &&
+            HabeasCorpus.get('fechaReclusion')?.touched
+          "
+          class="text-danger"
+        >
+          La fecha es obligatoria
+        </small>
+      </div>
 
-        <!-- Input para el nombre de la persona privada de libertad -->
-        <div class="form-group mt-2">
-            <label for="nombrePrivada"
-            ><strong>Nombre(s) y apellido(s) de la persona que se encuentra privada de la libertad</strong>-</label
+      <!-- Input para el funcionario que ordeno su aprehension-->
+      <div class="form-group mt-2">
+        <label for="funcionario"
+          ><strong>Funcionario que ordeno su aprehensión</strong> -</label
+        ><label class="text-primary"><strong> (requerido) </strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="funcionario"
+            id="funcionario"
+            placeholder="Funcionario que ordeno su aprehensión"
+            [class.is-invalid]="
+              HabeasCorpus.get('funcionario')?.invalid &&
+              HabeasCorpus.get('funcionario')?.touched
+            "
+            required
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Funcionario que ordeno su aprehensión"
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+        <small
+          *ngIf="
+            HabeasCorpus.get('funcionario')?.invalid &&
+            HabeasCorpus.get('funcionario')?.touched
+          "
+          class="text-danger"
+        >
+          El funcionario que ordeno su aprehensión es obligatorio.
+        </small>
+      </div>
+
+      <!-- Input para el cargo del funcionario que ordeno su aprehension-->
+      <div class="form-group mt-2">
+        <label for="cargoFuncionario"
+          ><strong>Cargo del funcionario que ordeno su aprehensión</strong>
+          -</label
+        ><label class="text-primary"><strong> (requerido) </strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="cargoFuncionario"
+            id="cargoFuncionario"
+            placeholder="Cargo del funcionario que ordeno su aprehensión"
+            [class.is-invalid]="
+              HabeasCorpus.get('cargoFuncionario')?.invalid &&
+              HabeasCorpus.get('cargoFuncionario')?.touched
+            "
+            required
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Cargo del funcionario que ordeno su aprehensión"
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+        <small
+          *ngIf="
+            HabeasCorpus.get('cargoFuncionario')?.invalid &&
+            HabeasCorpus.get('cargoFuncionario')?.touched
+          "
+          class="text-danger"
+        >
+          El cargo del funcionario que ordeno su aprehensión es obligatorio.
+        </small>
+      </div>
+
+      <!-- Numeral 5 -->
+      <div class="d-flex align-items-start mt-5">
+        <div
+          class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+          style="width: 25px; height: 25px"
+        >
+          <strong>5</strong>
+        </div>
+        <div class="form-group">
+          <!-- Label: Datos solicitante -->
+          <label class="text-primary" for="destinatario"
+            ><strong>Datos solicitante</strong></label
+          >
+          <div id="destinatarioHelpBlock" class="form-text">
+            Diligencie los siguientes campos con los datos del solicitante que
+            realiza este habeas-corpus.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Input para los datos del solicitante-->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="nombreSolicitante"
+              ><strong>Nombre(s) y Apellido(s)</strong> -</label
             ><label class="text-primary"><strong>(requerido)</strong></label>
-            <!-- Icono de alerta y mensaje de ayuda -->
             <div class="input-group">
-            <input
+              <input
                 type="text"
                 class="form-control"
-                formControlName="nombrePrivada"
-                id="nombrePrivada"
-                placeholder="Nombre(s) y apellido(s) de la persona que se encuentra privada de la libertad."
-            />
-            <button
+                formControlName="nombreSolicitante"
+                id="nombreSolicitante"
+                placeholder="Ej: Juan Perez"
+                [class.is-invalid]="
+                  HabeasCorpus.get('nombreSolicitante')?.invalid &&
+                  HabeasCorpus.get('nombreSolicitante')?.touched
+                "
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
                 type="button"
                 class="btn btn-primary"
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
                 data-bs-custom-class="custom-tooltip"
-                data-bs-title="Nombre(s) y apellido(s) de la persona que se encuentra privada de la libertad."
-            >
+                data-bs-title="Nombres y apellidos de la persona que hace la solicitud"
+              >
                 <i
-                class="fas fa-exclamation-circle text-white"
-                style="width: 25px; height: 25px"
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
                 ></i>
-            </button>
+              </button>
             </div>
+          </div>
+          <small
+            *ngIf="
+              HabeasCorpus.get('nombreSolicitante')?.invalid &&
+              HabeasCorpus.get('nombreSolicitante')?.touched
+            "
+            class="text-danger"
+          >
+            El nombre del solicitante es obligatorio.
+          </small>
         </div>
-        
-        <!-- Nombre de la persona que hace la solicitud -->
-        <div class="form-group mt-2">
-            <label for="nombrePeticionario"
-            ><strong>Nombre(s) y apellido(s) de la persona que hace la solicitud</strong>-</label
+
+        <!-- Input para la cedula -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="cedulaSolicitante"
+              ><strong>Cédula de Ciudadanía</strong> -</label
             ><label class="text-primary"><strong>(requerido)</strong></label>
-            <!-- Icono de alerta y mensaje de ayuda -->
             <div class="input-group">
-            <input
-                type="text"
+              <input
+                [class.is-invalid]="
+                  HabeasCorpus.get('cedulaSolicitante')?.invalid &&
+                  HabeasCorpus.get('cedulaSolicitante')?.touched
+                "
+                type="number"
                 class="form-control"
-                formControlName="nombrePeticionario"
-                id="nombrePeticionario"
-                placeholder="Nombre(s) y apellido(s) de la persona que hace la solicitud."
-            />
-            <button
+                formControlName="cedulaSolicitante"
+                id="cedulaSolicitante"
+                placeholder="Solo numeros, sin espacios"
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
                 type="button"
                 class="btn btn-primary"
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
                 data-bs-custom-class="custom-tooltip"
-                data-bs-title="Nombre(s) y apellido(s) de la persona que hace la solicitud."
-            >
+                data-bs-title="Solo numeros, sin espacios."
+              >
                 <i
-                class="fas fa-exclamation-circle text-white"
-                style="width: 25px; height: 25px"
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
                 ></i>
-            </button>
+              </button>
             </div>
+            <small
+              *ngIf="
+                HabeasCorpus.get('cedulaSolicitante')?.invalid &&
+                HabeasCorpus.get('cedulaSolicitante')?.touched
+              "
+              class="text-danger"
+            >
+              La cedula del solicitante es obligatoria.
+            </small>
+          </div>
         </div>
+      </div>
 
-        <!-- En mi calidad de:-->
-        <div class="form-group mt-2">
-            <label for="calidad"
-            ><strong>La persona que hace la solicitud se encuentra en calidad de:</strong> -</label
-            ><label class="text-primary"><strong> (requerido) </strong></label>
-            <!-- Icono de alerta y mensaje de ayuda -->
+      <div class="row">
+        <!-- Input para la expedicion de la cedula -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="cedulaExpedicion"
+              ><strong>Ciudad de expedición de la cédula</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
             <div class="input-group">
-            <input
+              <input
+                [class.is-invalid]="
+                  HabeasCorpus.get('cedulaExpedicion')?.invalid &&
+                  HabeasCorpus.get('cedulaExpedicion')?.touched
+                "
                 type="text"
                 class="form-control"
-                formControlName="calidad"
-                id="calidad"
-                placeholder="(afectado, pariente, tercero o apoderado)"
-            />
-            <button
+                formControlName="cedulaExpedicion"
+                id="cedulaExpedicion"
+                placeholder="Ciudad de expedición de la cédula."
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
                 type="button"
                 class="btn btn-primary"
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
                 data-bs-custom-class="custom-tooltip"
-                data-bs-title="(afectado, pariente, tercero o apoderado)"
-            >
+                data-bs-title="Ciudad de expedición de la cédula."
+              >
                 <i
-                class="fas fa-exclamation-circle text-white"
-                style="width: 25px; height: 25px"
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
                 ></i>
-            </button>
+              </button>
             </div>
+            <small
+              *ngIf="
+                HabeasCorpus.get('cedulaExpedicion')?.invalid &&
+                HabeasCorpus.get('cedulaExpedicion')?.touched
+              "
+              class="text-danger"
+            >
+              La ciudad de expedición de la cédula es obligatoria.
+            </small>
+          </div>
         </div>
 
-      
+        <!-- Input para la direccion del solicitante -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="direccionSolicitante"
+              ><strong>Dirección de residencia</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                [class.is-invalid]="
+                  HabeasCorpus.get('direccionSolicitante')?.invalid &&
+                  HabeasCorpus.get('direccionSolicitante')?.touched
+                "
+                type="text"
+                class="form-control"
+                formControlName="direccionSolicitante"
+                id="direccionSolicitante"
+                placeholder="Dirección de residencia del solicitante"
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Dirección de residencia del solicitante"
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                HabeasCorpus.get('direccionSolicitante')?.invalid &&
+                HabeasCorpus.get('direccionSolicitante')?.touched
+              "
+              class="text-danger"
+            >
+              La dirección del solicitante es obligatoria.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Input para el telefono -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="telefonoSolicitante"><strong>Teléfono</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                [class.is-invalid]="
+                  HabeasCorpus.get('telefonoSolicitante')?.invalid &&
+                  HabeasCorpus.get('telefonoSolicitante')?.touched
+                "
+                type="number"
+                class="form-control"
+                formControlName="telefonoSolicitante"
+                id="telefonoSolicitante"
+                placeholder="Solo numeros."
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Telefono al que se le notificara la carta al solicitante."
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                HabeasCorpus.get('telefonoSolicitante')?.invalid &&
+                HabeasCorpus.get('telefonoSolicitante')?.touched
+              "
+              class="text-danger"
+            >
+              El telefono es obligatorio
+            </small>
+          </div>
+        </div>
+
+        <!-- Input para la ciudad del solicitante -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="correoSolicitante"
+              ><strong>Correo electronico de residencia</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                [class.is-invalid]="
+                  HabeasCorpus.get('correoSolicitante')?.invalid &&
+                  HabeasCorpus.get('correoSolicitante')?.touched
+                "
+                type="text"
+                class="form-control"
+                formControlName="correoSolicitante"
+                id="correoSolicitante"
+                placeholder="Ej: juan@correo.com"
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Correo electronico del solicitante"
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                HabeasCorpus.get('correoSolicitante')?.invalid &&
+                HabeasCorpus.get('correoSolicitante')?.touched
+              "
+              class="text-danger"
+            >
+              El correo electrónico es obligatorio
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón de envío -->
+      <div class="d-flex justify-content-center align-items-center mt-3 p-5">
+        <button
+          type="submit"
+          class="btn btn-primary btn-icon"
+          [disabled]="!HabeasCorpus.valid"
+        >
+          <i class="fas fa-file-alt me-2"></i> Descargar documento
+        </button>
+      </div>
     </form>
   </div>
 
@@ -373,16 +1324,1039 @@
     <form [formGroup]="HabeasCorpus" (ngSubmit)="onSubmit()">
       <h3 class="mt-3">Habeas corpus por prolongación ilegal de la libertad</h3>
 
-      <!-- Aquí puedes agregar los campos necesarios para el formulario de prolongación ilegal -->
-      <div class="mb-3">
-        <label for="nombre" class="form-label">Apellido:</label>
-        <input
-          type="text"
-          class="form-control"
-          id="nombre"
-          formControlName="nombre"
-          required
-        />
+      <!-- Campos necesarios para el formulario de privación ilegal -->
+      <!-- Numeral 1 -->
+      <div class="d-flex align-items-start mt-5">
+        <div
+          class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+          style="width: 25px; height: 25px"
+        >
+          <strong>1</strong>
+        </div>
+        <div class="form-group">
+          <!-- Label: ¿A quién va dirigida carta? -->
+          <label class="text-primary" for="destinatario"
+            ><strong>¿A quién va dirigida esta carta?</strong></label
+          >
+          <div id="destinatarioHelpBlock" class="form-text">
+            Indica en los siguientes los campos al juez al que se dirige.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Input para la Ciudad -->
+        <div class="col-md-6">
+          <div class="form-group mt-2">
+            <label for="ciudad"><strong>Ciudad</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="ciudad"
+                id="ciudad"
+                placeholder="Ingresa la ciudad"
+                [class.is-invalid]="
+                  HabeasCorpus.get('ciudad')?.invalid &&
+                  HabeasCorpus.get('ciudad')?.touched
+                "
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="La ciudad de quien escribe y la fecha en la que se escribe dejan constancia del lugar y la fecha en la que se firma."
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                HabeasCorpus.get('ciudad')?.invalid &&
+                HabeasCorpus.get('ciudad')?.touched
+              "
+              class="text-danger"
+            >
+              La ciudad es obligatoria
+            </small>
+          </div>
+        </div>
+
+        <!-- Input para la Fecha -->
+        <div class="col-md-6 mt-2">
+          <div class="form-group">
+            <label for="fecha"><strong>Fecha</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                class="form-control"
+                type="date"
+                formControlName="fecha"
+                name="fecha"
+                id="fecha"
+                required
+                (input)="onDateChange($event)"
+                [class.is-invalid]="
+                  HabeasCorpus.get('fecha')?.invalid &&
+                  HabeasCorpus.get('fecha')?.touched
+                "
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <div>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-custom-class="custom-tooltip"
+                  data-bs-title="La fecha en que escribe la carta deja constancia de la fecha en la que se firma."
+                >
+                  <i
+                    class="fas fa-exclamation-circle text-white"
+                    style="width: 25px; height: 25px"
+                  ></i>
+                </button>
+              </div>
+            </div>
+            <small
+              *ngIf="
+                HabeasCorpus.get('fecha')?.invalid &&
+                HabeasCorpus.get('fecha')?.touched
+              "
+              class="text-danger"
+            >
+              La fecha es obligatoria
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input para el nombre de la entidad -->
+      <!--Promiscuo Municipal, Penal Municipal, Penal del Circuito, Promiscuo del Circuito, Magistrado del Tribunal-->
+      <div class="form-group mt-2">
+        <label for="juez"><strong>Juez al que se dirige</strong>-</label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="juez"
+            value="Promiscuo Municipal"
+          />
+          <label class="form-check-label" for="flexRadioDefault1">
+            Promiscuo Municipal
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="juez"
+            value="Penal Municipal"
+          />
+          <label class="form-check-label" for="flexRadioDefault2">
+            Penal Municipal
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="juez"
+            value="Penal del Circuito"
+          />
+          <label class="form-check-label" for="flexRadioDefault3">
+            Penal del Circuito
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="juez"
+            value="Promiscuo del Circuito"
+          />
+          <label class="form-check-label" for="flexRadioDefault4">
+            Promiscuo del Circuito
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="juez"
+            value="Magistrado del Tribunal"
+          />
+          <label class="form-check-label" for="flexRadioDefault5">
+            Magistrado del Tribunal
+          </label>
+        </div>
+      </div>
+
+      <!-- Input para la ciudad del juez -->
+      <div class="form-group mt-2">
+        <label for="ciudadJuez"><strong>Ciudad del juez</strong>-</label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="ciudadJuez"
+            id="ciudadJuez"
+            placeholder="Ciudad del juez que recibe el habeas corpus."
+            [class.invalid-input]="
+            HabeasCorpus.get('ciudadJuez')?.invalid &&
+            HabeasCorpus.get('ciudadJuez')?.touched
+            "
+            required
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Ciudad del juez que recibe el habeas corpus."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+        <small
+          *ngIf="
+          HabeasCorpus.get('ciudadJuez')?.invalid &&
+          HabeasCorpus.get('ciudadJuez')?.touched
+          "
+          class="text-danger">
+        La ciuadd del juez es obligatoria.
+        </small>
+      </div>
+
+      <!-- Input para la direccion Juez administrativo -->
+      <div class="form-group mt-2">
+        <label for="direccionJuez"><strong>Dirección del juez</strong>-</label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="direccionJuez"
+            id="direccionJuez"
+            placeholder="Dirección del juez que recibe el habeas corpus"
+            [class.invalid-input]="
+            HabeasCorpus.get('direccionJuez')?.invalid &&
+            HabeasCorpus.get('direccionJuez')?.touched
+            "
+            required
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Dirección del juez que recibe el habeas corpus."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+        <small
+        *ngIf="
+        HabeasCorpus.get('direccionJuez')?.invalid &&
+        HabeasCorpus.get('direccionJuez')?.touched
+        "
+        class="text-danger"
+        >
+        La dirección del juez es obligatoria.
+        </small>
+      </div>
+      <!-- Numeral 2-->
+      <div class="d-flex align-items-start mt-5">
+        <div
+          class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+          style="width: 25px; height: 25px"
+        >
+          <strong>2</strong>
+        </div>
+        <div class="form-group">
+          <!-- Label: ¿Quienes son los involucrados? -->
+          <label class="text-primary" for="destinatario"
+            ><strong>¿Quienes son los involucrados?</strong></label
+          >
+          <div id="destinatarioHelpBlock" class="form-text">
+            Indica en los siguientes los campos las personas involucradas en
+            esta acción de habeas corpus.
+          </div>
+        </div>
+      </div>
+
+      <!-- Input para el nombre de la persona privada de libertad -->
+      <div class="form-group mt-2">
+        <label for="nombrePrivada"
+          ><strong
+            >Nombre(s) y apellido(s) de la persona que se encuentra privada de
+            la libertad</strong
+          >-</label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="nombrePrivada"
+            id="nombrePrivada"
+            placeholder="Nombre(s) y apellido(s) de la persona que se encuentra privada de la libertad."
+            [class.invalid-input]="
+            HabeasCorpus.get('nombrePrivada')?.invalid &&
+            HabeasCorpus.get('nombrePrivada')?.touched
+            "
+            required
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Nombre(s) y apellido(s) de la persona que se encuentra privada de la libertad."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+        <small
+        *ngIf="
+        HabeasCorpus.get('nombrePrivada')?.invalid &&
+        HabeasCorpus.get('nombrePrivada')?.touched
+        "
+        class="text-danger"
+        >
+        El nombre de la persona privada de libertad es obligatorio.
+        </small>
+      </div>
+
+      <!-- Nombre de la persona que hace la solicitud -->
+      <div class="form-group mt-2">
+        <label for="nombrePeticionario"
+          ><strong
+            >Nombre(s) y apellido(s) de la persona que hace la solicitud</strong
+          >-</label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="nombrePeticionario"
+            id="nombrePeticionario"
+            placeholder="Nombre(s) y apellido(s) de la persona que hace la solicitud."
+            [class.invalid-input]="
+            HabeasCorpus.get('nombrePeticionario')?.invalid &&
+            HabeasCorpus.get('nombrePeticionario')?.touched
+            "
+            required
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Nombre(s) y apellido(s) de la persona que hace la solicitud."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+        <small
+        *ngIf= "
+        HabeasCorpus.get('nombrePeticionario')?.invalid &&
+        HabeasCorpus.get('nombrePeticionario')?.touched
+        "
+        class="text-danger"
+        >
+        El nombre de la persona que hace la solicitud es obligatorio.
+        </small>
+
+      </div>
+
+      <!-- En mi calidad de:-->
+      <div class="form-group mt-2">
+        <label for="calidad"
+          ><strong
+            >La persona que hace la solicitud se encuentra en calidad
+            de:</strong
+          >
+          -</label
+        ><label class="text-primary"><strong> (requerido) </strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="calidad"
+            value="Afectado"
+          />
+          <label class="form-check-label" for="flexRadioDefault1">
+            Afectado
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="calidad"
+            value="Pariente"
+          />
+          <label class="form-check-label" for="flexRadioDefault2">
+            Pariente
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="calidad"
+            value="Tercero"
+          />
+          <label class="form-check-label" for="flexRadioDefault3">
+            Tercero
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="calidad"
+            value="Apoderado"
+          />
+          <label class="form-check-label" for="flexRadioDefault4">
+            Apoderado
+          </label>
+        </div>
+      </div>
+
+      <!--Numeral 3-->
+      <div class="d-flex align-items-start mt-5">
+        <div
+          class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+          style="width: 25px; height: 25px"
+        >
+          <strong>3</strong>
+        </div>
+        <div class="form-group">
+          <!-- Label: ¿Quienes son los involucrados? -->
+          <label class="text-primary" for="destinatario"
+            ><strong>Hechos</strong></label
+          >
+          <div id="destinatarioHelpBlock" class="form-text">
+            Indica en los siguientes los hechos en este caso de privación ilegal
+            de la libertad.
+          </div>
+        </div>
+      </div>
+
+      <!-- Campo para los hechos -->
+      <div class="form-group mt-2">
+        <label for="hechos"> <strong>HECHOS </strong> - </label
+        ><label class="text-primary"><strong>(requerido)</strong> </label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+
+        <ng-container
+          formArrayName="hechos"
+          *ngFor="
+            let row of hechos.controls;
+            index as i;
+            first as isFirst;
+            last as isLast
+          "
+          class="input-group"
+        >
+          <ng-container *ngIf="isFirst" [formGroupName]="i">
+            <div class="input-group">
+              <textarea
+                [class.is-invalid]="
+                  HabeasCorpus.get('hechos')?.invalid &&
+                  HabeasCorpus.get('hechos')?.touched &&
+                  isLast
+                "
+                rows="6"
+                class="form-control"
+                formControlName="contenido"
+                id="hechos{{ i }}"
+                placeholder="Hacer el relato de las razones que fundamentan el incumplimiento"
+                required
+              ></textarea>
+
+              <div class="d-flex flex-column">
+                <div class="mb-2">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip"
+                    data-bs-title="Hacer el relato de los hechos que configuran el incumplimiento de la norma."
+                  >
+                    <i
+                      class="fas fa-exclamation-circle text-white"
+                      style="width: 25px; height: 25px"
+                    ></i>
+                  </button>
+                </div>
+                <div *ngIf="isLast" class="mb-2">
+                  <!-- Botón para agregar un nuevo campo -->
+                  <button
+                    type="button"
+                    class="btn btn-primary mt-2"
+                    (click)="agregarHecho()"
+                  >
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <small
+              *ngIf="
+                HabeasCorpus.get('hechos')?.invalid &&
+                HabeasCorpus.get('hechos')?.touched &&
+                isLast
+              "
+              class="text-danger"
+            >
+              Los hechos son obliogatorios
+            </small>
+          </ng-container>
+
+          <ng-container *ngIf="!isFirst" [formGroupName]="i">
+            <div class="input-group">
+              <textarea
+                [class.is-invalid]="
+                  HabeasCorpus.get('hechos')?.invalid &&
+                  HabeasCorpus.get('hechos')?.touched &&
+                  isLast
+                "
+                rows="6"
+                class="form-control"
+                formControlName="contenido"
+                id="hechos{{ i }}"
+                placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma"
+                required
+              ></textarea>
+              <div *ngIf="isLast" class="mb-2">
+                <!-- Botón para agregar un nuevo campo -->
+                <button
+                  type="button"
+                  class="btn btn-primary mt-2"
+                  (click)="agregarHecho()"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </div>
+            <small
+              *ngIf="
+                HabeasCorpus.get('hechos')?.invalid &&
+                HabeasCorpus.get('hechos')?.touched &&
+                isLast
+              "
+              class="text-danger"
+            >
+              Los hechos son obliogatorios
+            </small>
+          </ng-container>
+        </ng-container>
+      </div>
+
+      <!-- Numeral 4 -->
+      <div class="d-flex align-items-start mt-5">
+        <div
+          class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+          style="width: 25px; height: 25px"
+        >
+          <strong>4</strong>
+        </div>
+        <div class="form-group">
+          <!-- Label: ¿Qué se solicita? -->
+          <label class="text-primary" for="destinatario"
+            ><strong>Ordenes</strong></label
+          >
+          <div id="destinatarioHelpBlock" class="form-text">
+            Si el habeas corpus se invoca por privación ilegal de la libertad
+            diligencie los siguientes campos.
+          </div>
+        </div>
+      </div>
+
+      <!-- Input para el sitio de reclusion-->
+      <div class="form-group mt-2">
+        <label for="sitioReclusion"><strong>Sitio de reclusión</strong> -</label
+        ><label class="text-primary"><strong> (requerido) </strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="sitioReclusion"
+            id="sitioReclusion"
+            placeholder="Sitio de reclusión"
+            [class.invalid-input]="
+            HabeasCorpus.get('sitioReclusion')?.invalid &&
+            HabeasCorpus.get('sitioReclusion')?.touched
+            "
+            required
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Sitio de reclusión"
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+        <small
+        *ngIf="
+        HabeasCorpus.get('sitioReclusion')?.invalid &&
+        HabeasCorpus.get('sitioReclusion')?.touched
+        "
+        class="text-danger"
+        > El sitio de reclusión es obligatorio.
+      </small>
+      </div>
+
+      <!-- Input para los dias que han transcurrido desde la captura -->
+      <div class="form-group mt-2">
+        <label for="dias"
+          ><strong>Días que han transcurrido desde la captura</strong> -</label
+        ><label class="text-primary"><strong> (requerido) </strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="number"
+            class="form-control"
+            formControlName="dias"
+            id="dias"
+            placeholder="Solo el numero de días, sin espacios"
+            [class.invalid-input]="
+            HabeasCorpus.get('dias')?.invalid &&
+            HabeasCorpus.get('dias')?.touched
+            "
+            required
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Solo el numero de días, sin espacios"
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+        <small
+        *ngIf="
+        HabeasCorpus.get('dias')?.invalid &&
+        HabeasCorpus.get('dias')?.touched
+        "
+        class="text-danger"
+        > Los días que han transcurrido desde la captura son obligatorios. 
+      </small>
+      </div>
+
+      <!-- Fecha desde que se encuentra en el sitio de reclusion-->
+      <div class="form-group mt-2">
+        <label for="fechaReclusion"
+          ><strong
+            >Fecha desde que se encuentra en el sitio de reclusión</strong
+          >
+          -</label
+        ><label class="text-primary"><strong> (requerido) </strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            class="form-control"
+            type="date"
+            formControlName="fechaReclusion"
+            name="fechaReclusion"
+            id="fechaReclusion"
+            required
+            (input)="onDateChange($event)"
+            [class.is-invalid]="
+              HabeasCorpus.get('fechaReclusion')?.invalid &&
+              HabeasCorpus.get('fechaReclusion')?.touched
+            "
+          />
+          <!-- Icono de alerta y mensaje de ayuda -->
+          <div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="La fecha en que escribe la carta deja constancia de la fecha en la que se firma."
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+        </div>
+        <small
+          *ngIf="
+            HabeasCorpus.get('fechaReclusion')?.invalid &&
+            HabeasCorpus.get('fechaReclusion')?.touched
+          "
+          class="text-danger"
+        >
+          La fecha es obligatoria
+        </small>
+      </div>
+
+      <!-- Numeral 5 -->
+      <div class="d-flex align-items-start mt-5">
+        <div
+          class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+          style="width: 25px; height: 25px"
+        >
+          <strong>5</strong>
+        </div>
+        <div class="form-group">
+          <!-- Label: Datos solicitante -->
+          <label class="text-primary" for="destinatario"
+            ><strong>Datos solicitante</strong></label
+          >
+          <div id="destinatarioHelpBlock" class="form-text">
+            Diligencie los siguientes campos con los datos del solicitante que
+            realiza este habeas-corpus.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Input para los datos del solicitante-->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="nombreSolicitante"
+              ><strong>Nombre(s) y Apellido(s)</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                [class.is-invalid]="
+                  HabeasCorpus.get('nombreSolicitante')?.invalid &&
+                  HabeasCorpus.get('nombreSolicitante')?.touched
+                "
+                type="text"
+                class="form-control"
+                formControlName="nombreSolicitante"
+                id="nombreSolicitante"
+                placeholder="Ej: Juan Perez"
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Nombres y apellidos de la persona que hace la solicitud"
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                HabeasCorpus.get('nombreSolicitante')?.invalid &&
+                HabeasCorpus.get('nombreSolicitante')?.touched
+              "
+              class="text-danger"
+            >
+              El nombre del solicitante es obligatorio
+            </small>
+          </div>
+        </div>
+
+        <!-- Input para la cedula -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="cedulaSolicitante"
+              ><strong>Cédula de Ciudadanía</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                [class.is-invalid]="
+                  HabeasCorpus.get('cedulaSolicitante')?.invalid &&
+                  HabeasCorpus.get('cedulaSolicitante')?.touched
+                "
+                type="number"
+                class="form-control"
+                formControlName="cedulaSolicitante"
+                id="cedulaSolicitante"
+                placeholder="Solo numeros, sin espacios"
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Solo numeros, sin espacios."
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                HabeasCorpus.get('cedulaSolicitante')?.invalid &&
+                HabeasCorpus.get('cedulaSolicitante')?.touched
+              "
+              class="text-danger"
+            >
+              La cédula del solicitante es obligatoria.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Input para la expedicion de la cedula -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="cedulaExpedicion"
+              ><strong>Ciudad de expedición de la cédula</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                [class.is-invalid]="
+                  HabeasCorpus.get('cedulaExpedicion')?.invalid &&
+                  HabeasCorpus.get('cedulaExpedicion')?.touched
+                "
+                type="text"
+                class="form-control"
+                formControlName="cedulaExpedicion"
+                id="cedulaExpedicion"
+                placeholder="Ciudad de expedición de la cédula."
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Ciudad de expedición de la cédula."
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                HabeasCorpus.get('cedulaExpedicion')?.invalid &&
+                HabeasCorpus.get('cedulaExpedicion')?.touched
+              "
+              class="text-danger"
+            >
+              La ciudad de expedición de la cédula es obligatoria.
+            </small>
+          </div>
+        </div>
+
+        <!-- Input para la direccion del solicitante -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="direccionSolicitante"
+              ><strong>Dirección de residencia</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                [class.is-invalid]="
+                  HabeasCorpus.get('direccionSolicitante')?.invalid &&
+                  HabeasCorpus.get('direccionSolicitante')?.touched
+                "
+                type="text"
+                class="form-control"
+                formControlName="direccionSolicitante"
+                id="direccionSolicitante"
+                placeholder="Dirección de residencia del solicitante"
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Dirección de residencia del solicitante"
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                HabeasCorpus.get('direccionSolicitante')?.invalid &&
+                HabeasCorpus.get('direccionSolicitante')?.touched
+              "
+              class="text-danger"
+            >
+              La dirección del solicitante es obligatoria.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Input para el telefono -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="telefonoSolicitante"><strong>Teléfono</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                [class.is-invalid]="
+                  HabeasCorpus.get('telefonoSolicitante')?.invalid &&
+                  HabeasCorpus.get('telefonoSolicitante')?.touched
+                "
+                type="number"
+                class="form-control"
+                formControlName="telefonoSolicitante"
+                id="telefonoSolicitante"
+                placeholder="Solo numeros."
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Telefono al que se le notificara la carta al solicitante."
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                HabeasCorpus.get('telefonoSolicitante')?.invalid &&
+                HabeasCorpus.get('telefonoSolicitante')?.touched
+              "
+              class="text-danger"
+            >
+              El telefono del solitante es obligatorio.
+            </small>
+          </div>
+        </div>
+
+        <!-- Input para el correo del solicitante -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="correoSolicitante"
+              ><strong>Correo electronico de residencia</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                [class.is-invalid]="
+                  HabeasCorpus.get('correoSolicitante')?.invalid &&
+                  HabeasCorpus.get('correoSolicitante')?.touched
+                "
+                type="text"
+                class="form-control"
+                formControlName="correoSolicitante"
+                id="correoSolicitante"
+                placeholder="Ej: juan@correo.com"
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Correo electronico del solicitante"
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+                HabeasCorpus.get('correoSolicitante')?.invalid &&
+                HabeasCorpus.get('correoSolicitante')?.touched
+              "
+              class="text-danger"
+            >
+              El correo electrónico del solicitante es obligatorio.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón de envío -->
+      <div class="d-flex justify-content-center align-items-center mt-3 p-5">
+        <button
+          type="submit"
+          class="btn btn-primary btn-icon"
+          [disabled]="!HabeasCorpus.valid"
+        >
+          <i class="fas fa-file-alt me-2"></i> Descargar documento
+        </button>
       </div>
       <!-- Otros campos aquí -->
     </form>
