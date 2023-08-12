@@ -1,1 +1,1325 @@
-<p>accion-de-tutela works!</p>
+<div class="container mt-5">
+    <h3>Diligencie el siguiente formulario</h3>
+  
+    <form [formGroup]="AccionDeTutela" (ngSubmit)="onSubmit()">
+      <!-- Numeral 1-->
+      <div class="d-flex align-items-start mt-5">
+        <div
+          class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+          style="width: 25px; height: 25px"
+        >
+          <strong>1</strong>
+        </div>
+        <div class="form-group">
+          <!-- Label: ¿A quién va dirigida esta acción de cumplimiento? -->
+          <label class="text-primary" for="destinatario"
+            ><strong
+              >¿A quién va dirigida esta acción de cumplimiento?</strong
+            ></label
+          >
+          <div id="destinatarioHelpBlock" class="form-text">
+            Indica en los siguientes los campos la entidad judicial a la que se
+            dirige.
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+      <div class="row">
+        <!-- Input para la Ciudad -->
+        <div class="col-md-6">
+          <div class="form-group mt-2">
+            <label for="ciudad"><strong>Ciudad</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="ciudad"
+                id="ciudad"
+                placeholder="Ingresa la ciudad"
+                [class.is-invalid]="
+                AccionDeTutela.get('ciudad')?.invalid &&
+                AccionDeTutela.get('ciudad')?.touched
+                "
+                required
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="La ciudad de quien escribe y la fecha en la que se escribe dejan constancia del lugar y la fecha en la que se firma."
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <small
+              *ngIf="
+              AccionDeTutela.get('ciudad')?.invalid &&
+              AccionDeTutela.get('ciudad')?.touched
+              "
+              class="text-danger"
+            >
+              La ciudad es obligatoria
+            </small>
+          </div>
+        </div>
+
+        <!-- Input para la Fecha -->
+        <div class="col-md-6 mt-2">
+          <div class="form-group">
+            <label for="fecha"><strong>Fecha</strong> -</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <div class="input-group">
+              <input
+                class="form-control"
+                type="date"
+                formControlName="fecha"
+                name="fecha"
+                id="fecha"
+                required
+                (input)="onDateChange($event)"
+                [class.is-invalid]="
+                AccionDeTutela.get('fecha')?.invalid &&
+                AccionDeTutela.get('fecha')?.touched
+                "
+              />
+              <!-- Icono de alerta y mensaje de ayuda -->
+              <div>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-custom-class="custom-tooltip"
+                  data-bs-title="La fecha en que escribe la carta deja constancia de la fecha en la que se firma."
+                >
+                  <i
+                    class="fas fa-exclamation-circle text-white"
+                    style="width: 25px; height: 25px"
+                  ></i>
+                </button>
+              </div>
+            </div>
+            <small
+              *ngIf="
+              AccionDeTutela.get('fecha')?.invalid &&
+              AccionDeTutela.get('fecha')?.touched
+              "
+              class="text-danger"
+            >
+              La fecha es obligatoria
+            </small>
+          </div>
+          
+        </div>
+      </div>
+
+      <!-- Input para el nombre de la entidad -->
+      <!--Promiscuo Municipal, Penal Municipal, Penal del Circuito, Promiscuo del Circuito, Magistrado del Tribunal-->
+      <div class="form-group mt-2">
+        <label for="juez"><strong>Juez al que se dirige</strong>-</label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="juez"
+            value="Promiscuo Municipal"
+          />
+          <label class="form-check-label" for="flexRadioDefault1">
+            Promiscuo Municipal
+          </label>
+        </div>
+
+
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="juez"
+            value="Penal del Circuito"
+          />
+          <label class="form-check-label" for="flexRadioDefault3">
+            Promiscuio del Circuito
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="juez"
+            value="Magistrado del Tribunal"
+          />
+          <label class="form-check-label" for="flexRadioDefault5">
+            Magistrado del Tribunal
+          </label>
+        </div>
+
+        <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="juez"
+              value=" de la Corte Suprema de Justicia"
+            />
+            <label class="form-check-label" for="flexRadioDefault5">
+              Corte Suprema de Justicia
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="juez"
+              value="del Consejo de Estado"
+            />
+            <label class="form-check-label" for="flexRadioDefault5">
+              Consejo de Estado
+            </label>
+          </div>
+
+
+      </div>
+
+
+  <!-- Input para la ciudad del juez -->
+  <div class="form-group mt-2">
+    <label for="ciudadJuez"><strong>Ciudad del juez</strong>-</label
+    ><label class="text-primary"><strong>(requerido)</strong></label>
+    <!-- Icono de alerta y mensaje de ayuda -->
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        formControlName="ciudadJuez"
+        id="ciudadJuez"
+        placeholder="Ciudad del juez que recibe el habeas corpus."
+        [class.is-invalid]="
+        AccionDeTutela.get('ciudadJuez')?.invalid &&
+        AccionDeTutela.get('ciudadJuez')?.touched
+        "
+        required
+      />
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        data-bs-custom-class="custom-tooltip"
+        data-bs-title="Ciudad del juez que recibe la accion de tutela."
+      >
+        <i
+          class="fas fa-exclamation-circle text-white"
+          style="width: 25px; height: 25px"
+        ></i>
+      </button>
+    </div>
+    <small
+      *ngIf="
+      AccionDeTutela.get('ciudadJuez')?.invalid &&
+      AccionDeTutela.get('ciudadJuez')?.touched
+      "
+      class="text-danger"
+    >
+      La ciudad del juez es obligatoria.
+    </small>
+  </div>
+
+
+
+
+  <div class="d-flex align-items-start mt-5">
+    <div
+      class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+      style="width: 25px; height: 25px"
+    >
+      <strong>2</strong>
+    </div>
+    <div class="form-group">
+      <!-- Label: Datos de la persona que hace esta accion de cumplimiento -->
+      <label class="text-primary" for="destinatario"
+        ><strong
+          >Datos de la persona que hace esta acción de tutela
+        </strong></label
+      >
+      <div id="destinatarioHelpBlock" class="form-text">
+        Indica en los siguientes campos los datos de la persona que hace esta
+        acción de cumplimiento
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-md-6">
+    <!-- Input para los nombres y apellidos del demandante -->
+    <div class="form-group mt-2">
+      <label for="nombreDemandante"><strong>Nombre(s) y apellido(s)</strong> -</label>
+      <label class="text-primary"><strong>(requerido)</strong></label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="nombreDemandante"
+          id="nombreDemandante"
+          placeholder="Nombre de quien hace esta acción de cumplimiento"
+          [class.is-invalid]="
+            AccionDeTutela.get('nombreDemandante')?.invalid &&
+            AccionDeTutela.get('nombreDemandante')?.touched"
+          required
+        />
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-custom-class="custom-tooltip"
+          data-bs-title="Todo documento jurídico debe iniciar por identificar a la persona que hace la petición. Con nombre y apellidos."
+        >
+          <i class="fas fa-exclamation-circle text-white" style="width: 25px; height: 25px"></i>
+        </button>
+      </div>
+      <small
+        *ngIf="
+          AccionDeTutela.get('nombreDemandante')?.invalid &&
+          AccionDeTutela.get('nombreDemandante')?.touched"
+        class="text-danger"
+      >
+        Los nombres y apellidos son obligatorios
+      </small>
+    </div>
+    </div>
+    <div class="col-md-6 mt-2">
+    <!-- Select para el tipo de documento -->
+    <div class="form-group mt-2">
+      <label for="tipoDocumento"><strong>Tipo de documento</strong> -</label>
+      <select
+        class="form-control"
+        formControlName="tipoDocumento"
+        id="tipoDocumento"
+        required
+      >
+        <option value="" disabled selected>Seleccione un tipo de documento</option>
+        <option value="cedula">Cédula</option>
+        <option value="pasaporte">Pasaporte</option>
+        <option value="otro">Otro</option>
+      </select>
+      <small
+        *ngIf="
+          AccionDeTutela.get('tipoDocumento')?.invalid &&
+          AccionDeTutela.get('tipoDocumento')?.touched"
+        class="text-danger"
+      >
+        Por favor, seleccione un tipo de documento
+      </small>
+    </div>
+
+        
+    </div>
+  </div>
+  
+
+
+  
+  <div class="row">
+    <!-- Input para el numero de cedula  -->
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="cedulaDemandante"
+          ><strong>Número de cédula</strong> -</label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <div class="input-group">
+          <input
+            type="number"
+            class="form-control"
+            formControlName="cedulaDemandante"
+            id="cedulaDemandante"
+            placeholder="Solo números sin espacios"
+            required
+            pattern="[0-9]+"
+            [class.is-invalid]="
+            AccionDeTutela.get('cedulaDemandante')?.invalid &&
+              AccionDeTutela.get('cedulaDemandante')?.touched
+            "
+          />
+          <!-- Icono de alerta y mensaje de ayuda -->
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="La identificación debe ir con cédula."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+        <small
+          *ngIf="
+          AccionDeTutela.get('cedulaDemandante')?.invalid &&
+          AccionDeTutela.get('cedulaDemandante')?.touched
+          "
+          class="text-danger"
+        >
+          El numero de cedula es obligatorio
+        </small>
+      </div>
+    </div>
+
+    <!-- Input para la ciudad de expedicion -->
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="ciudadCedula"
+          ><strong>Ciudad de expedición de cédula</strong> -</label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="ciudadCedula"
+            id="ciudadCedula"
+            placeholder="Ejemplo: Bogotá"
+            required
+            [class.is-invalid]="
+            AccionDeTutela.get('ciudadCedula')?.invalid &&
+              AccionDeTutela.get('ciudadCedula')?.touched
+            "
+          />
+          <!-- Icono de alerta y mensaje de ayuda -->
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="La identificación debe ir con la ciudad de expedición de la cédula."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+        <small
+          *ngIf="
+          AccionDeTutela.get('ciudadCedula')?.invalid &&
+            AccionDeTutela.get('ciudadCedula')?.touched
+          "
+          class="text-danger"
+        >
+          La ciudad de expedicion es obligatoria
+        </small>
+      </div>
+    </div>
+  </div>
+
+        
+
+
+
+
+  <div class="d-flex align-items-start mt-5">
+    <div
+      class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+      style="width: 25px; height: 25px"
+    >
+      <strong>3</strong>
+    </div>
+    <div class="form-group">
+      <!-- Label: Datos de la persona que hace esta accion de cumplimiento -->
+      <label class="text-primary" for="destinatario"
+        ><strong
+          >Datos de la persona demandada
+        </strong></label
+      >
+      <div id="destinatarioHelpBlock" class="form-text">
+        Indica en los siguientes campos los datos de la persona demandada
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Input para los nombres y apellidos del demandante -->
+  <div class="form-group mt-2">
+    <label for="nombreDemandandado"
+      ><strong>Nombre(s) y apellido(s)</strong> -</label
+    >
+    <label class="text-primary"><strong>(requerido)</strong></label>
+    <!-- Icono de alerta y mensaje de ayuda -->
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        formControlName="nombreDemandandado"
+        id="nombreDemandandado"
+        placeholder="Nombre de quien hace esta acción de cumplimiento"
+        [class.is-invalid]="
+        AccionDeTutela.get('nombreDemandandado')?.invalid &&
+          AccionDeTutela.get('nombreDemandandado')?.touched
+        "
+        required
+      />
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        data-bs-custom-class="custom-tooltip"
+        data-bs-title="Todo documento jurídico debe iniciar por identificar a la persona que hace la petición. Con nombre y apellidos."
+      >
+        <i
+          class="fas fa-exclamation-circle text-white"
+          style="width: 25px; height: 25px"
+        ></i>
+      </button>
+    </div>
+    <small
+      *ngIf="
+      AccionDeTutela.get('nombreDemandandado')?.invalid &&
+      AccionDeTutela.get('nombreDemandandado')?.touched
+      "
+      class="text-danger"
+    >
+      Los nombres y apellidos son obligatorios
+    </small>
+  </div>
+
+
+
+
+
+
+
+  <div class="row">
+    <!-- Input para el numero de cedula  -->
+    <div class="col-md-6">
+        <div class="form-group">
+          <label for="direccionDemandado"><strong>Dirección</strong> -</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="input-group">
+            <input
+              [class.is-invalid]="
+              AccionDeTutela.get('direccionDemandado')?.invalid &&
+              AccionDeTutela.get('direccionDemandado')?.touched
+              "
+              type="text"
+              class="form-control"
+              formControlName="direccionDemandado"
+              id="direccionDemandado"
+              placeholder="Direccón del demandado."
+              required
+            />
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="Direccón de residencia  a la que se le notificara la acción de cumplimiento al demandado."
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+          <small
+            *ngIf="
+            AccionDeTutela.get('direccionDemandado')?.invalid &&
+            AccionDeTutela.get('direccionDemandado')?.touched
+            "
+            class="text-danger"
+          >
+            La direccion es obligatoria
+          </small>
+        </div>
+      </div>
+
+         <!-- Input para el correo electronico -->
+         <div class="col-md-6">
+            <div class="form-group">
+              <label for="correoDemandado"
+                ><strong>Correo Electrónico</strong> -</label
+              ><label class="text-primary"><strong>(requerido)</strong></label>
+              <div class="input-group">
+                <input
+                  [class.is-invalid]="
+                  AccionDeTutela.get('correoDemandado')?.invalid &&
+                  AccionDeTutela.get('correoDemandado')?.touched
+                  "
+                  type="text"
+                  class="form-control"
+                  formControlName="correoDemandado"
+                  id="correoDemandado"
+                  placeholder="Correo electrónico del demandado."
+                  required
+                />
+                <!-- Icono de alerta y mensaje de ayuda -->
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-custom-class="custom-tooltip"
+                  data-bs-title="Correo electrónico se le notificara la acción de cumplimiento al demandado."
+                >
+                  <i
+                    class="fas fa-exclamation-circle text-white"
+                    style="width: 25px; height: 25px"
+                  ></i>
+                </button>
+              </div>
+              <small
+                *ngIf="
+                AccionDeTutela.get('correoDemandado')?.invalid &&
+                  AccionDeTutela.get('correoDemandado')?.touched
+                "
+                class="text-danger"
+              >
+                El correo es obligatorio
+              </small>
+            </div>
+          </div>
+  </div>
+
+
+
+
+
+  <div class="d-flex align-items-start mt-5">
+    <div
+      class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+      style="width: 25px; height: 25px"
+    >
+      <strong>4</strong>
+    </div>
+    <div class="form-group">
+      <!-- Label: Datos de la persona que hace esta accion de cumplimiento -->
+      <label class="text-primary" for="destinatario"
+        ><strong
+          >Datos de las acciones incumpidas
+        </strong></label
+      >
+      <div id="destinatarioHelpBlock" class="form-text">
+        Indica en los siguientes campos la descripcion de las acciones incumplidas 
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="form-group mt-2">
+    <label for="autoridadIncumple"
+      ><strong>DERECHOS FUNDAMENTALES VULNERADOS </strong> - </label
+    ><label class="text-primary"><strong>(requerido)</strong></label>
+    <!-- Icono de alerta y mensaje de ayuda -->
+    <div class="input-group">
+      <textarea
+        [class.is-invalid]="
+        AccionDeTutela.get('derechosFundamentales')?.invalid &&
+        AccionDeTutela.get('derechosFundamentales')?.touched
+        "
+        rows="6"
+        class="form-control"
+        formControlName="derechosFundamentales"
+        id="derechosFundamentales"
+        placeholder="Los derecho fundamentales vulnerados "
+        required
+      ></textarea>
+      <div>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-custom-class="custom-tooltip"
+          data-bs-title="Especifique los derechos fundamentales vulnerados."
+        >
+          <i
+            class="fas fa-exclamation-circle text-white"
+            style="width: 25px; height: 25px"
+          ></i>
+        </button>
+      </div>
+    </div>
+    <small
+      *ngIf="
+      AccionDeTutela.get('autoridadIncumple')?.invalid &&
+      AccionDeTutela.get('autoridadIncumple')?.touched
+      "
+      class="text-danger"
+    >
+      La autoridad que incumple es obligatoria
+    </small>
+  </div>
+
+
+ <!-- Campo para los hechos -->
+ <div class="form-group mt-2">
+    <label for="hechos"> <strong>HECHOS </strong> - </label
+    ><label class="text-primary"><strong>(requerido)</strong> </label>
+    <!-- Icono de alerta y mensaje de ayuda -->
+    <div id="destinatarioHelpBlock" class="form-text">
+      Para agregar mas hechos use el boton de + para eliminar use -
+    </div>
+    <ng-container
+      formArrayName="hechos"
+      *ngFor="
+        let row of hechos.controls;
+        index as i;
+        first as isFirst;
+        last as isLast
+      "
+      class="input-group"
+    >
+      <ng-container *ngIf="isFirst" [formGroupName]="i">
+        <div class="input-group">
+          <textarea
+            [class.is-invalid]="
+            AccionDeTutela.get('hechos')?.invalid &&
+            AccionDeTutela.get('hechos')?.touched &&
+              isLast
+            "
+            rows="6"
+            class="form-control"
+            formControlName="contenido"
+            id="hechos{{ i }}"
+            placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma"
+            required
+          ></textarea>
+
+          <div class="d-flex flex-column">
+            <div class="mb-2">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Hacer el relato de los hechos que configuran el incumplimiento de la norma."
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <div *ngIf="isLast" class="mb-2">
+              <!-- Botón para agregar un nuevo campo -->
+              <button
+                type="button"
+                class="btn btn-primary mt-2"
+                (click)="agregarHecho()"
+              >
+                <i class="fas fa-plus"></i>
+              </button>
+              <button
+              type="button"
+              class="btn btn-primary mt-2"
+              (click)="eliminarHecho()"
+            >
+              <i class="fas fa-minus"></i>
+            </button>
+            </div>
+          </div>
+        </div>
+        <small
+          *ngIf="
+          AccionDeTutela.get('hechos')?.invalid &&
+          AccionDeTutela.get('hechos')?.touched &&
+            isLast
+          "
+          class="text-danger"
+        >
+          Los hechos son obliogatorios
+        </small>
+      </ng-container>
+
+      <ng-container *ngIf="!isFirst" [formGroupName]="i">
+        <div class="input-group">
+          <textarea
+            [class.is-invalid]="
+            AccionDeTutela.get('hechos')?.invalid &&
+            AccionDeTutela.get('hechos')?.touched &&
+              isLast
+            "
+            rows="6"
+            class="form-control"
+            formControlName="contenido"
+            id="hechos{{ i }}"
+            placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma"
+            required
+          ></textarea>
+          <div *ngIf="isLast" class="mb-2">
+            <!-- Botón para agregar un nuevo campo -->
+            <button
+              type="button"
+              class="btn btn-primary mt-2"
+              (click)="agregarHecho()"
+            >
+              <i class="fas fa-plus"></i>
+            </button>
+            <button
+            type="button"
+            class="btn btn-primary mt-2"
+            (click)="eliminarHecho()"
+          >
+            <i class="fas fa-minus"></i>
+          </button>
+          </div>
+        </div>
+        <small
+          *ngIf="
+          AccionDeTutela.get('hechos')?.invalid &&
+            AccionDeTutela.get('hechos')?.touched &&
+            isLast
+          "
+          class="text-danger"
+        >
+          Los hechos son obligatorios
+        </small>
+      </ng-container>
+    </ng-container>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+ <!-- Campo para los hechos -->
+ <div class="form-group mt-2">
+    <label for="derechosVulnerados"> <strong>DERECHOS VULNERADOS </strong> - </label
+    ><label class="text-primary"><strong>(requerido)</strong> </label>
+    <!-- Icono de alerta y mensaje de ayuda -->
+    <div id="destinatarioHelpBlock" class="form-text">
+      Para agregar mas hechos use el boton de + para eliminar use -
+    </div>
+    <ng-container
+      formArrayName="derechosVulnerados"
+      *ngFor="
+        let row of derechosVulnerados.controls;
+        index as i;
+        first as isFirst;
+        last as isLast
+      "
+      class="input-group"
+    >
+      <ng-container *ngIf="isFirst" [formGroupName]="i">
+        <div class="input-group">
+          <textarea
+            [class.is-invalid]="
+            AccionDeTutela.get('derechosVulnerados')?.invalid &&
+            AccionDeTutela.get('derechosVulnerados')?.touched &&
+              isLast
+            "
+            rows="6"
+            class="form-control"
+            formControlName="contenido"
+            id="derechosVulnerados{{ i }}"
+            placeholder="Hacer el relato de los derechos vulnerados"
+            required
+          ></textarea>
+
+          <div class="d-flex flex-column">
+            <div class="mb-2">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Hacer el relato de los derechos vulnerados."
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <div *ngIf="isLast" class="mb-2">
+              <!-- Botón para agregar un nuevo campo -->
+              <button
+                type="button"
+                class="btn btn-primary mt-2"
+                (click)="agregarDerechoVulnerado()"
+              >
+                <i class="fas fa-plus"></i>
+              </button>
+              <button
+              type="button"
+              class="btn btn-primary mt-2"
+              (click)="eliminarDerechoVulnerado()"
+            >
+              <i class="fas fa-minus"></i>
+            </button>
+            </div>
+          </div>
+        </div>
+        <small
+          *ngIf="
+          AccionDeTutela.get('derechosVulnerados')?.invalid &&
+          AccionDeTutela.get('derechosVulnerados')?.touched &&
+            isLast
+          "
+          class="text-danger"
+        >
+          Los hechos son obliogatorios
+        </small>
+      </ng-container>
+
+      <ng-container *ngIf="!isFirst" [formGroupName]="i">
+        <div class="input-group">
+          <textarea
+            [class.is-invalid]="
+            AccionDeTutela.get('derechosVulnerados')?.invalid &&
+            AccionDeTutela.get('derechosVulnerados')?.touched &&
+              isLast
+            "
+            rows="6"
+            class="form-control"
+            formControlName="contenido"
+            id="derechosVulnerados{{ i }}"
+            placeholder="Hacer el relato de los hechos vulnerados"
+            required
+          ></textarea>
+          <div *ngIf="isLast" class="mb-2">
+            <!-- Botón para agregar un nuevo campo -->
+            <button
+              type="button"
+              class="btn btn-primary mt-2"
+              (click)="agregarDerechoVulnerado()"
+            >
+              <i class="fas fa-plus"></i>
+            </button>
+            <button
+            type="button"
+            class="btn btn-primary mt-2"
+            (click)="eliminarDerechoVulnerado()"
+          >
+            <i class="fas fa-minus"></i>
+          </button>
+          </div>
+        </div>
+        <small
+          *ngIf="
+          AccionDeTutela.get('derechosVulnerados')?.invalid &&
+            AccionDeTutela.get('derechosVulnerados')?.touched &&
+            isLast
+          "
+          class="text-danger"
+        >
+          Los hechos son obligatorios
+        </small>
+      </ng-container>
+    </ng-container>
+  </div>
+
+
+
+
+
+
+
+
+  <div class="form-group mt-2">
+    <label for="autoridadIncumple"
+      ><strong>FUNDAMENTOS JURIDICOS </strong>  </label
+    >
+    <!-- Icono de alerta y mensaje de ayuda -->
+    <div class="input-group">
+      <textarea
+        [class.is-invalid]="
+        AccionDeTutela.get('fundamentosJuridicos')?.invalid &&
+        AccionDeTutela.get('fundamentosJuridicos')?.touched
+        "
+        rows="6"
+        class="form-control"
+        formControlName="fundamnetosJuridicos"
+        id="fundamnetosJuridicos"
+        placeholder="Los fundaentos juridicos "
+        required
+      ></textarea>
+      <div>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-custom-class="custom-tooltip"
+          data-bs-title="Si conoce la norma constitucional, legal, reglamentaria y la jurisprudencia nacional relacionada con el derecho fundamental que invoca como vulnerado o amenazado, puede relacionarla en lo pertinente."
+        >
+          <i
+            class="fas fa-exclamation-circle text-white"
+            style="width: 25px; height: 25px"
+          ></i>
+        </button>
+      </div>
+    </div>
+    <small
+      *ngIf="
+      AccionDeTutela.get('fundamentosJuridicos')?.invalid &&
+      AccionDeTutela.get('fundamentosJuridicos')?.touched
+      "
+      class="text-danger"
+    >
+      La autoridad que incumple es obligatoria
+    </small>
+  </div>
+
+
+
+
+
+
+
+
+ <!-- Campo para las pruebas -->
+ <div class="form-group mt-2">
+    <label for="pruebas"> <strong>PRUEBAS </strong> - </label
+    ><label class="text-primary"><strong>(requerido)</strong> </label>
+    <!-- Icono de alerta y mensaje de ayuda -->
+    <div id="destinatarioHelpBlock" class="form-text">
+      Para agregar mas hechos use el boton de + para eliminar use -
+    </div>
+    <ng-container
+      formArrayName="pruebas"
+      *ngFor="
+        let row of pruebas.controls;
+        index as i;
+        first as isFirst;
+        last as isLast
+      "
+      class="input-group"
+    >
+      <ng-container *ngIf="isFirst" [formGroupName]="i">
+        <div class="input-group">
+          <textarea
+            [class.is-invalid]="
+            AccionDeTutela.get('pruebas')?.invalid &&
+            AccionDeTutela.get('pruebas')?.touched &&
+              isLast
+            "
+            rows="6"
+            class="form-control"
+            formControlName="contenido"
+            id="pruebas{{ i }}"
+            placeholder="Hacer el relato de las pruebas"
+            required
+          ></textarea>
+
+          <div class="d-flex flex-column">
+            <div class="mb-2">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Hacer el relato de las pruebas."
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+            <div *ngIf="isLast" class="mb-2">
+              <!-- Botón para agregar un nuevo campo -->
+              <button
+                type="button"
+                class="btn btn-primary mt-2"
+                (click)="agregarPrueba()"
+              >
+                <i class="fas fa-plus"></i>
+              </button>
+              <button
+              type="button"
+              class="btn btn-primary mt-2"
+              (click)="eliminarPrueba()"
+            >
+              <i class="fas fa-minus"></i>
+            </button>
+            </div>
+          </div>
+        </div>
+        <small
+          *ngIf="
+          AccionDeTutela.get('pruebas')?.invalid &&
+          AccionDeTutela.get('pruebas')?.touched &&
+            isLast
+          "
+          class="text-danger"
+        >
+          Las pruebas son obliogatorios
+        </small>
+      </ng-container>
+
+      <ng-container *ngIf="!isFirst" [formGroupName]="i">
+        <div class="input-group">
+          <textarea
+            [class.is-invalid]="
+            AccionDeTutela.get('pruebas')?.invalid &&
+            AccionDeTutela.get('pruebas')?.touched &&
+              isLast
+            "
+            rows="6"
+            class="form-control"
+            formControlName="contenido"
+            id="pruebas{{ i }}"
+            placeholder="Hacer el relato de las pruebas"
+            required
+          ></textarea>
+          <div *ngIf="isLast" class="mb-2">
+            <!-- Botón para agregar un nuevo campo -->
+            <button
+              type="button"
+              class="btn btn-primary mt-2"
+              (click)="agregarPrueba()"
+            >
+              <i class="fas fa-plus"></i>
+            </button>
+            <button
+            type="button"
+            class="btn btn-primary mt-2"
+            (click)="eliminarPrueba()"
+          >
+            <i class="fas fa-minus"></i>
+          </button>
+          </div>
+        </div>
+        <small
+          *ngIf="
+          AccionDeTutela.get('pruebas')?.invalid &&
+            AccionDeTutela.get('pruebas')?.touched &&
+            isLast
+          "
+          class="text-danger"
+        >
+          Las pruebas son obligatorios
+        </small>
+      </ng-container>
+    </ng-container>
+  </div>
+
+
+
+
+  <div class="form-group mt-2">
+    <label for="autoridadIncumple"
+      ><strong>PRETENSIONES </strong> - </label
+    ><label class="text-primary"><strong>(requerido)</strong></label>
+    <!-- Icono de alerta y mensaje de ayuda -->
+    <div class="input-group">
+      <textarea
+        [class.is-invalid]="
+        AccionDeTutela.get('pretensiones')?.invalid &&
+        AccionDeTutela.get('pretensiones')?.touched
+        "
+        rows="6"
+        class="form-control"
+        formControlName="pretensiones"
+        id="pretensiones"
+        placeholder="las pretensiones "
+        required
+      ></textarea>
+      <div>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-custom-class="custom-tooltip"
+          data-bs-title="Especifique las pretensiones."
+        >
+          <i
+            class="fas fa-exclamation-circle text-white"
+            style="width: 25px; height: 25px"
+          ></i>
+        </button>
+      </div>
+    </div>
+    <small
+      *ngIf="
+      AccionDeTutela.get('pretensiones')?.invalid &&
+      AccionDeTutela.get('pretensiones')?.touched
+      "
+      class="text-danger"
+    >
+      La autoridad que incumple es obligatoria
+    </small>
+  </div>
+
+
+
+
+
+
+
+  <div class="d-flex align-items-start mt-5">
+    <div
+      class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+      style="width: 25px; height: 25px"
+    >
+      <strong>4</strong>
+    </div>
+    <div class="form-group">
+      <!-- Label: Datos de la persona que hace esta accion de cumplimiento -->
+      <label class="text-primary" for="destinatario"
+        ><strong
+          >Notificaciones al demandante
+        </strong></label
+      >
+      <div id="destinatarioHelpBlock" class="form-text">
+        Indica en los siguientes campos los datos para las notificaciones al demandante, los datos para la notificacion al demandado ya se pidieron arriba. 
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="row">
+    <!-- Input para el numero de cedula  -->
+    <div class="col-md-6">
+        <div class="form-group">
+          <label for="direccionDemandante"><strong>Dirección</strong> -</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="input-group">
+            <input
+              [class.is-invalid]="
+              AccionDeTutela.get('direccionDemandante')?.invalid &&
+              AccionDeTutela.get('direccionDemandante')?.touched
+              "
+              type="text"
+              class="form-control"
+              formControlName="direccionDemandante"
+              id="direccionDemandante"
+              placeholder="Direccón del demandado."
+              required
+            />
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="Direccón de residencia  a la que se le notificara la acción de tutela"
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+          <small
+            *ngIf="
+            AccionDeTutela.get('direccionDemandante')?.invalid &&
+            AccionDeTutela.get('direccionDemandante')?.touched
+            "
+            class="text-danger"
+          >
+            La direccion es obligatoria
+          </small>
+        </div>
+      </div>
+
+         <!-- Input para el correo electronico -->
+         <div class="col-md-6">
+            <div class="form-group">
+              <label for="correoDemandante"
+                ><strong>Correo Electrónico</strong> -</label
+              ><label class="text-primary"><strong>(requerido)</strong></label>
+              <div class="input-group">
+                <input
+                  [class.is-invalid]="
+                  AccionDeTutela.get('correoDemandante')?.invalid &&
+                  AccionDeTutela.get('correoDemandante')?.touched
+                  "
+                  type="text"
+                  class="form-control"
+                  formControlName="correoDemandante"
+                  id="correoDemandante"
+                  placeholder="Correo electrónico del demandante."
+                  required
+                />
+                <!-- Icono de alerta y mensaje de ayuda -->
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-custom-class="custom-tooltip"
+                  data-bs-title="Correo electrónico se le notificara la acción de cumplimiento al demandante."
+                >
+                  <i
+                    class="fas fa-exclamation-circle text-white"
+                    style="width: 25px; height: 25px"
+                  ></i>
+                </button>
+              </div>
+              <small
+                *ngIf="
+                AccionDeTutela.get('correoDemandante')?.invalid &&
+                  AccionDeTutela.get('correoDemandante')?.touched
+                "
+                class="text-danger"
+              >
+                El correo es obligatorio
+              </small>
+            </div>
+          </div>
+  </div>
+
+
+
+
+
+
+    <!-- Botón de envío -->
+    <div class="d-flex justify-content-center align-items-center mt-3 p-5">
+        <button
+          type="submit"
+          class="btn btn-primary btn-icon"
+          [disabled]="!AccionDeTutela.valid"
+        >
+          <i class="fas fa-file-alt me-2"></i> Descargar documento
+        </button>
+      </div>
+    </form>
+  </div>
+  
