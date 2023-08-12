@@ -38,7 +38,10 @@
     margin: 0 5px;
   }
   
- 
+  .logo-inicio {
+    width: fit-content;
+    height: fit-content;
+  }
   
   
   
