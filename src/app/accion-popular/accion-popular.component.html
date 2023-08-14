@@ -1,1 +1,1239 @@
-<p>accion-popular works!</p>
+<div class="container mt-5">
+  <h3>Diligencie el siguiente formulario</h3>
+
+  <form [formGroup]="AccionPopular" (ngSubmit)="onSubmit()">
+    <!-- Numeral 1-->
+    <div class="d-flex align-items-start mt-5">
+      <div
+        class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+        style="width: 25px; height: 25px"
+      >
+        <strong>1</strong>
+      </div>
+      <div class="form-group">
+        <!-- Label: ¿A quién va dirigida esta acción de tutela ? -->
+        <label class="text-primary" for="destinatario"
+          ><strong>¿A quién va dirigida esta acción de popular?</strong></label
+        >
+        <div id="destinatarioHelpBlock" class="form-text">
+          Indica en los siguientes los campos a quien dirige la accion popular.
+          Si es contra <strong>autoridad publica</strong> va dirigida a un
+          <strong>juez administrativo.</strong> Si es contra un
+          <strong>particular</strong> se dirige a un
+          <strong>juez civil de circuito.</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group mt-2">
+          <label for="ciudad"><strong>Ciudad</strong> -</label>
+          <label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="ciudad"
+              id="ciudad"
+              placeholder="Ingresa la ciudad"
+              [class.is-invalid]="
+                AccionPopular.get('ciudad')?.invalid &&
+                AccionPopular.get('ciudad')?.touched
+              "
+              required
+            />
+            <!-- Icono de alerta y mensaje de ayuda-->
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="La ciudad de quien escribe y la fecha en la que se escribe dejan constancia del lugar y la fecha en la que se firma."
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+          <small
+            *ngIf="
+              AccionPopular.get('ciudad')?.invalid &&
+              AccionPopular.get('ciudad')?.touched
+            "
+            class="text-danger"
+          >
+            La ciudad es obligatoria
+          </small>
+        </div>
+      </div>
+
+      <!-- Input para la Fecha -->
+      <div class="col-md-6 mt-2">
+        <div class="form-group">
+          <label for="fecha"><strong>Fecha</strong> -</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="input-group">
+            <input
+              class="form-control"
+              type="date"
+              formControlName="fecha"
+              name="fecha"
+              id="fecha"
+              required
+              (input)="onDateChange($event)"
+              [class.is-invalid]="
+                AccionPopular.get('fecha')?.invalid &&
+                AccionPopular.get('fecha')?.touched
+              "
+            />
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <div>
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="La fecha en que escribe la carta deja constancia de la fecha en la que se firma."
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
+          </div>
+          <small
+            *ngIf="
+              AccionPopular.get('fecha')?.invalid &&
+              AccionPopular.get('fecha')?.touched
+            "
+            class="text-danger"
+          >
+            La fecha es obligatoria
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input para el nombre del juez-->
+    <div class="form-group mt-2">
+      <label for="juez"><strong>Juez al que se dirige</strong>-</label
+      ><label class="text-primary"><strong>(requerido)</strong></label>
+      <div class="d-flex flex-row align-items-start">
+        <select class="form-control" formControlName="juez" id="juez" required>
+          <option value="" disabled selected>Seleccione el juez</option>
+          <option value="Juez administrativo">Juez administrativo</option>
+          <option value="Juez civil de circuito">Juez civil de circuito</option>
+        </select>
+        <!-- Icono de alerta y mensaje de ayuda -->
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-custom-class="custom-tooltip"
+          data-bs-title="El juez al que se dirige la carta depende de si la accion popular es contra una autoridad publica o un particular."
+        >
+          <i
+            class="fas fa-exclamation-circle text-white"
+            style="width: 25px; height: 25px"
+          ></i>
+        </button>
+      </div>
+      <small
+        *ngIf="
+          AccionPopular.get('juez')?.invalid &&
+          AccionPopular.get('juez')?.touched
+        "
+        class="text-danger"
+      >
+        El juez es obligatorio
+      </small>
+    </div>
+
+    <!-- Input para la ciudad del juez-->
+    <div class="form-group mt-2">
+      <label for="ciudadJuez"><strong>Ciudad del juez</strong>-</label
+      ><label class="text-primary"><strong>(requerido)</strong></label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="ciudadJuez"
+          id="ciudadJuez"
+          placeholder="Ciudad del juez que recibe la acción popular."
+          [class.is-invalid]="
+            AccionPopular.get('ciudadJuez')?.invalid &&
+            AccionPopular.get('ciudadJuez')?.touched
+          "
+          required
+        />
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-custom-class="custom-tooltip"
+          data-bs-title="Ciudad del juez que recibe la acción popular."
+        >
+          <i
+            class="fas fa-exclamation-circle text-white"
+            style="width: 25px; height: 25px"
+          ></i>
+        </button>
+      </div>
+      <small
+        *ngIf="
+          AccionPopular.get('ciudadJuez')?.invalid &&
+          AccionPopular.get('ciudadJuez')?.touched
+        "
+        class="text-danger"
+      >
+        La ciudad del juez es obligatoria.
+      </small>
+    </div>
+
+    <!-- Numeral 2-->
+
+    <div class="d-flex align-items-start mt-5">
+      <div
+        class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+        style="width: 25px; height: 25px"
+      >
+        <strong>2</strong>
+      </div>
+      <div class="form-group">
+        <!-- Datos de la persona que hace esta acción popular-->
+        <label class="text-primary" for="destinatario"
+          ><strong
+            >Datos de la persona que hace esta acción popular</strong
+          ></label
+        >
+        <div id="destinatarioHelpBlock" class="form-text">
+          Indica en los siguientes los campos los datos del demandante.
+        </div>
+      </div>
+    </div>
+
+    <!-- Input para el nombre del demandante-->
+
+    <div class="form-group mt-2">
+      <!-- Input para los nombres y apellidos del demandante -->
+      <div class="form-group mt-2">
+        <label for="nombreDemandante"
+          ><strong>Nombre(s) y apellido(s)</strong> -</label
+        >
+        <label class="text-primary"><strong>(requerido)</strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="nombreDemandante"
+            id="nombreDemandante"
+            placeholder="Nombre de quien hace esta acción popular"
+            [class.is-invalid]="
+              AccionPopular.get('nombreDemandante')?.invalid &&
+              AccionPopular.get('nombreDemandante')?.touched
+            "
+            required
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Todo documento jurídico debe iniciar por identificar a la persona que hace la petición. Con nombre y apellidos."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+        <small
+          *ngIf="
+            AccionPopular.get('nombreDemandante')?.invalid &&
+            AccionPopular.get('nombreDemandante')?.touched
+          "
+          class="text-danger"
+        >
+          Los nombres y apellidos son obligatorios
+        </small>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mt-2">
+        <!-- Select para el tipo de documento -->
+        <div class="form-group mt-2">
+          <label for="tipoDocumento"
+            ><strong>Ciudad de residencia</strong> -</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="ciudadResidencia"
+              id="ciudadResidencia"
+              placeholder="Ciudad de residencia del demandante"
+              [class.is-invalid]="
+                AccionPopular.get('ciudadResidencia')?.invalid &&
+                AccionPopular.get('ciudadResidencia')?.touched
+              "
+              required
+            />
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="La ciudad de residencia del demandante."
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+          <small
+            *ngIf="
+              AccionPopular.get('ciudadResidencia')?.invalid &&
+              AccionPopular.get('ciudadResidencia')?.touched
+            "
+            class="text-danger"
+          >
+            La ciudad de residencia es obligatoria.
+          </small>
+        </div>
+      </div>
+
+      <div class="col-md-6 mt-2">
+        <!-- Select para el tipo de documento -->
+        <div class="form-group mt-2">
+          <label for="tipoDocumento"><strong>Tipo de documento</strong> -</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <select
+            class="form-control"
+            formControlName="tipoDocumento"
+            id="tipoDocumento"
+            required
+          >
+            <option value="" disabled selected>
+              Seleccione un tipo de documento
+            </option>
+            <option value="Cedula de Ciudadania">Cédula de ciudadanía</option>
+            <option value="Cedula de extranjería">Cédula de extranjería</option>
+            <option value="Tarjeta de Identidad">Tarjeta de identidad</option>
+            <option value="Pasaporte">Pasaporte</option>
+          </select>
+          <small
+            *ngIf="
+              AccionPopular.get('tipoDocumento')?.invalid &&
+              AccionPopular.get('tipoDocumento')?.touched
+            "
+            class="text-danger"
+          >
+            Por favor, seleccione un tipo de documento
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Input para el numero de cedula  -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="cedulaDemandante"
+            ><strong>Número de cédula</strong> -</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="input-group">
+            <input
+              type="number"
+              class="form-control"
+              formControlName="cedulaDemandante"
+              id="cedulaDemandante"
+              placeholder="Solo números sin espacios"
+              required
+              pattern="[0-9]+"
+              [class.is-invalid]="
+                AccionPopular.get('cedulaDemandante')?.invalid &&
+                AccionPopular.get('cedulaDemandante')?.touched
+              "
+            />
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="El número de la respectiva identificación."
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+          <small
+            *ngIf="
+              AccionPopular.get('cedulaDemandante')?.invalid &&
+              AccionPopular.get('cedulaDemandante')?.touched
+            "
+            class="text-danger"
+          >
+            El numero de cedula es obligatorio
+          </small>
+        </div>
+      </div>
+
+      <!-- Input para la ciudad de expedicion -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="ciudadCedula"
+            ><strong>Ciudad de expedición de cédula</strong> -</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="ciudadCedula"
+              id="ciudadCedula"
+              placeholder="Ejemplo: Bogotá"
+              required
+              [class.is-invalid]="
+                AccionPopular.get('ciudadCedula')?.invalid &&
+                AccionPopular.get('ciudadCedula')?.touched
+              "
+            />
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="La identificación debe ir con la ciudad de expedición de la cédula."
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+          <small
+            *ngIf="
+              AccionPopular.get('ciudadCedula')?.invalid &&
+              AccionPopular.get('ciudadCedula')?.touched
+            "
+            class="text-danger"
+          >
+            La ciudad de expedicion es obligatoria
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-start mt-5">
+      <div
+        class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+        style="width: 25px; height: 25px"
+      >
+        <strong>3</strong>
+      </div>
+      <div class="form-group">
+        <!-- Label: Datos de la persona que hace esta accion de cumplimiento -->
+        <label class="text-primary" for="destinatario"
+          ><strong>Datos de la persona demandada </strong></label
+        >
+        <div id="destinatarioHelpBlock" class="form-text">
+          Indica en los siguientes campos los datos de la persona demandada
+        </div>
+      </div>
+    </div>
+
+    <!-- Input para los nombres y apellidos del demandante -->
+    <div class="form-group mt-2">
+      <label for="nombreDemandado"
+        ><strong>Nombre(s) y apellido(s)</strong> -</label
+      >
+      <label class="text-primary"><strong>(requerido)</strong></label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="nombreDemandado"
+          id="nombreDemandado"
+          placeholder="Nombre de quien hace esta acción de cumplimiento"
+          [class.is-invalid]="
+            AccionPopular.get('nombreDemandado')?.invalid &&
+            AccionPopular.get('nombreDemandado')?.touched
+          "
+          required
+        />
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-custom-class="custom-tooltip"
+          data-bs-title="Todo documento jurídico debe iniciar por identificar a la persona que hace la petición. Con nombre y apellidos."
+        >
+          <i
+            class="fas fa-exclamation-circle text-white"
+            style="width: 25px; height: 25px"
+          ></i>
+        </button>
+      </div>
+      <small
+        *ngIf="
+          AccionPopular.get('nombreDemandado')?.invalid &&
+          AccionPopular.get('nombreDemandado')?.touched
+        "
+        class="text-danger"
+      >
+        Los nombres y apellidos son obligatorios
+      </small>
+    </div>
+
+    <div class="row">
+      <!-- Input para el numero de cedula  -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="direccionDemandado"><strong>Dirección</strong> -</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="input-group">
+            <input
+              [class.is-invalid]="
+                AccionPopular.get('direccionDemandado')?.invalid &&
+                AccionPopular.get('direccionDemandado')?.touched
+              "
+              type="text"
+              class="form-control"
+              formControlName="direccionDemandado"
+              id="direccionDemandado"
+              placeholder="Direccón del demandado."
+              required
+            />
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="Direccón de residencia  a la que se le notificara la acción de cumplimiento al demandado."
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+          <small
+            *ngIf="
+              AccionPopular.get('direccionDemandado')?.invalid &&
+              AccionPopular.get('direccionDemandado')?.touched
+            "
+            class="text-danger"
+          >
+            La direccion es obligatoria
+          </small>
+        </div>
+      </div>
+
+      <!-- Input para el correo electronico -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="correoDemandado"
+            ><strong>Correo Electrónico</strong> -</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="input-group">
+            <input
+              [class.is-invalid]="
+                AccionPopular.get('correoDemandado')?.invalid &&
+                AccionPopular.get('correoDemandado')?.touched
+              "
+              type="text"
+              class="form-control"
+              formControlName="correoDemandado"
+              id="correoDemandado"
+              placeholder="Correo electrónico del demandado."
+              required
+            />
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="Correo electrónico se le notificara la acción de cumplimiento al demandado."
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+          <small
+            *ngIf="
+              AccionPopular.get('correoDemandado')?.invalid &&
+              AccionPopular.get('correoDemandado')?.touched
+            "
+            class="text-danger"
+          >
+            El correo es obligatorio
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Numeral 3-->
+    <div class="d-flex align-items-start mt-5">
+      <div
+        class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+        style="width: 25px; height: 25px"
+      >
+        <strong>3</strong>
+      </div>
+      <div class="form-group">
+        <!-- Label: ¿A quién va dirigida esta acción de tutela ? -->
+        <label class="text-primary" for="destinatario"
+          ><strong>Fundamentos</strong></label
+        >
+        <div id="destinatarioHelpBlock" class="form-text">
+          Indica en los siguientes los fundamentos de la presente acción
+          popular.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mt-2">
+      <label for="hechos"> <strong>HECHOS </strong> - </label
+      ><label class="text-primary"><strong>(requerido)</strong> </label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+      <div id="destinatarioHelpBlock" class="form-text">
+        Para agregar mas hechos use el boton de + para eliminar use -
+      </div>
+      <ng-container
+        formArrayName="hechos"
+        *ngFor="
+          let row of hechos.controls;
+          index as i;
+          first as isFirst;
+          last as isLast
+        "
+        class="input-group"
+      >
+        <ng-container *ngIf="isFirst" [formGroupName]="i">
+          <div class="input-group">
+            <textarea
+              [class.is-invalid]="
+                AccionPopular.get('hechos')?.invalid &&
+                AccionPopular.get('hechos')?.touched &&
+                isLast
+              "
+              rows="6"
+              class="form-control"
+              formControlName="contenido"
+              id="hechos{{ i }}"
+              placeholder="Descripción cronológica de los hechos, actos, acciones u omisiones que motivan la interposición de la acción popular"
+              required
+            ></textarea>
+
+            <div class="d-flex flex-column">
+              <div class="mb-2">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-custom-class="custom-tooltip"
+                  data-bs-title="Descripción cronológica de los hechos, actos, acciones u omisiones que motivan la interposición de la acción popular"
+                >
+                  <i
+                    class="fas fa-exclamation-circle text-white"
+                    style="width: 25px; height: 25px"
+                  ></i>
+                </button>
+              </div>
+              <div *ngIf="isLast" class="float-end ms-2">
+                <!-- Botón para agregar un nuevo campo -->
+                <button
+                  type="button"
+                  class="btn btn-primary mt-2"
+                  (click)="agregarHecho()"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+
+                <div *ngIf="isLast" class="float-end ms-1">
+                  <button
+                    type="button"
+                    class="btn btn-danger mt-2"
+                    (click)="eliminarHecho()"
+                  >
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <small
+            *ngIf="
+              AccionPopular.get('hechos')?.invalid &&
+              AccionPopular.get('hechos')?.touched &&
+              isLast
+            "
+            class="text-danger"
+          >
+            Los hechos son obligatorios
+          </small>
+        </ng-container>
+
+        <ng-container *ngIf="!isFirst" [formGroupName]="i">
+          <div class="input-group">
+            <textarea
+              [class.is-invalid]="
+                AccionPopular.get('hechos')?.invalid &&
+                AccionPopular.get('hechos')?.touched &&
+                isLast
+              "
+              rows="6"
+              class="form-control"
+              formControlName="contenido"
+              id="hechos{{ i }}"
+              placeholder="Descripción cronológica de los hechos, actos, acciones u omisiones que motivan la interposición de la acción popular"
+              required
+            ></textarea>
+            <div *ngIf="isLast" class="float-end ms-2">
+              <!-- Botón para agregar un nuevo campo -->
+              <button
+                type="button"
+                class="btn btn-primary mt-2"
+                (click)="agregarHecho()"
+              >
+                <i class="fas fa-plus"></i>
+              </button>
+
+              <div *ngIf="isLast" class="float-end ms-1">
+                <button
+                  type="button"
+                  class="btn btn-danger mt-2"
+                  (click)="eliminarHecho()"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <small
+            *ngIf="
+              AccionPopular.get('hechos')?.invalid &&
+              AccionPopular.get('hechos')?.touched &&
+              isLast
+            "
+            class="text-danger"
+          >
+            Los hechos son obligatorios
+          </small>
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <!-- Campo para los derechosVulnerados -->
+    <div class="form-group mt-2">
+      <label for="derechosVulnerados">
+        <strong>DERECHOS VULNERADOS</strong> - </label
+      ><label class="text-primary"><strong>(requerido)</strong> </label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+      <div id="destinatarioHelpBlock" class="form-text">
+        Para agregar más derechos vulnerados use el boton de + para eliminar use -
+      </div>
+      <ng-container
+        formArrayName="derechosVulnerados"
+        *ngFor="
+          let row of derechosVulnerados.controls;
+          index as i;
+          first as isFirst;
+          last as isLast
+        "
+        class="input-group"
+      >
+        <ng-container *ngIf="isFirst" [formGroupName]="i">
+          <div class="input-group">
+            <textarea
+              [class.is-invalid]="
+                AccionPopular.get('derechosVulnerados')?.invalid &&
+                AccionPopular.get('derechosVulnerados')?.touched &&
+                isLast
+              "
+              rows="6"
+              class="form-control"
+              formControlName="contenido"
+              id="derechosVulnerados{{ i }}"
+              placeholder="Indicar uno a uno los derechos o intereses colectivos que, con la acción o la omisión de la persona particular, jurídica o de la autoridad pública se vulneraron o se encuentran amenazado"
+              required
+            ></textarea>
+
+            <div class="d-flex flex-column">
+              <div class="mb-2">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-custom-class="custom-tooltip"
+                  data-bs-title="Indicar uno a uno los derechos o intereses colectivos que, con la acción o la omisión de la persona particular, jurídica o de la autoridad pública se vulneraron o se encuentran amenazado."
+                >
+                  <i
+                    class="fas fa-exclamation-circle text-white"
+                    style="width: 25px; height: 25px"
+                  ></i>
+                </button>
+              </div>
+              <div *ngIf="isLast" class="float-end ms-2">
+                <!-- Botón para agregar un nuevo campo -->
+                <button
+                  type="button"
+                  class="btn btn-primary mt-2"
+                  (click)="agregarDerechoVulnerado()"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+
+                <div *ngIf="isLast" class="float-end ms-1">
+                  <button
+                    type="button"
+                    class="btn btn-danger mt-2"
+                    (click)="eliminarDerechoVulnerado()"
+                  >
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <small
+            *ngIf="
+              AccionPopular.get('derechosVulnerados')?.invalid &&
+              AccionPopular.get('derechosVulnerados')?.touched &&
+              isLast
+            "
+            class="text-danger"
+          >
+            Los derechos vulnerados son obligatorios
+          </small>
+        </ng-container>
+
+        <ng-container *ngIf="!isFirst" [formGroupName]="i">
+          <div class="input-group">
+            <textarea
+              [class.is-invalid]="
+                AccionPopular.get('derechosVulnerados')?.invalid &&
+                AccionPopular.get('derechosVulnerados')?.touched &&
+                isLast
+              "
+              rows="6"
+              class="form-control"
+              formControlName="contenido"
+              id="derechosVulnerados{{ i }}"
+              placeholder="Indicar uno a uno los derechos o intereses colectivos que, con la acción o la omisión de la persona particular, jurídica o de la autoridad pública se vulneraron o se encuentran amenazado"
+              required
+            ></textarea>
+            <div *ngIf="isLast" class="float-end ms-2">
+              <!-- Botón para agregar un nuevo campo -->
+              <button
+                type="button"
+                class="btn btn-primary mt-2"
+                (click)="agregarDerechoVulnerado()"
+              >
+                <i class="fas fa-plus"></i>
+              </button>
+
+              <div *ngIf="isLast" class="float-end ms-1">
+                <button
+                  type="button"
+                  class="btn btn-danger mt-2"
+                  (click)="eliminarDerechoVulnerado()"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <small
+            *ngIf="
+              AccionPopular.get('derechosVulnerados')?.invalid &&
+              AccionPopular.get('derechosVulnerados')?.touched &&
+              isLast
+            "
+            class="text-danger"
+          >
+            Los derechos vulnerados son obligatorios
+          </small>
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <!-- Campo para las pretensiones  -->
+    <!-- Campo para la pretension-->
+    <div class="form-group mt-2">
+      <label for="pretension"><strong>PRETENSIÓN </strong> - </label
+      ><label class="text-primary"><strong>(requerido)</strong></label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+      <div class="input-group">
+        <textarea
+          [class.is-invalid]="
+            AccionPopular.get('pretension')?.invalid &&
+            AccionPopular.get('pretension')?.touched
+          "
+          rows="6"
+          class="form-control"
+          formControlName="pretension"
+          id="pretension"
+          placeholder="Enunciar que es lo que se quiere que el juez ordene para proteger los derechos colectivos invocados como amenazados o vulnerados"
+          required
+        ></textarea>
+        <div>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Enunciar que es lo que se quiere que el juez ordene para proteger los derechos colectivos invocados como amenazados o vulnerados."
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+      </div>
+      <small
+        *ngIf="
+          AccionPopular.get('pretension')?.invalid &&
+          AccionPopular.get('pretension')?.touched
+        "
+        class="text-danger"
+      >
+        La pretension es obligatoria
+      </small>
+    </div>
+
+    <!-- Campo para las pruebas -->
+    <div class="form-group mt-2">
+      <label for="pruebas"> <strong>PRUEBAS </strong> - </label
+      ><label class="text-primary"><strong>(requerido)</strong> </label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+      <div id="destinatarioHelpBlock" class="form-text">
+        Para agregar más pruebas use el boton de + para eliminar use -
+      </div>
+      <ng-container
+        formArrayName="pruebas"
+        *ngFor="
+          let row of pruebas.controls;
+          index as i;
+          first as isFirst;
+          last as isLast
+        "
+        class="input-group"
+      >
+        <ng-container *ngIf="isFirst" [formGroupName]="i">
+          <div class="input-group">
+            <textarea
+              [class.is-invalid]="
+                AccionPopular.get('pruebas')?.invalid &&
+                AccionPopular.get('pruebas')?.touched &&
+                isLast
+              "
+              rows="6"
+              class="form-control"
+              formControlName="contenido"
+              id="pruebas{{ i }}"
+              placeholder="Enumerar una a una los documentos, fotos, videos, testimonios y en general todas las pruebas con que cuente para que el juez tenga en cuenta al proferir el fallo"
+              required
+            ></textarea>
+
+            <div class="d-flex flex-column">
+              <div class="mb-2">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-custom-class="custom-tooltip"
+                  data-bs-title="Enumerar una a una los documentos, fotos, videos, testimonios y en general todas las pruebas con que cuente para que el juez tenga en cuenta al proferir el fallo"
+                >
+                  <i
+                    class="fas fa-exclamation-circle text-white"
+                    style="width: 25px; height: 25px"
+                  ></i>
+                </button>
+              </div>
+              <div *ngIf="isLast" class="float-end ms-2">
+                <!-- Botón para agregar un nuevo campo -->
+                <button
+                  type="button"
+                  class="btn btn-primary mt-2"
+                  (click)="agregarPrueba()"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+                <div *ngIf="isLast" class="float-end ms-1">
+                  <button
+                    type="button"
+                    class="btn btn-danger mt-2"
+                    (click)="eliminarPrueba()"
+                  >
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <small
+            *ngIf="
+              AccionPopular.get('pruebas')?.invalid &&
+              AccionPopular.get('pruebas')?.touched &&
+              isLast
+            "
+            class="text-danger"
+          >
+            Las pruebas son obligatorios
+          </small>
+        </ng-container>
+
+        <ng-container *ngIf="!isFirst" [formGroupName]="i">
+          <div class="input-group">
+            <textarea
+              [class.is-invalid]="
+                AccionPopular.get('pruebas')?.invalid &&
+                AccionPopular.get('pruebas')?.touched &&
+                isLast
+              "
+              rows="6"
+              class="form-control"
+              formControlName="contenido"
+              id="pruebas{{ i }}"
+              placeholder="Enumerar una a una los documentos, fotos, videos, testimonios y en general todas las pruebas con que cuente para que el juez tenga en cuenta al proferir el fallo"
+              required
+            ></textarea>
+            <div *ngIf="isLast" class="float-end ms-2">
+              <!-- Botón para agregar un nuevo campo -->
+              <button
+                type="button"
+                class="btn btn-primary mt-2"
+                (click)="agregarPrueba()"
+              >
+                <i class="fas fa-plus"></i>
+              </button>
+              <div *ngIf="isLast" class="float-end ms-1">
+                <button
+                  type="button"
+                  class="btn btn-danger mt-2"
+                  (click)="eliminarPrueba()"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <small
+            *ngIf="
+              AccionPopular.get('pruebas')?.invalid &&
+              AccionPopular.get('pruebas')?.touched &&
+              isLast
+            "
+            class="text-danger"
+          >
+            Las pruebas son obligatorios
+          </small>
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <!-- Numeral 4-->
+    <div class="d-flex align-items-start mt-5">
+      <div
+        class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+        style="width: 25px; height: 25px"
+      >
+        <strong>4</strong>
+      </div>
+      <div class="form-group">
+        <!-- Label: Datos de la persona que hace esta accion de cumplimiento -->
+        <label class="text-primary" for="destinatario"
+          ><strong>Notificaciones al demandante </strong></label
+        >
+        <div id="destinatarioHelpBlock" class="form-text">
+          Indica en los siguientes campos los datos para las notificaciones al
+          demandante.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mt-2">
+      <label for="correoDemandante">
+        <strong>Correo electrónico</strong> -</label
+      >
+      <label class="text-primary"><strong>(requerido)</strong></label>
+      <div class="input-group">
+        <input
+          type="email"
+          class="form-control"
+          formControlName="correoDemandante"
+          id="correoDemandante"
+          placeholder="Correo electrónico"
+          [class.is-invalid]="
+            AccionPopular.get('correoDemandante')?.invalid &&
+            AccionPopular.get('correoDemandante')?.touched
+          "
+          required
+        />
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-custom-class="custom-tooltip"
+          data-bs-title="Direccón de residencia a la que se le notificara la acción popular"
+        >
+          <i
+            class="fas fa-exclamation-circle text-white"
+            style="width: 25px; height: 25px"
+          ></i>
+        </button>
+      </div>
+      <small
+            *ngIf="
+              AccionPopular.get('correoDemandante')?.invalid &&
+              AccionPopular.get('correoDemandante')?.touched
+            "
+            class="text-danger"
+          >
+            El correo electrónico es obligatorio.
+          </small>
+    </div>
+
+    <div class="row">
+      <!-- Input para el numero de cedula  -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="direccionDemandante"><strong>Dirección</strong> -</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="input-group">
+            <input
+              [class.is-invalid]="
+                AccionPopular.get('direccionDemandante')?.invalid &&
+                AccionPopular.get('direccionDemandante')?.touched
+              "
+              type="text"
+              class="form-control"
+              formControlName="direccionDemandante"
+              id="direccionDemandando"
+              placeholder="Direccón del demandado."
+              required
+            />
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="Direccón de residencia  a la que se le notificara la acción popular"
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+          <small
+            *ngIf="
+              AccionPopular.get('direccionDemandante')?.invalid &&
+              AccionPopular.get('direccionDemandante')?.touched
+            "
+            class="text-danger"
+          >
+            La dirección es obligatoria
+          </small>
+        </div>
+      </div>
+
+      <!-- Input para el correo electronico -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="telefonoDemandante"
+            ><strong>Teléfono</strong> -</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="input-group">
+            <input
+              [class.is-invalid]="
+                AccionPopular.get('telefonoDemandante')?.invalid &&
+                AccionPopular.get('telefonoDemandante')?.touched
+              "
+              type="number"
+              class="form-control"
+              formControlName="telefonoDemandante"
+              id="telefonoDemandante"
+              placeholder="Teléfono del demandante."
+              required
+            />
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="Teléfono que se le notificara la acción popular al demandante."
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+          <small
+            *ngIf="
+              AccionPopular.get('telefonoDemandante')?.invalid &&
+              AccionPopular.get('telefonoDemandante')?.touched
+            "
+            class="text-danger"
+          >
+            El telefono es obligatorio
+          </small>
+        </div>
+      </div>
+    </div>
+
+
+    
+
+    <!-- Botón de envío -->
+    <div class="d-flex justify-content-center align-items-center mt-3 p-5">
+      <button
+        type="submit"
+        class="btn btn-primary btn-icon"
+        [disabled]="!AccionPopular.valid"
+      >
+        <i class="fas fa-file-alt me-2"></i> Descargar documento
+      </button>
+    </div>
+
+  </form>
+</div>

@@ -87,6 +87,14 @@ export class DerechoDePeticionComponent {
     console.log(this.DerechoDePeticion.controls)
   }
 
+  eliminarAdjunto() {
+    const adjuntoArray = this.DerechoDePeticion.get('adjunto') as FormArray;
+    if(adjuntoArray.length > 1){
+    adjuntoArray.removeAt(adjuntoArray.length - 1);
+  }
+  }
+  
+
   get adjunto(): FormArray {
     return this.DerechoDePeticion.get('adjunto') as FormArray;
   }

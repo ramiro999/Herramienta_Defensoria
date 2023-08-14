@@ -551,7 +551,7 @@
                     ></i>
                   </button>
                 </div>
-                <div *ngIf="isLast" class="mb-2">
+                <div *ngIf="isLast" class="float-end ms-2">
                   <!-- Botón para agregar un nuevo campo -->
                   <button
                     type="button"
@@ -561,6 +561,19 @@
                     <i class="fas fa-plus"></i>
                   </button>
                 </div>
+                <div *ngIf="isLast" class="float-end ms-2">
+                  <!-- Botón para agregar un nuevo campo -->
+                  <button
+                    type="button"
+                    class="btn btn-danger mt-2"
+                    (click)="eliminarHecho()"
+                  >
+                    <i class="fas fa-minus"></i>
+                  </button>
+
+                </div>
+
+
               </div>
             </div>
             <small
@@ -590,7 +603,7 @@
                 placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma"
                 required
               ></textarea>
-              <div *ngIf="isLast" class="mb-2">
+              <div *ngIf="isLast" class="float-end ms-2">
                 <!-- Botón para agregar un nuevo campo -->
                 <button
                   type="button"
@@ -600,6 +613,17 @@
                   <i class="fas fa-plus"></i>
                 </button>
               </div>
+              <div *ngIf="isLast" class="float-end ms-2">
+                <!-- Botón para agregar un nuevo campo -->
+                <button
+                  type="button"
+                  class="btn btn-danger mt-2"
+                  (click)="eliminarHecho()"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+
             </div>
             <small
               *ngIf="
@@ -1827,7 +1851,7 @@
                     ></i>
                   </button>
                 </div>
-                <div *ngIf="isLast" class="mb-2">
+                <div *ngIf="isLast" class="float-end ms-2">
                   <!-- Botón para agregar un nuevo campo -->
                   <button
                     type="button"
@@ -1837,6 +1861,18 @@
                     <i class="fas fa-plus"></i>
                   </button>
                 </div>
+                <div *ngIf="isLast" class="float-end ms-2">
+                  <!-- Botón para agregar un nuevo campo -->
+                  <button
+                    type="button"
+                    class="btn btn-danger mt-2"
+                    (click)="eliminarHecho()"
+                  >
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+
+
               </div>
             </div>
             <small
@@ -1866,7 +1902,7 @@
                 placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma"
                 required
               ></textarea>
-              <div *ngIf="isLast" class="mb-2">
+              <div *ngIf="isLast" class="float-end ms-2">
                 <!-- Botón para agregar un nuevo campo -->
                 <button
                   type="button"
@@ -1876,6 +1912,20 @@
                   <i class="fas fa-plus"></i>
                 </button>
               </div>
+
+              <div *ngIf="isLast" class="float-end ms-2">
+                <!-- Botón para agregar un nuevo campo -->
+                <button
+                  type="button"
+                  class="btn btn-danger mt-2"
+                  (click)="eliminarHecho()"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+
+              </div>
+
+
             </div>
             <small
               *ngIf="

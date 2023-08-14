@@ -9,6 +9,7 @@ import { HabeasCorpusComponent } from './habeas-corpus/habeas-corpus.component';
 import { HabeasDataComponent } from './habeas-data/habeas-data.component';
 import { HomeComponent } from './home/home.component';
 import { CartaRenuenciaAcComponent } from './carta-renuencia-ac/carta-renuencia-ac.component'; 
+import { CartaRenuenciaApComponent } from './carta-renuencia-ap/carta-renuencia-ap.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'habeas-corpus', component: HabeasCorpusComponent },
   { path: 'habeas-data', component: HabeasDataComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'carta-renuencia-ac', component: CartaRenuenciaAcComponent}
+  { path: 'carta-renuencia-ac', component: CartaRenuenciaAcComponent},
+  { path: 'carta-renuencia-ap', component: CartaRenuenciaApComponent}
 ]
 
 @NgModule({   

@@ -211,7 +211,54 @@ export class AccionDeGrupoComponent {
       console.log(this.AccionDeGrupo.value)
     }
 
+    eliminarDemandante() {
+      const demandantesArray = this.AccionDeGrupo.get('demandantes') as FormArray;
+      if (demandantesArray.length > 1) {
+        demandantesArray.removeAt(demandantesArray.length - 1);
+      }
+    }
 
+    eliminarHecho() {
+      const hechosArray = this.AccionDeGrupo.get('hechos') as FormArray;
+      if (hechosArray.length > 1) {
+        hechosArray.removeAt(hechosArray.length - 1);
+      }
+    }
+
+    eliminarProcedencia() {
+      const procedenciaArray = this.AccionDeGrupo.get('procedencia') as FormArray;
+      if (procedenciaArray.length > 1) {
+        procedenciaArray.removeAt(procedenciaArray.length - 1);
+      }
+    }
+
+    eliminarDocumental() {
+      const documentalArray = this.AccionDeGrupo.get('documentales') as FormArray;
+      if (documentalArray.length > 1) {
+        documentalArray.removeAt(documentalArray.length - 1);
+      }
+    }
+
+    eliminarDocumentalSOLI() {
+      const documentalSOLIArray = this.AccionDeGrupo.get('documentalesSOLI') as FormArray;
+      if (documentalSOLIArray.length > 1) {
+        documentalSOLIArray.removeAt(documentalSOLIArray.length - 1);
+      }
+    }
+
+    eliminarPericial() {
+      const pericialArray = this.AccionDeGrupo.get('periciales') as FormArray;
+      if (pericialArray.length > 1) {
+        pericialArray.removeAt(pericialArray.length - 1);
+      }
+    }
+
+    eliminarTestimonial() {
+      const testimonialArray = this.AccionDeGrupo.get('testimoniales') as FormArray;
+      if (testimonialArray.length > 1) {
+        testimonialArray.removeAt(testimonialArray.length - 1);
+      }
+    }
 
 
     get demandantes(): FormArray {

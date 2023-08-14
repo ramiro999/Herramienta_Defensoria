@@ -90,11 +90,7 @@
               "
             />
             <!-- Icono de alerta y mensaje de ayuda -->
-            <button
-              class="btn btn-primary"
-              (click)="toggleDatepicker()"
-              type="button"
-            ></button>
+           <div>
             <button
               type="button"
               class="btn btn-primary"
@@ -108,6 +104,7 @@
                 style="width: 25px; height: 25px"
               ></i>
             </button>
+          </div>
           </div>
           <small
             *ngIf="
@@ -135,6 +132,11 @@
           formControlName="ciudadJuez"
           id="ciudadJuez"
           placeholder="Ciudad del juez administrativo que recibe el acta de cumplimiento"
+          [class.is-invalid]="
+            AccionDeCumplimiento.get('ciudadJuez')?.invalid &&
+            AccionDeCumplimiento.get('ciudadJuez')?.touched
+          "
+          required
         />
         <button
           type="button"
@@ -150,6 +152,15 @@
           ></i>
         </button>
       </div>
+      <small
+        *ngIf="
+          AccionDeCumplimiento.get('ciudadJuez')?.invalid &&
+          AccionDeCumplimiento.get('ciudadJuez')?.touched
+        "
+        class="text-danger"
+      >
+        La ciudad es obligatoria
+      </small>
     </div>
 
     <!-- Input para la direccion Juez administrativo -->
@@ -165,6 +176,11 @@
           formControlName="direccionJuez"
           id="direccionJuez"
           placeholder="Dirección del juez administrativo que recibe el acta de cumplimiento"
+          [class.is-invalid]="
+            AccionDeCumplimiento.get('direccionJuez')?.invalid &&
+            AccionDeCumplimiento.get('direccionJuez')?.touched
+          "
+          required
         />
         <button
           type="button"
@@ -180,6 +196,15 @@
           ></i>
         </button>
       </div>
+      <small
+        *ngIf="
+          AccionDeCumplimiento.get('direccionJuez')?.invalid &&
+          AccionDeCumplimiento.get('direccionJuez')?.touched
+        "
+        class="text-danger"
+      >
+        La dirección es obligatoria
+      </small>
     </div>
 
     <!-- Input para el nombre del Demandado -->
@@ -195,6 +220,11 @@
           formControlName="nombreDemandado"
           id="nombreDemandado"
           placeholder="Nombre de la persona o entidad a la que demanda"
+          [class.is-invalid]="
+            AccionDeCumplimiento.get('nombreDemandado')?.invalid &&
+            AccionDeCumplimiento.get('nombreDemandado')?.touched
+          "
+          required
         />
         <button
           type="button"
@@ -210,6 +240,15 @@
           ></i>
         </button>
       </div>
+      <small
+        *ngIf="
+          AccionDeCumplimiento.get('nombreDemandado')?.invalid &&
+          AccionDeCumplimiento.get('nombreDemandado')?.touched
+        "
+        class="text-danger"
+      >
+        El nombre es obligatorio
+      </small>
     </div>
 
     <!-- Numeral 2-->
@@ -489,7 +528,7 @@
                   ></i>
                 </button>
               </div>
-              <div *ngIf="isLast" class="mb-2">
+              <div *ngIf="isLast" class="float-end ms-2">
                 <!-- Botón para agregar un nuevo campo -->
                 <button
                   type="button"
@@ -498,13 +537,15 @@
                 >
                   <i class="fas fa-plus"></i>
                 </button>
+                <div *ngIf="isLast" class="float-end ms-1">
                 <button
                 type="button"
-                class="btn btn-primary mt-2"
+                class="btn btn-danger mt-2"
                 (click)="eliminarHecho()"
               >
                 <i class="fas fa-minus"></i>
               </button>
+                </div>
               </div>
             </div>
           </div>
@@ -535,7 +576,7 @@
               placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma"
               required
             ></textarea>
-            <div *ngIf="isLast" class="mb-2">
+            <div *ngIf="isLast" class="float-end ms-2">
               <!-- Botón para agregar un nuevo campo -->
               <button
                 type="button"
@@ -544,13 +585,15 @@
               >
                 <i class="fas fa-plus"></i>
               </button>
+              <div *ngIf="isLast" class="float-end ms-1">
               <button
               type="button"
-              class="btn btn-primary mt-2"
+              class="btn btn-danger mt-2"
               (click)="eliminarHecho()"
             >
               <i class="fas fa-minus"></i>
             </button>
+          </div>
             </div>
           </div>
           <small

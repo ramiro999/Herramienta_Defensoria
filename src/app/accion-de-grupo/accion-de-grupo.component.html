@@ -580,7 +580,7 @@
                 class="form-control "
                 formControlName="nombre"
                 id="nombre"
-                placeholder="nombre del abogado."
+                placeholder="nombre del demandante."
                 [class.is-invalid]="
                   AccionDeGrupo.get('nombre')?.invalid &&
                   AccionDeGrupo.get('nombre')?.touched
@@ -611,7 +611,7 @@
               "
               class="text-danger"
             >
-              El no de expedicion del abogado es obligatoria
+              El No de expedicion del abogado es obligatoria
             </small>
           </div>
         </div>
@@ -628,7 +628,7 @@
               class="form-control"
               formControlName="cedula"
               id="tarjetaProfesional"
-              placeholder="cedula del abogado"
+              placeholder="cedula del demandante"
                   [class.is-invalid]="
                   AccionDeGrupo.get('cedula')?.invalid &&
                   AccionDeGrupo.get('cedula')?.touched
@@ -656,6 +656,17 @@
                 (click)="agregarDemandante()"
               >
                 <i class="fas fa-plus"></i>
+              </button>
+            </div>
+
+            <div *ngIf="isLast" class="float-end ms-2">
+              <!-- Botón para eliminar un campo -->
+              <button
+                type="button"
+                class="btn btn-danger mt-2"
+                (click)="eliminarDemandante()"
+              >
+                <i class="fas fa-minus"></i>
               </button>
             </div>
           
@@ -750,7 +761,7 @@
                   ></i>
                 </button>
               </div>
-              <div *ngIf="isLast" class="mb-2">
+              <div *ngIf="isLast" class="float-end ms-2">
                 <!-- Botón para agregar un nuevo campo -->
                 <button
                   type="button"
@@ -758,6 +769,16 @@
                   (click)="agregarHecho()"
                 >
                   <i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <div *ngIf="isLast" class="float-end ms-2">
+                <!-- Botón para eliminar un campo -->
+                <button
+                  type="button"
+                  class="btn btn-danger mt-2"
+                  (click)="eliminarHecho()"
+                >
+                  <i class="fas fa-minus"></i>
                 </button>
               </div>
             </div>
@@ -789,7 +810,7 @@
               placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma"
               required
             ></textarea>
-            <div *ngIf="isLast" class="mb-2">
+            <div *ngIf="isLast" class="float-end ms-2">
               <!-- Botón para agregar un nuevo campo -->
               <button
                 type="button"
@@ -797,6 +818,16 @@
                 (click)="agregarHecho()"
               >
                 <i class="fas fa-plus"></i>
+              </button>
+            </div>
+            <div *ngIf="isLast" class="float-end ms-2">
+              <!-- Botón para eliminar un campo -->
+              <button
+                type="button"
+                class="btn btn-danger mt-2"
+                (click)="eliminarHecho()"
+              >
+                <i class="fas fa-minus"></i>
               </button>
             </div>
           </div>
@@ -1103,7 +1134,7 @@
                   ></i>
                 </button>
               </div>
-              <div *ngIf="isLast" class="mb-2">
+              <div *ngIf="isLast" class="float-end ms-2">
                 <!-- Botón para agregar un nuevo campo -->
                 <button
                   type="button"
@@ -1113,6 +1144,19 @@
                   <i class="fas fa-plus"></i>
                 </button>
               </div>
+
+              <div *ngIf="isLast" class="float-end ms-2">
+                <!-- Botón para agregar un nuevo campo -->
+                <button
+                  type="button"
+                  class="btn btn-danger mt-2"
+                  (click)="eliminarProcedencia()"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+
+              
             </div>
           </div>
           <small
@@ -1142,7 +1186,7 @@
               placeholder="Procedencia de la accion"
               required
             ></textarea>
-            <div *ngIf="isLast" class="mb-2">
+            <div *ngIf="isLast" class="float-end ms-2">
               <!-- Botón para agregar un nuevo campo -->
               <button
                 type="button"
@@ -1152,6 +1196,19 @@
                 <i class="fas fa-plus"></i>
               </button>
             </div>
+
+            <div *ngIf="isLast" class="float-end ms-2">
+              <!-- Botón para agregar un nuevo campo -->
+              <button
+                type="button"
+                class="btn btn-danger mt-2"
+                (click)="eliminarProcedencia()"
+              >
+                <i class="fas fa-minus"></i>
+              </button>
+
+            </div>
+
           </div>
           <small
             *ngIf="
@@ -1294,7 +1351,7 @@
                   ></i>
                 </button>
               </div>
-              <div *ngIf="isLast" class="mb-2">
+              <div *ngIf="isLast" class="float-end ms-2">
                 <!-- Botón para agregar un nuevo campo -->
                 <button
                   type="button"
@@ -1304,6 +1361,18 @@
                   <i class="fas fa-plus"></i>
                 </button>
               </div>
+
+              <div *ngIf="isLast" class="float-end ms-2">
+                <!-- Botón para agregar un nuevo campo -->
+                <button
+                  type="button"
+                  class="btn btn-danger mt-2"
+                  (click)="eliminarDocumental()"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+
             </div>
           </div>
           <small
@@ -1333,7 +1402,7 @@
               placeholder="documentales de la accion"
               required
             ></textarea>
-            <div *ngIf="isLast" class="mb-2">
+            <div *ngIf="isLast" class="float-end ms-2">
               <!-- Botón para agregar un nuevo campo -->
               <button
                 type="button"
@@ -1343,6 +1412,18 @@
                 <i class="fas fa-plus"></i>
               </button>
             </div>
+
+            <div *ngIf="isLast" class="float-end ms-2">
+              <!-- Botón para agregar un nuevo campo -->
+              <button
+                type="button"
+                class="btn btn-danger mt-2"
+                (click)="eliminarDocumental()"
+              >
+                <i class="fas fa-minus"></i>
+              </button>
+            </div>
+
           </div>
           <small
             *ngIf="
@@ -1412,7 +1493,7 @@
                   ></i>
                 </button>
               </div>
-              <div *ngIf="isLast" class="mb-2">
+              <div *ngIf="isLast" class="float-end ms-2">
                 <!-- Botón para agregar un nuevo campo -->
                 <button
                   type="button"
@@ -1422,6 +1503,18 @@
                   <i class="fas fa-plus"></i>
                 </button>
               </div>
+
+              <div *ngIf="isLast" class="float-end ms-2">
+                <!-- Botón para agregar un nuevo campo -->
+                <button
+                  type="button"
+                  class="btn btn-danger mt-2"
+                  (click)="eliminarDocumentalSOLI()"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+
             </div>
           </div>
           <small
@@ -1451,7 +1544,7 @@
               placeholder="documentales asociados"
               required
             ></textarea>
-            <div *ngIf="isLast" class="mb-2">
+            <div *ngIf="isLast" class="float-end ms-2">
               <!-- Botón para agregar un nuevo campo -->
               <button
                 type="button"
@@ -1461,6 +1554,18 @@
                 <i class="fas fa-plus"></i>
               </button>
             </div>
+
+            <div *ngIf="isLast" class="float-end ms-2">
+              <!-- Botón para agregar un nuevo campo -->
+              <button
+                type="button"
+                class="btn btn-danger mt-2"
+                (click)="eliminarDocumentalSOLI()"
+              >
+                <i class="fas fa-minus"></i>
+              </button>
+            </div>
+
           </div>
           <small
             *ngIf="
@@ -1532,7 +1637,7 @@
                   ></i>
                 </button>
               </div>
-              <div *ngIf="isLast" class="mb-2">
+              <div *ngIf="isLast" class="float-end ms-2">
                 <!-- Botón para agregar un nuevo campo -->
                 <button
                   type="button"
@@ -1542,6 +1647,19 @@
                   <i class="fas fa-plus"></i>
                 </button>
               </div>
+
+              <div *ngIf="isLast" class="float-end ms-2">
+                <!-- Botón para eliminar un nuevo campo -->
+                <button
+                  type="button"
+                  class="btn btn-danger mt-2"
+                  (click)="eliminarPericial()"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+
+              </div>
+
             </div>
           </div>
           <small
@@ -1571,7 +1689,7 @@
               placeholder="periciales asociados"
               required
             ></textarea>
-            <div *ngIf="isLast" class="mb-2">
+            <div *ngIf="isLast" class="float-end ms-2">
               <!-- Botón para agregar un nuevo campo -->
               <button
                 type="button"
@@ -1581,6 +1699,18 @@
                 <i class="fas fa-plus"></i>
               </button>
             </div>
+
+            <div *ngIf="isLast" class="float-end ms-2">
+              <!-- Botón para eliminar un nuevo campo -->
+              <button
+                type="button"
+                class="btn btn-danger mt-2"
+                (click)="eliminarPericial()"
+              >
+                <i class="fas fa-minus"></i>
+              </button>
+            </div>
+
           </div>
           <small
             *ngIf="
@@ -1650,7 +1780,7 @@
                   ></i>
                 </button>
               </div>
-              <div *ngIf="isLast" class="mb-2">
+              <div *ngIf="isLast" class="float-end ms-2">
                 <!-- Botón para agregar un nuevo campo -->
                 <button
                   type="button"
@@ -1660,6 +1790,18 @@
                   <i class="fas fa-plus"></i>
                 </button>
               </div>
+
+              <div *ngIf="isLast" class="float-end ms-2">
+                <!-- Botón para eliminar un nuevo campo -->
+                <button
+                  type="button"
+                  class="btn btn-danger mt-2"
+                  (click)="eliminarTestimonial()"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+
             </div>
           </div>
           <small
@@ -1689,7 +1831,7 @@
               placeholder="testimoniales asociados"
               required
             ></textarea>
-            <div *ngIf="isLast" class="mb-2">
+            <div *ngIf="isLast" class="float-end ms-2">
               <!-- Botón para agregar un nuevo campo -->
               <button
                 type="button"
@@ -1699,6 +1841,17 @@
                 <i class="fas fa-plus"></i>
               </button>
             </div>
+            <div *ngIf="isLast" class="float-end ms-2">
+              <!-- Botón para eliminar un nuevo campo -->
+              <button
+                type="button"
+                class="btn btn-danger mt-2"
+                (click)="eliminarTestimonial()"
+              >
+                <i class="fas fa-minus"></i>
+              </button>
+            </div>
+
           </div>
           <small
             *ngIf="

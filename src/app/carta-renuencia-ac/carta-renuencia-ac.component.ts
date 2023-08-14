@@ -90,6 +90,14 @@ export class CartaRenuenciaAcComponent {
     console.log(this.CartaRenuenciaAc.controls)
   }
 
+  eliminarHecho(){
+    const hechosArray = this.CartaRenuenciaAc.get('hechos') as FormArray;
+    if(hechosArray.length > 1){
+      hechosArray.removeAt(hechosArray.length - 1);
+    }
+    
+  }
+
   get hechos(): FormArray {
     return this.CartaRenuenciaAc.get('hechos') as FormArray;
   }

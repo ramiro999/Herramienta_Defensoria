@@ -1,13 +1,16 @@
 <div class="container mt-5">
-  <h3>Habeas data</h3>
+  <h3>REQUISITO PREVIO EN ACCIÓN POPULAR</h3>
   <p>
-    El derecho de hábeas data es aquel que tiene toda persona de conocer,
-    actualizar y rectificar la información que se haya recogido sobre ella en
-    archivos y bancos de datos de naturaleza pública o privada.
+    El actor debe solicitar anticipadamente a la autoridad o particular que
+    adopte las medidas necesarias para proteger el derecho o interés colectivo
+    amenazado o violado. EXCEPCION DE AGOTAMIENTO DE PRERREQUISITO PARA
+    INSTAURAR UNA ACCION POPULAR - Es procedente la acción popular que no cumpla
+    el requisito previo cuando exista inminente peligro de ocurrir un perjuicio
+    irremediable en contra de los derechos e intereses colectivos.
   </p>
 
-  <form [formGroup]="HabeasData" (ngSubmit)="onSubmit()">
-    <!--Numeral 1-->
+  <form [formGroup]="CartaRenuenciaAp" (ngSubmit)="onSubmit()">
+    <!-- Numeral 1 -->
     <div class="d-flex align-items-start mt-5">
       <div
         class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
@@ -18,23 +21,21 @@
       <div class="form-group">
         <!-- Label: ¿A quién va dirigida carta? -->
         <label class="text-primary" for="destinatario"
-          ><strong
-            >¿A quién va dirigida esta acción de habeas data?</strong
-          ></label
+          ><strong>¿A quién va dirigida esta carta?</strong></label
         >
         <div id="destinatarioHelpBlock" class="form-text">
-          Indica en los siguientes los campos el nombre y cargo de la autoridad
-          a quien se dirige.
+          Indica en los siguientes campos los datos de la la persona o autoridad
+          que debe proteger o evitar que se cause el daño colectivo
         </div>
       </div>
     </div>
 
     <div class="row">
-      <!-- Input para la ciudad-->
+      <!-- Input para la Ciudad -->
       <div class="col-md-6">
         <div class="form-group mt-2">
-          <label for="ciudad"><strong>Ciudad</strong> -</label>
-          <label class="text-primary"><strong> (requerido) </strong></label>
+          <label for="ciudad"><strong>Ciudad</strong> -</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
           <div class="input-group">
             <input
               type="text"
@@ -43,31 +44,30 @@
               id="ciudad"
               placeholder="Ingresa la ciudad"
               [class.is-invalid]="
-                HabeasData.get('ciudad')?.invalid &&
-                HabeasData.get('ciudad')?.touched
+                CartaRenuenciaAp.get('ciudad')?.invalid &&
+                CartaRenuenciaAp.get('ciudad')?.touched
               "
               required
             />
-            <!-- Icono de alerta y mensaje de ayuda-->
+            <!-- Icono de alerta y mensaje de ayuda -->
             <button
               type="button"
               class="btn btn-primary"
               data-bs-toggle="tooltip"
               data-bs-placement="top"
-              data-bs-custom-class="tooltip-primary"
+              data-bs-custom-class="custom-tooltip"
               data-bs-title="La ciudad de quien escribe y la fecha en la que se escribe dejan constancia del lugar y la fecha en la que se firma."
             >
               <i
                 class="fas fa-exclamation-circle text-white"
                 style="width: 25px; height: 25px"
-              >
-              </i>
+              ></i>
             </button>
           </div>
           <small
             *ngIf="
-              HabeasData.get('ciudad')?.invalid &&
-              HabeasData.get('ciudad')?.touched
+              CartaRenuenciaAp.get('ciudad')?.invalid &&
+              CartaRenuenciaAp.get('ciudad')?.touched
             "
             class="text-danger"
           >
@@ -76,7 +76,7 @@
         </div>
       </div>
 
-      <!-- Input para la fecha-->
+      <!-- Input para la Fecha -->
       <div class="col-md-6 mt-2">
         <div class="form-group">
           <label for="fecha"><strong>Fecha</strong> -</label
@@ -91,8 +91,8 @@
               required
               (input)="onDateChange($event)"
               [class.is-invalid]="
-                HabeasData.get('fecha')?.invalid &&
-                HabeasData.get('fecha')?.touched
+                CartaRenuenciaAp.get('fecha')?.invalid &&
+                CartaRenuenciaAp.get('fecha')?.touched
               "
             />
             <!-- Icono de alerta y mensaje de ayuda -->
@@ -103,7 +103,7 @@
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
                 data-bs-custom-class="custom-tooltip"
-                data-bs-title="La fecha en que escribe la carta deja constancia de la fecha en la que se firma."
+                data-bs-title="IMPORTANTE: La fecha más relevante es aquella en la que se presenta en la petición ante la entidad. La fecha en la que se envía por correo electrónico o la fecha en la que se presenta en la ventanilla."
               >
                 <i
                   class="fas fa-exclamation-circle text-white"
@@ -114,8 +114,8 @@
           </div>
           <small
             *ngIf="
-              HabeasData.get('fecha')?.invalid &&
-              HabeasData.get('fecha')?.touched
+              CartaRenuenciaAp.get('fecha')?.invalid &&
+              CartaRenuenciaAp.get('fecha')?.touched
             "
             class="text-danger"
           >
@@ -124,151 +124,135 @@
         </div>
       </div>
     </div>
-
-    <!-- Input para el nombre de la autoridad -->
+    <!-- Input para el nombre de la entidad -->
     <div class="form-group mt-2">
-      <label for="nombreDirige"
+      <label for="nombreAutoridad"
         ><strong
-          >Nombre del responsable o del encargado del tratamiento de
-          datos</strong
-        >
-        -</label
+          >Nombre de la persona o autoridad que debe proteger o evitar que se
+          cause el daño colectivo</strong
+        >-</label
       ><label class="text-primary"><strong>(requerido)</strong></label>
+      <!-- Icono de alerta y mensaje de ayuda -->
       <div class="input-group">
         <input
           type="text"
           class="form-control"
-          formControlName="nombreDirige"
-          id="nombreDirige"
-          placeholder="Ingresa el nombre del responsable o del encargado del tratamiento de datos"
+          formControlName="nombreAutoridad"
+          id="nombreAutoridad"
+          placeholder="Nombre de la persona o autoridad."
           [class.is-invalid]="
-            HabeasData.get('nombreDirige')?.invalid &&
-            HabeasData.get('nombreDirige')?.touched
+            CartaRenuenciaAp.get('nombreAutoridad')?.invalid &&
+            CartaRenuenciaAp.get('nombreAutoridad')?.touched
           "
           required
         />
-        <!-- Icono de alerta y mensaje de ayuda -->
-        <div>
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            data-bs-custom-class="custom-tooltip"
-            data-bs-title="El nombre de la persona a quien se dirige la carta es importante para que la carta llegue a la persona correcta."
-          >
-            <i
-              class="fas fa-exclamation-circle text-white"
-              style="width: 25px; height: 25px"
-            ></i>
-          </button>
-        </div>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-custom-class="custom-tooltip"
+          data-bs-title="Nombre de la persona o autoridad que debe proteger o
+            evitar que se cause el daño colectivo."
+        >
+          <i
+            class="fas fa-exclamation-circle text-white"
+            style="width: 25px; height: 25px"
+          ></i>
+        </button>
       </div>
       <small
         *ngIf="
-          HabeasData.get('nombreDirige')?.invalid &&
-          HabeasData.get('nombreDirige')?.touched
+          CartaRenuenciaAp.get('nombreAutoridad')?.invalid &&
+          CartaRenuenciaAp.get('nombreAutoridad')?.touched
         "
         class="text-danger"
       >
-        El nombre es obligatorio
+        El nombre de la autoridad es obligatorio
       </small>
     </div>
 
-    <!-- Input para el cargo de la autoridad -->
+    <!-- Input para la entidad de la autoridad -->
     <div class="form-group mt-2">
-      <label for="cargoDirige"
-        ><strong
-          >Cargo del responsable o del encargado del tratamiento de
-          datos</strong
-        >
-        -</label
+      <label for="entidadAutoridad"
+        ><strong>Entidad de la persona o autoridad</strong>-</label
       ><label class="text-primary"><strong>(requerido)</strong></label>
+      <!-- Icono de alerta y mensaje de ayuda -->
       <div class="input-group">
         <input
           type="text"
           class="form-control"
-          formControlName="cargoDirige"
-          id="cargoDirige"
-          placeholder="Ingresa el cargo del responsable o del encargado del tratamiento de datos"
+          formControlName="entidadAutoridad"
+          id="entidadAutoridad"
+          placeholder="Entidad de la persona o autoridad que recibe la carta"
           [class.is-invalid]="
-            HabeasData.get('cargoDirige')?.invalid &&
-            HabeasData.get('cargoDirige')?.touched
+            CartaRenuenciaAp.get('entidadAutoridad')?.invalid &&
+            CartaRenuenciaAp.get('entidadAutoridad')?.touched
           "
           required
         />
-        <!-- Icono de alerta y mensaje de ayuda -->
-        <div>
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            data-bs-custom-class="custom-tooltip"
-            data-bs-title="El cargo de la persona a quien se dirige la carta es importante para que la carta llegue a la persona correcta."
-          >
-            <i
-              class="fas fa-exclamation-circle text-white"
-              style="width: 25px; height: 25px"
-            ></i>
-          </button>
-        </div>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-custom-class="custom-tooltip"
+          data-bs-title="Entidad de la persona o autoridad que recibe la carta"
+        >
+          <i
+            class="fas fa-exclamation-circle text-white"
+            style="width: 25px; height: 25px"
+          ></i>
+        </button>
       </div>
       <small
         *ngIf="
-          HabeasData.get('cargoDirige')?.invalid &&
-          HabeasData.get('cargoDirige')?.touched
+          CartaRenuenciaAp.get('entidadAutoridad')?.invalid &&
+          CartaRenuenciaAp.get('entidadAutoridad')?.touched
         "
         class="text-danger"
       >
-        El cargo es obligatorio
+        La entidad de la autoridad es obligatoria
       </small>
     </div>
 
-    <!-- Input para la ciudad de la autoridad-->
-
+    <!-- Input para la ciudad de la entidad -->
     <div class="form-group mt-2">
-      <label for="ciudadDirige"
-        ><strong
-          >Ciudad del responsable o del encargado del tratamiento de
-          datos</strong
-        >
-        -</label
+      <label for="ciudadAutoridad"
+        ><strong>Ciudad de la persona o autoridad</strong>-</label
       ><label class="text-primary"><strong>(requerido)</strong></label>
+      <!-- Icono de alerta y mensaje de ayuda -->
       <div class="input-group">
         <input
           type="text"
           class="form-control"
-          formControlName="ciudadDirige"
-          id="ciudadDirige"
-          placeholder="Ingresa la ciudad del responsable o del encargado del tratamiento de datos"
+          formControlName="ciudadAutoridad"
+          id="ciudadAutoridad"
+          placeholder="Ciudad de la persona o autoridad que recibe la carta"
           [class.is-invalid]="
-            HabeasData.get('ciudadDirige')?.invalid &&
-            HabeasData.get('ciudadDirige')?.touched
+            CartaRenuenciaAp.get('ciudadAutoridad')?.invalid &&
+            CartaRenuenciaAp.get('ciudadAutoridad')?.touched
           "
           required
         />
-        <!-- Icono de alerta y mensaje de ayuda -->
-        <div>
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            data-bs-custom-class="custom-tooltip"
-            data-bs-title="La ciudad de la persona a quien se dirige la carta es importante para que la carta llegue a la persona correcta."
-          >
-            <i
-              class="fas fa-exclamation-circle text-white"
-              style="width: 25px; height: 25px"
-            ></i>
-          </button>
-        </div>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-custom-class="custom-tooltip"
+          data-bs-title="Ciudad de la persona o autoridad que recibe la carta."
+        >
+          <i
+            class="fas fa-exclamation-circle text-white"
+            style="width: 25px; height: 25px"
+          ></i>
+        </button>
       </div>
       <small
         *ngIf="
-          HabeasData.get('ciudadDirige')?.invalid &&
-          HabeasData.get('ciudadDirige')?.touched
+          CartaRenuenciaAp.get('ciudadAutoridad')?.invalid &&
+          CartaRenuenciaAp.get('ciudadAutoridad')?.touched
         "
         class="text-danger"
       >
@@ -276,7 +260,51 @@
       </small>
     </div>
 
-    <!-- Numeral 2-->
+    <!-- Input para la direccion Juez administrativo -->
+    <div class="form-group mt-2">
+      <label for="direccionAutoridad"
+        ><strong>Dirección de la persona o autoridad</strong>-</label
+      ><label class="text-primary"><strong>(requerido)</strong></label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="direccionAutoridad"
+          id="direccionAutoridad"
+          placeholder="Dirección de la autoridad administrativa que recibe la carta"
+          [class.is-invalid]="
+            CartaRenuenciaAp.get('direccionAutoridad')?.invalid &&
+            CartaRenuenciaAp.get('direccionAutoridad')?.touched
+          "
+          required
+        />
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-custom-class="custom-tooltip"
+          data-bs-title="Dirección de la autoridad administrativa que recibe la carta."
+        >
+          <i
+            class="fas fa-exclamation-circle text-white"
+            style="width: 25px; height: 25px"
+          ></i>
+        </button>
+      </div>
+      <small
+        *ngIf="
+          CartaRenuenciaAp.get('direccionAutoridad')?.invalid &&
+          CartaRenuenciaAp.get('direccionAutoridad')?.touched
+        "
+        class="text-danger"
+      >
+        La dirección es obligatoria
+      </small>
+    </div>
+
+    <!--Numeral 2-->
     <div class="d-flex align-items-start mt-5">
       <div
         class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
@@ -285,146 +313,55 @@
         <strong>2</strong>
       </div>
       <div class="form-group">
-        <!-- Label: Petición -->
+        <!-- Label: Ley o acto incumplido  -->
         <label class="text-primary" for="destinatario"
-          ><strong> Petición </strong></label
+          ><strong>Referencia y Solicitud</strong></label
         >
         <div id="destinatarioHelpBlock" class="form-text">
-          Indica en los siguientes los campos el tipo de solicitud y la entidad
-          pública o empresa privada en la que reposan los datos.
-        </div>
-      </div>
-    </div>
-
-    <!-- Input para el tipo de solicitud -->
-    <!-- Actualizar, Rectificar o Suprimir-->
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="tipoSolicitud"><strong>Tipo de solicitud</strong> -</label>
-        <label class="text-primary"><strong>(requerido)</strong></label>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="radio"
-            formControlName="tipoSolicitud"
-            value="Actualizar"
-          />
-          <label class="form-check-label" for="flexRadioDefault1">
-            Actualizar
-          </label>
-        </div>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="radio"
-            formControlName="tipoSolicitud"
-            value="Rectificar"
-          />
-          <label class="form-check-label" for="flexRadioDefault2">
-            Rectificar
-          </label>
-        </div>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="radio"
-            formControlName="tipoSolicitud"
-            value="Suprimir"
-          />
-          <label class="form-check-label" for="flexRadioDefault3">
-            Suprimir
-          </label>
+          Indica en los siguientes los campos la referencia y solicitud de la
+          carta.
         </div>
       </div>
     </div>
 
     <div class="form-group mt-2">
-      <div class="form-group">
-        <label for="ciudad"
-          ><strong
-            >El nombre de la entidad pública o empresa privada en la que reposa
-            el o los datos</strong
-          >
-          -</label
+      <label for="referencia">
+        <strong>Referencia</strong>-<label class="text-primary"
+          ><strong>(requerido)</strong></label
         >
-        <label class="text-primary"><strong>(requerido)</strong></label>
-        <div class="input-group">
-          <input
-            type="text"
-            class="form-control"
-            formControlName="nombreEntidad"
-            id="nombreEntidad"
-            placeholder="Ingresa el nombre de la entidad pública o empresa privada en la que reposa el o los datos"
-            [class.is-invalid]="
-              HabeasData.get('nombreEntidad')?.invalid &&
-              HabeasData.get('nombreEntidad')?.touched
-            "
-            required
-          />
-          <!-- Icono de alerta y mensaje de ayuda-->
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            data-bs-custom-class="tooltip-primary"
-            data-bs-title="El nombre de la entidad pública o empresa privada en la que reposa el o los datos es importante para que la carta llegue a la persona correcta."
-          >
-            <i
-              class="fas fa-exclamation-circle text-white"
-              style="width: 25px; height: 25px"
-            >
-            </i>
-          </button>
-        </div>
-        <small
-          *ngIf="
-            HabeasData.get('nombreEntidad')?.invalid &&
-            HabeasData.get('nombreEntidad')?.touched
-          "
-          class="text-danger"
-        >
-          El nombre de la entidad es obligatorio
-        </small>
-      </div>
-    </div>
-
-    <!--Referencia-->
-    <div class="form-group">
-      <label for="referencia"><strong>Referencia</strong> -</label>
-      <label class="text-primary"><strong>(opcional)</strong></label>
+      </label>
+      <!-- Icono de alerta y mensaje de ayuda -->
       <div class="input-group">
         <input
           type="text"
           class="form-control"
           formControlName="referencia"
           id="referencia"
-          placeholder="Ingresa la referencia"
+          placeholder="Referencia de la carta. Ejemplo: Agotamiento vía administrativa"
           [class.is-invalid]="
-            HabeasData.get('referencia')?.invalid &&
-            HabeasData.get('referencia')?.touched
+            CartaRenuenciaAp.get('referencia')?.invalid &&
+            CartaRenuenciaAp.get('referencia')?.touched
           "
+          required
         />
-        <!-- Icono de alerta y mensaje de ayuda-->
         <button
           type="button"
           class="btn btn-primary"
           data-bs-toggle="tooltip"
           data-bs-placement="top"
-          data-bs-custom-class="tooltip-primary"
-          data-bs-title="La referencia es importante para que la carta llegue a la persona correcta."
+          data-bs-custom-class="custom-tooltip"
+          data-bs-title="Referencia de la carta"
         >
           <i
             class="fas fa-exclamation-circle text-white"
             style="width: 25px; height: 25px"
-          >
-          </i>
+          ></i>
         </button>
       </div>
       <small
         *ngIf="
-          HabeasData.get('referencia')?.invalid &&
-          HabeasData.get('referencia')?.touched
+          CartaRenuenciaAp.get('referencia')?.invalid &&
+          CartaRenuenciaAp.get('referencia')?.touched
         "
         class="text-danger"
       >
@@ -432,14 +369,76 @@
       </small>
     </div>
 
+    <!-- Campo para la solicitud-->
+    <div class="form-group mt-2">
+      <label for="solicitud"><strong>Solicitud </strong> - </label
+      ><label class="text-primary"><strong>(requerido)</strong></label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+      <div class="input-group">
+        <textarea
+          [class.is-invalid]="
+            CartaRenuenciaAp.get('solicitud')?.invalid &&
+            CartaRenuenciaAp.get('solicitud')?.touched
+          "
+          rows="6"
+          class="form-control"
+          formControlName="solicitud"
+          id="solicitud"
+          placeholder="Ingresa la solicitud que deseas realizar en esta petición"
+          required
+        ></textarea>
+        <div>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Ingresa la solicitud que deseas realizar en esta petición"
+          >
+            <i
+              class="fas fa-exclamation-circle text-white"
+              style="width: 25px; height: 25px"
+            ></i>
+          </button>
+        </div>
+      </div>
+      <small
+        *ngIf="
+          CartaRenuenciaAp.get('solicitud')?.invalid &&
+          CartaRenuenciaAp.get('solicitud')?.touched
+        "
+        class="text-danger"
+      >
+        La solicitud es obligatoria
+      </small>
+    </div>
+
+    <!-- Numeral 3-->
+    <div class="d-flex align-items-start mt-5">
+      <div
+        class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+        style="width: 25px; height: 25px"
+      >
+        <strong>3</strong>
+      </div>
+      <div class="form-group">
+        <!-- Label: Hechos -->
+        <label class="text-primary" for="destinatario"
+          ><strong>Hechos</strong></label
+        >
+        <div id="destinatarioHelpBlock" class="form-text">
+          Para agregar mas hechos use el boton de + para eliminar use -
+        </div>
+      </div>
+    </div>
+
     <!-- Campo para los hechos -->
     <div class="form-group mt-2">
       <label for="hechos"> <strong>HECHOS </strong> - </label
       ><label class="text-primary"><strong>(requerido)</strong> </label>
       <!-- Icono de alerta y mensaje de ayuda -->
-      <div id="destinatarioHelpBlock" class="form-text">
-        Para agregar mas hechos use el boton de + para eliminar use -
-      </div>
+
       <ng-container
         formArrayName="hechos"
         *ngFor="
@@ -454,15 +453,15 @@
           <div class="input-group">
             <textarea
               [class.is-invalid]="
-                HabeasData.get('hechos')?.invalid &&
-                HabeasData.get('hechos')?.touched &&
+                CartaRenuenciaAp.get('hechos')?.invalid &&
+                CartaRenuenciaAp.get('hechos')?.touched &&
                 isLast
               "
               rows="6"
               class="form-control"
               formControlName="contenido"
               id="hechos{{ i }}"
-              placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma"
+              placeholder="Hacer el relato de las razones que fundamentan el incumplimiento"
               required
             ></textarea>
 
@@ -491,27 +490,27 @@
                 >
                   <i class="fas fa-plus"></i>
                 </button>
-                <div *ngIf="isLast" class="float-end ms-2">
-                <button
-                  type="button"
-                  class="btn btn-danger mt-2"
-                  (click)="eliminarHecho()"
-                >
-                  <i class="fas fa-minus"></i>
-                </button>
-              </div>
+                <div *ngIf="isLast" class="float-end ms-1">
+                  <button
+                    type="button"
+                    class="btn btn-danger mt-2"
+                    (click)="eliminarHecho()"
+                  >
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
           <small
             *ngIf="
-              HabeasData.get('hechos')?.invalid &&
-              HabeasData.get('hechos')?.touched &&
+              CartaRenuenciaAp.get('hechos')?.invalid &&
+              CartaRenuenciaAp.get('hechos')?.touched &&
               isLast
             "
             class="text-danger"
           >
-            Los hechos son obliogatorios
+            Los hechos son obligatorios
           </small>
         </ng-container>
 
@@ -519,8 +518,8 @@
           <div class="input-group">
             <textarea
               [class.is-invalid]="
-                HabeasData.get('hechos')?.invalid &&
-                HabeasData.get('hechos')?.touched &&
+                CartaRenuenciaAp.get('hechos')?.invalid &&
+                CartaRenuenciaAp.get('hechos')?.touched &&
                 isLast
               "
               rows="6"
@@ -539,94 +538,125 @@
               >
                 <i class="fas fa-plus"></i>
               </button>
-              <div *ngIf="isLast" class="float-end ms-2">
-              <button
-                type="button"
-                class="btn btn-danger mt-2"
-                (click)="eliminarHecho()"
-              >
-                <i class="fas fa-minus"></i>
-              </button>
-            </div>
+              <div *ngIf="isLast" class="float-end ms-1">
+                <button
+                  type="button"
+                  class="btn btn-danger mt-2"
+                  (click)="eliminarHecho()"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
             </div>
           </div>
           <small
             *ngIf="
-              HabeasData.get('hechos')?.invalid &&
-              HabeasData.get('hechos')?.touched &&
+              CartaRenuenciaAp.get('hechos')?.invalid &&
+              CartaRenuenciaAp.get('hechos')?.touched &&
               isLast
             "
             class="text-danger"
           >
-            Los hechos son obliogatorios
+            Los hechos son obligatorios
           </small>
         </ng-container>
       </ng-container>
     </div>
 
-    <!-- Numeral 5 -->
+    <!-- Numeral 4-->
     <div class="d-flex align-items-start mt-5">
       <div
         class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
         style="width: 25px; height: 25px"
       >
-        <strong>3</strong>
+        <strong>4</strong>
       </div>
       <div class="form-group">
-        <!-- Label: Datos solicitante -->
+        <!-- Label: Datos de la persona que hace la solicitud -->
         <label class="text-primary" for="destinatario"
-          ><strong>Datos solicitante</strong></label
+          ><strong>Datos de la persona que hace esta carta</strong></label
         >
         <div id="destinatarioHelpBlock" class="form-text">
-          Diligencie los siguientes campos con los datos del solicitante que
-          realiza este habeas-corpus.
+          Indica en los siguientes los campos los datos de la persona que hace
+          esta solicitud.
         </div>
       </div>
+    </div>
+
+    <div class="form-group mt-5">
+      <label for="nombreSolicitante"
+        ><strong>Nombre(s) y Apellido(s)</strong> -</label
+      ><label class="text-primary"><strong>(requerido)</strong></label>
+      <div class="input-group">
+        <input
+          [class.is-invalid]="
+            CartaRenuenciaAp.get('nombreSolicitante')?.invalid &&
+            CartaRenuenciaAp.get('nombreSolicitante')?.touched
+          "
+          type="text"
+          class="form-control"
+          formControlName="nombreSolicitante"
+          id="nombreSolicitante"
+          placeholder="Ej: Juan Perez"
+          required
+        />
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-custom-class="custom-tooltip"
+          data-bs-title="Escribir el nombre y apellido de la persona que hace la solicitud."
+        >
+          <i
+            class="fas fa-exclamation-circle text-white"
+            style="width: 25px; height: 25px"
+          ></i>
+        </button>
+      </div>
+      <small
+        *ngIf="
+          CartaRenuenciaAp.get('nombreSolicitante')?.invalid &&
+          CartaRenuenciaAp.get('nombreSolicitante')?.touched
+        "
+        class="text-danger"
+      >
+        El nombre y apellido son obligatorios
+      </small>
     </div>
 
     <div class="row">
       <!-- Input para los datos del solicitante-->
       <div class="col-md-6">
+        <!-- Select para el tipo de documento -->
         <div class="form-group">
-          <label for="nombreSolicitante"
-            ><strong>Nombre(s) y Apellido(s)</strong> -</label
-          ><label class="text-primary"><strong>(requerido)</strong></label>
-          <div class="input-group">
-            <input
-              [class.is-invalid]="
-                HabeasData.get('nombreSolicitante')?.invalid &&
-                HabeasData.get('nombreSolicitante')?.touched
-              "
-              type="text"
-              class="form-control"
-              formControlName="nombreSolicitante"
-              id="nombreSolicitante"
-              placeholder="Ej: Juan Perez"
-              required
-            />
-            <!-- Icono de alerta y mensaje de ayuda -->
-            <button
-              type="button"
-              class="btn btn-primary"
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              data-bs-custom-class="custom-tooltip"
-              data-bs-title="Nombres y apellidos de la persona que hace la solicitud"
-            >
-              <i
-                class="fas fa-exclamation-circle text-white"
-                style="width: 25px; height: 25px"
-              ></i>
-            </button>
-          </div>
+          <label for="tipoDocumento"
+            ><strong>Tipo de documento</strong> -
+            <label class="text-primary"><strong>(requerido)</strong> </label>
+          </label>
+          <select
+            class="form-control"
+            formControlName="tipoDocumento"
+            id="tipoDocumento"
+            required
+          >
+            <option value="" disabled selected>
+              Seleccione un tipo de documento
+            </option>
+            <option value="cedulaC">Cédula de ciudadanía</option>
+            <option value="cedulaE">Cédula de extranjería</option>
+            <option value="tarjetaI">Tarjeta de identidad</option>
+            <option value="otro">Otro</option>
+          </select>
           <small
             *ngIf="
-              HabeasData.get('nombreSolicitante')?.invalid &&
-              HabeasData.get('nombreSolicitante')?.touched
+              CartaRenuenciaAp.get('tipoDocumento')?.invalid &&
+              CartaRenuenciaAp.get('tipoDocumento')?.touched
             "
             class="text-danger"
           >
-            El nombre del solicitante es obligatorio
+            Por favor, seleccione un tipo de documento
           </small>
         </div>
       </div>
@@ -640,8 +670,8 @@
           <div class="input-group">
             <input
               [class.is-invalid]="
-                HabeasData.get('cedulaSolicitante')?.invalid &&
-                HabeasData.get('cedulaSolicitante')?.touched
+                CartaRenuenciaAp.get('cedulaSolicitante')?.invalid &&
+                CartaRenuenciaAp.get('cedulaSolicitante')?.touched
               "
               type="number"
               class="form-control"
@@ -667,12 +697,12 @@
           </div>
           <small
             *ngIf="
-              HabeasData.get('cedulaSolicitante')?.invalid &&
-              HabeasData.get('cedulaSolicitante')?.touched
+              CartaRenuenciaAp.get('cedulaSolicitante')?.invalid &&
+              CartaRenuenciaAp.get('cedulaSolicitante')?.touched
             "
             class="text-danger"
           >
-            La cédula del solicitante es obligatoria.
+            La cédula de ciudadania es obligatoria.
           </small>
         </div>
       </div>
@@ -688,8 +718,8 @@
           <div class="input-group">
             <input
               [class.is-invalid]="
-                HabeasData.get('cedulaExpedicion')?.invalid &&
-                HabeasData.get('cedulaExpedicion')?.touched
+                CartaRenuenciaAp.get('cedulaExpedicion')?.invalid &&
+                CartaRenuenciaAp.get('cedulaExpedicion')?.touched
               "
               type="text"
               class="form-control"
@@ -715,12 +745,12 @@
           </div>
           <small
             *ngIf="
-              HabeasData.get('cedulaExpedicion')?.invalid &&
-              HabeasData.get('cedulaExpedicion')?.touched
+              CartaRenuenciaAp.get('cedulaExpedicion')?.invalid &&
+              CartaRenuenciaAp.get('cedulaExpedicion')?.touched
             "
             class="text-danger"
           >
-            La ciudad de expedición de la cédula es obligatoria.
+            La ciudad de expedición de la cédula es obligatorio.
           </small>
         </div>
       </div>
@@ -734,8 +764,8 @@
           <div class="input-group">
             <input
               [class.is-invalid]="
-                HabeasData.get('direccionSolicitante')?.invalid &&
-                HabeasData.get('direccionSolicitante')?.touched
+                CartaRenuenciaAp.get('direccionSolicitante')?.invalid &&
+                CartaRenuenciaAp.get('direccionSolicitante')?.touched
               "
               type="text"
               class="form-control"
@@ -761,12 +791,12 @@
           </div>
           <small
             *ngIf="
-              HabeasData.get('direccionSolicitante')?.invalid &&
-              HabeasData.get('direccionSolicitante')?.touched
+              CartaRenuenciaAp.get('direccionSolicitante')?.invalid &&
+              CartaRenuenciaAp.get('direccionSolicitante')?.touched
             "
             class="text-danger"
           >
-            La dirección del solicitante es obligatoria.
+            La dirección de residencia es obligatoria.
           </small>
         </div>
       </div>
@@ -781,8 +811,8 @@
           <div class="input-group">
             <input
               [class.is-invalid]="
-                HabeasData.get('telefonoSolicitante')?.invalid &&
-                HabeasData.get('telefonoSolicitante')?.touched
+                CartaRenuenciaAp.get('telefonoSolicitante')?.invalid &&
+                CartaRenuenciaAp.get('telefonoSolicitante')?.touched
               "
               type="number"
               class="form-control"
@@ -808,33 +838,33 @@
           </div>
           <small
             *ngIf="
-              HabeasData.get('telefonoSolicitante')?.invalid &&
-              HabeasData.get('telefonoSolicitante')?.touched
+              CartaRenuenciaAp.get('telefonoSolicitante')?.invalid &&
+              CartaRenuenciaAp.get('telefonoSolicitante')?.touched
             "
             class="text-danger"
           >
-            El telefono del solitante es obligatorio.
+            El telefono es obligatorio
           </small>
         </div>
       </div>
 
-      <!-- Input para el correo del solicitante -->
+      <!-- Input para la ciudad del solicitante -->
       <div class="col-md-6">
         <div class="form-group">
-          <label for="correoSolicitante"
-            ><strong>Correo electronico de residencia</strong> -</label
+          <label for="ciudadSolicitante"
+            ><strong>Ciudad de residencia</strong> -</label
           ><label class="text-primary"><strong>(requerido)</strong></label>
           <div class="input-group">
             <input
               [class.is-invalid]="
-                HabeasData.get('correoSolicitante')?.invalid &&
-                HabeasData.get('correoSolicitante')?.touched
+                CartaRenuenciaAp.get('ciudadSolicitante')?.invalid &&
+                CartaRenuenciaAp.get('ciudadSolicitante')?.touched
               "
               type="text"
               class="form-control"
-              formControlName="correoSolicitante"
-              id="correoSolicitante"
-              placeholder="Ej: juan@correo.com"
+              formControlName="ciudadSolicitante"
+              id="ciudadSolicitante"
+              placeholder="Ej: Bogotá D.C."
               required
             />
             <!-- Icono de alerta y mensaje de ayuda -->
@@ -844,7 +874,7 @@
               data-bs-toggle="tooltip"
               data-bs-placement="top"
               data-bs-custom-class="custom-tooltip"
-              data-bs-title="Correo electronico del solicitante"
+              data-bs-title="Ciudad de residencia del solicitante"
             >
               <i
                 class="fas fa-exclamation-circle text-white"
@@ -854,12 +884,12 @@
           </div>
           <small
             *ngIf="
-              HabeasData.get('correoSolicitante')?.invalid &&
-              HabeasData.get('correoSolicitante')?.touched
+              CartaRenuenciaAp.get('ciudadSolicitante')?.invalid &&
+              CartaRenuenciaAp.get('ciudadSolicitante')?.touched
             "
             class="text-danger"
           >
-            El correo electrónico del solicitante es obligatorio.
+            La ciudad de residencia es obligatorio
           </small>
         </div>
       </div>
@@ -870,7 +900,7 @@
       <button
         type="submit"
         class="btn btn-primary btn-icon"
-        [disabled]="!HabeasData.valid"
+        [disabled]="!CartaRenuenciaAp.valid"
       >
         <i class="fas fa-file-alt me-2"></i> Descargar documento
       </button>

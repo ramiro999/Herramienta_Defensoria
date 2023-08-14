@@ -103,6 +103,13 @@ export class HabeasCorpusComponent implements OnInit {
     console.log(this.HabeasCorpus.controls)
   }
 
+  eliminarHecho(){
+    const hechosArray = this.HabeasCorpus.get('hechos') as FormArray;
+    if(hechosArray.length > 1){
+      hechosArray.removeAt(hechosArray.length - 1);
+    }
+  }
+
   get hechos(): FormArray {
     return this.HabeasCorpus.get('hechos') as FormArray;
   }
