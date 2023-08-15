@@ -244,7 +244,7 @@
         >
         <div id="destinatarioHelpBlock" class="form-text">
           Indica en los siguientes campos los datos de la persona que hace esta
-          acción de cumplimiento
+          acción de tutela
         </div>
       </div>
     </div>
@@ -264,7 +264,7 @@
               class="form-control"
               formControlName="nombreDemandante"
               id="nombreDemandante"
-              placeholder="Nombre de quien hace esta acción de cumplimiento"
+              placeholder="Nombre de quien hace esta acción de tutela"
               [class.is-invalid]="
                 AccionDeTutela.get('nombreDemandante')?.invalid &&
                 AccionDeTutela.get('nombreDemandante')?.touched
@@ -454,7 +454,7 @@
           class="form-control"
           formControlName="nombreDemandandado"
           id="nombreDemandandado"
-          placeholder="Nombre de quien hace esta acción de cumplimiento"
+          placeholder="Nombre de la persana que es demandada"
           [class.is-invalid]="
             AccionDeTutela.get('nombreDemandandado')?.invalid &&
             AccionDeTutela.get('nombreDemandandado')?.touched
@@ -512,7 +512,7 @@
               data-bs-toggle="tooltip"
               data-bs-placement="top"
               data-bs-custom-class="custom-tooltip"
-              data-bs-title="Direccón de residencia  a la que se le notificara la acción de cumplimiento al demandado."
+              data-bs-title="Direccón de residencia  a la que se le notificara la acción de tutela."
             >
               <i
                 class="fas fa-exclamation-circle text-white"
@@ -558,7 +558,7 @@
               data-bs-toggle="tooltip"
               data-bs-placement="top"
               data-bs-custom-class="custom-tooltip"
-              data-bs-title="Correo electrónico se le notificara la acción de cumplimiento al demandado."
+              data-bs-title="Correo electrónico se le notificara la acción de tutela."
             >
               <i
                 class="fas fa-exclamation-circle text-white"
@@ -613,7 +613,7 @@
           class="form-control"
           formControlName="derechosFundamentales"
           id="derechosFundamentales"
-          placeholder="Los derecho fundamentales vulnerados "
+          placeholder="Especifique los derechos fundamentales vulnerados."
           required
         ></textarea>
         <div>
@@ -623,7 +623,7 @@
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             data-bs-custom-class="custom-tooltip"
-            data-bs-title="Especifique los derechos fundamentales vulnerados."
+            data-bs-title="Indicar uno a uno los derechos fundamnetales que, con la acción o la omisión de la persona particular, jurídica o de la autoridad pública se vulneraron o se encuentran amenazado."
           >
             <i
               class="fas fa-exclamation-circle text-white"
@@ -673,7 +673,7 @@
               class="form-control"
               formControlName="contenido"
               id="hechos{{ i }}"
-              placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma"
+              placeholder="Relaciónar de manera cronológica, detallada y clara los hechos que están generando la violación del derecho fundamental"
               required
             ></textarea>
 
@@ -685,7 +685,7 @@
                   data-bs-toggle="tooltip"
                   data-bs-placement="top"
                   data-bs-custom-class="custom-tooltip"
-                  data-bs-title="Hacer el relato de los hechos que configuran el incumplimiento de la norma."
+                  data-bs-title="Relaciónar de manera cronológica, detallada y clara los hechos que están generando la violación del derecho fundamental."
                 >
                   <i
                     class="fas fa-exclamation-circle text-white"
@@ -739,7 +739,7 @@
               class="form-control"
               formControlName="contenido"
               id="hechos{{ i }}"
-              placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma"
+              placeholder="Hacer el relato de los hechos que configuran la accion de tutela"
               required
             ></textarea>
             <div *ngIf="isLast" class="float-end ms-2">
@@ -808,7 +808,7 @@
               class="form-control"
               formControlName="contenido"
               id="derechosVulnerados{{ i }}"
-              placeholder="Hacer el relato de los derechos vulnerados"
+              placeholder="Indicar uno a uno los derechos que, con la acción o la omisión de la persona particular, jurídica o de la autoridad pública se vulneraron o se encuentran amenazado"
               required
             ></textarea>
 
@@ -820,7 +820,7 @@
                   data-bs-toggle="tooltip"
                   data-bs-placement="top"
                   data-bs-custom-class="custom-tooltip"
-                  data-bs-title="Hacer el relato de los derechos vulnerados."
+                  data-bs-title="Enumere el o los derechos que considera han sido vulnerados"
                 >
                   <i
                     class="fas fa-exclamation-circle text-white"
@@ -925,7 +925,7 @@
           class="form-control"
           formControlName="fundamnetosJuridicos"
           id="fundamnetosJuridicos"
-          placeholder="Los fundaentos juridicos "
+          placeholder="Si conoce la norma constitucional, legal, reglamentaria y la jurisprudencia nacional relacionada con el derecho fundamental que invoca como vulnerado o amenazado, puede relacionarla en lo pertinente."
           required
         ></textarea>
         <div>
@@ -985,7 +985,7 @@
               class="form-control"
               formControlName="contenido"
               id="pruebas{{ i }}"
-              placeholder="Hacer el relato de las pruebas"
+              placeholder="Enumerar una a una los documentos, fotos, videos, testimonios y en general todas las pruebas con que cuente para que el juez tenga en cuenta al proferir el fallo"
               required
             ></textarea>
 
@@ -997,7 +997,7 @@
                   data-bs-toggle="tooltip"
                   data-bs-placement="top"
                   data-bs-custom-class="custom-tooltip"
-                  data-bs-title="Hacer el relato de las pruebas."
+                  data-bs-title="Enumerar una a una los documentos, fotos, videos, testimonios y en general todas las pruebas con que cuente para que el juez tenga en cuenta al proferir el fallo"
                 >
                   <i
                     class="fas fa-exclamation-circle text-white"
@@ -1101,7 +1101,7 @@
           class="form-control"
           formControlName="pretensiones"
           id="pretensiones"
-          placeholder="las pretensiones "
+          placeholder="Enunciar que es lo que se quiere que el juez ordene"
           required
         ></textarea>
         <div>
@@ -1223,7 +1223,7 @@
               data-bs-toggle="tooltip"
               data-bs-placement="top"
               data-bs-custom-class="custom-tooltip"
-              data-bs-title="Correo electrónico se le notificara la acción de cumplimiento al demandante."
+              data-bs-title="Correo electrónico se le notificara la acción de tutela al demandante."
             >
               <i
                 class="fas fa-exclamation-circle text-white"
