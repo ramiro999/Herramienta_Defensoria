@@ -48,9 +48,17 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/derecho-de-peticion">Derecho de Peticion</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/habeas-corpus">Habeas Corpus</a>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="corpusDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Habeas Corpus
+            </a>
+            <div class="dropdown-menu" aria-labelledby="corpusDropdown">
+              <a class="dropdown-item" routerLink="/habeas-corpus">Privación ilegal</a>
+              <a class="dropdown-item" routerLink="/habeas-corpus-p">Prolongación ilegal</a>
+            </div>
           </li>
+
           <li class="nav-item">
             <a class="nav-link" routerLink="/habeas-data">Habeas Data</a>
           </li>

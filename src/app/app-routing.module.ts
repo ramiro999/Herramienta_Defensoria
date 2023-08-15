@@ -6,6 +6,7 @@ import { AccionDeTutelaComponent } from './accion-de-tutela/accion-de-tutela.com
 import { AccionPopularComponent } from './accion-popular/accion-popular.component';
 import { DerechoDePeticionComponent } from './derecho-de-peticion/derecho-de-peticion.component';
 import { HabeasCorpusComponent } from './habeas-corpus/habeas-corpus.component';
+import { HabeasCorpusPComponent} from './habeas-corpus-p/habeas-corpus-p.component';
 import { HabeasDataComponent } from './habeas-data/habeas-data.component';
 import { HomeComponent } from './home/home.component';
 import { CartaRenuenciaAcComponent } from './carta-renuencia-ac/carta-renuencia-ac.component'; 
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'accion-popular', component: AccionPopularComponent },
   { path: 'derecho-de-peticion', component: DerechoDePeticionComponent },
   { path: 'habeas-corpus', component: HabeasCorpusComponent },
+  { path: 'habeas-corpus-p', component: HabeasCorpusPComponent},
   { path: 'habeas-data', component: HabeasDataComponent },
   { path: 'home', component: HomeComponent },
   { path: 'carta-renuencia-ac', component: CartaRenuenciaAcComponent},

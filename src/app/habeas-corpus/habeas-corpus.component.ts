@@ -28,8 +28,7 @@ export class HabeasCorpusComponent implements OnInit {
 
 
   HabeasCorpus!: FormGroup;
-  selectedOption: 'privacion' | 'prolongacion' = 'privacion'; // Variable para mantener la opción seleccionada
-
+ 
   constructor(
     private readonly fb: FormBuilder,
     private docGenerator: DocgeneratorService,
@@ -71,25 +70,36 @@ export class HabeasCorpusComponent implements OnInit {
       correoSolicitante: ['', Validators.required],
       cedulaSolicitante: ['', Validators.required],
       cedulaExpedicion: ['', Validators.required],
+      ciudad_2: ['', Validators.required],
+      fecha_2: ['', Validators.required],
+      juez_2: ['', Validators.required],
+      ciudadJuez_2: ['', Validators.required],
+      direccionJuez_2: ['', Validators.required],
+      nombrePrivada_2: ['', Validators.required],
+      nombrePeticionario_2: ['', Validators.required],
+      calidad_2: ['', Validators.required],
+      hechos_2: this.fb.array([this.crearHechoFormGroup()]),
+      sitioReclusion_2: ['', Validators.required],
+      dias_2: ['', Validators.required],
+      fechaReclusion_2: ['', Validators.required],
+      nombreSolicitante_2: ['', Validators.required],
+      cedulaSolicitante_2: ['', Validators.required],
+      cedulaExpedicion_2: ['', Validators.required],
+      direccionSolicitante_2: ['', Validators.required],
+      telefonoSolicitante_2: ['', Validators.required],
+      correoSolicitante_2: ['', Validators.required],
     });
   }
 
   onSubmit() {
-    let templateURL: string;
-    let docName: string;
-
-    if (this.selectedOption === 'privacion') {
-      templateURL = 'http://localhost:4200/assets/formats/template-habeas-corpus-1.docx';
-      docName = 'habeas-corpus-privacion';
-    } else {
-      templateURL = 'http://localhost:4200/assets/formats/template-habeas-corpus-prolongacion.docx';
-      docName = 'habeas-corpus-prolongacion';
-    }
-
-    this.docGenerator.generateDocx(templateURL, this.HabeasCorpus.value, docName);
+    this.docGenerator.generateDocx(
+        'http://localhost:4200/assets/formats/template-habeas-corpus-1.docx',
+        //"https://drive.google.com/uc?id=1JMQiqx0ORMZsz57C4SSRNLoFnb8NmQ1_",
+        this.HabeasCorpus.value,
+        'habeas-corpus-1.docx');
 
     console.log('Formulario enviado', this.HabeasCorpus.value);
-  }
+}
 
   crearHechoFormGroup(): FormGroup {
     return this.fb.group({
@@ -103,6 +113,8 @@ export class HabeasCorpusComponent implements OnInit {
     console.log(this.HabeasCorpus.controls)
   }
 
+  
+
   eliminarHecho(){
     const hechosArray = this.HabeasCorpus.get('hechos') as FormArray;
     if(hechosArray.length > 1){
@@ -110,10 +122,13 @@ export class HabeasCorpusComponent implements OnInit {
     }
   }
 
+
+
   get hechos(): FormArray {
     return this.HabeasCorpus.get('hechos') as FormArray;
   }
 
+  
 
 
 }
