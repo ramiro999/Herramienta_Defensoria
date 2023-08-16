@@ -72,7 +72,7 @@ export class AccionDeGrupoComponent {
 
 
       this.docGenerator.generateDocx(
-        'http://localhost:4200/assets/formats/template-accion-de-grupo.docx',
+        'assets/formats/template-accion-de-grupo.docx',
         //"https://drive.google.com/uc?id=1JMQiqx0ORMZsz57C4SSRNLoFnb8NmQ1_",
         this.AccionDeGrupo.value,
         'accion-de-grupo');

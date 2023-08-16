@@ -47,7 +47,7 @@ export class DerechoDePeticionComponent {
 
   onSubmit() {
     this.docGenerator.generateDocx(
-      'http://localhost:4200/assets/formats/template-derecho-de-peticion.docx',
+      'assets/formats/template-derecho-de-peticion.docx',
       //"https://drive.google.com/uc?id=1JMQiqx0ORMZsz57C4SSRNLoFnb8NmQ1_",
       this.DerechoDePeticion.value,
       'derecho-de-peticion');
