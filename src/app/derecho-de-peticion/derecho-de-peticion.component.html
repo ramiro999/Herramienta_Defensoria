@@ -318,6 +318,11 @@
       <label for="adjunto"> <strong>Documentos adjuntos </strong> - </label
       ><label class="text-primary"><strong>(requerido)</strong> </label>
       <!-- Icono de alerta y mensaje de ayuda -->
+      <div id="destinatarioHelpBlock" class="form-text" style="font-size: 18px;">
+        Para agregar mas documentos adjuntos use el botón de <strong class="text-primary"> + </strong>  para eliminar use <strong class="text-danger"> - </strong>
+      </div>
+
+
 
       <ng-container
         formArrayName="adjunto"
@@ -394,7 +399,7 @@
             "
             class="text-danger"
           >
-            Los adjunto son obliogatorios
+            Los adjunto son obligatorios
           </small>
         </ng-container>
 

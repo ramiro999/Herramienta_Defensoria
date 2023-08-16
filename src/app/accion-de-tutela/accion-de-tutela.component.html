@@ -1,5 +1,12 @@
 <div class="container mt-5">
-  <h3>Diligencie el siguiente formulario</h3>
+  <h3>Acción de tutela</h3>
+  <p>
+    La acción de tutela es como se denomina un mecanismo previsto en el artículo
+    86 de la Constitución política de Colombia de 1991, que busca proteger los
+    Derechos fundamentales de los individuos cuando cualquiera de éstos resulten
+    vulnerados o amenazados por la acción o la omisión, Constitución Política de
+    Colombia 1991.
+  </p>
 
   <form [formGroup]="AccionDeTutela" (ngSubmit)="onSubmit()">
     <!-- Numeral 1-->
@@ -13,9 +20,7 @@
       <div class="form-group">
         <!-- Label: ¿A quién va dirigida esta acción de tutela ? -->
         <label class="text-primary" for="destinatario"
-          ><strong
-            >¿A quién va dirigida esta acción de tutela?</strong
-          ></label
+          ><strong>¿A quién va dirigida esta acción de tutela?</strong></label
         >
         <div id="destinatarioHelpBlock" class="form-text">
           Indica en los siguientes los campos la entidad judicial a la que se
@@ -302,6 +307,7 @@
           <label for="tipoDocumento"
             ><strong>Tipo de documento</strong> -</label
           >
+          <label class="text-primary"><strong>(requerido)</strong></label>
           <select
             class="form-control"
             formControlName="tipoDocumento"
@@ -648,8 +654,10 @@
       <label for="hechos"> <strong>HECHOS </strong> - </label
       ><label class="text-primary"><strong>(requerido)</strong> </label>
       <!-- Icono de alerta y mensaje de ayuda -->
-      <div id="destinatarioHelpBlock" class="form-text">
-        Para agregar mas hechos use el boton de + para eliminar use -
+      <div id="destinatarioHelpBlock" class="form-text" style="font-size: 18px">
+        Para agregar mas campos use el botón de
+        <strong class="text-primary"> + </strong> para eliminar use
+        <strong class="text-danger"> - </strong>
       </div>
       <ng-container
         formArrayName="hechos"
@@ -739,7 +747,7 @@
               class="form-control"
               formControlName="contenido"
               id="hechos{{ i }}"
-              placeholder="Hacer el relato de los hechos que configuran la accion de tutela"
+              placeholder="Relaciónar de manera cronológica, detallada y clara los hechos que están generando la violación del derecho fundamental"
               required
             ></textarea>
             <div *ngIf="isLast" class="float-end ms-2">
@@ -783,8 +791,10 @@
         <strong>DERECHOS VULNERADOS </strong> - </label
       ><label class="text-primary"><strong>(requerido)</strong> </label>
       <!-- Icono de alerta y mensaje de ayuda -->
-      <div id="destinatarioHelpBlock" class="form-text">
-        Para agregar mas hechos use el boton de + para eliminar use -
+      <div id="destinatarioHelpBlock" class="form-text" style="font-size: 18px">
+        Para agregar mas campos use el botón de
+        <strong class="text-primary"> + </strong> para eliminar use
+        <strong class="text-danger"> - </strong>
       </div>
       <ng-container
         formArrayName="derechosVulnerados"
@@ -873,7 +883,7 @@
               class="form-control"
               formControlName="contenido"
               id="derechosVulnerados{{ i }}"
-              placeholder="Hacer el relato de los hechos vulnerados"
+              placeholder="Indicar uno a uno los derechos que, con la acción o la omisión de la persona particular, jurídica o de la autoridad pública se vulneraron o se encuentran amenazado"
               required
             ></textarea>
             <div *ngIf="isLast" class="float-end ms-2">
@@ -960,8 +970,10 @@
       <label for="pruebas"> <strong>PRUEBAS </strong> - </label
       ><label class="text-primary"><strong>(requerido)</strong> </label>
       <!-- Icono de alerta y mensaje de ayuda -->
-      <div id="destinatarioHelpBlock" class="form-text">
-        Para agregar mas hechos use el boton de + para eliminar use -
+      <div id="destinatarioHelpBlock" class="form-text" style="font-size: 18px">
+        Para agregar mas campos use el botón de
+        <strong class="text-primary"> + </strong> para eliminar use
+        <strong class="text-danger"> - </strong>
       </div>
       <ng-container
         formArrayName="pruebas"
@@ -1050,7 +1062,7 @@
               class="form-control"
               formControlName="contenido"
               id="pruebas{{ i }}"
-              placeholder="Hacer el relato de las pruebas"
+              placeholder="Enumerar una a una los documentos, fotos, videos, testimonios y en general todas las pruebas con que cuente para que el juez tenga en cuenta al proferir el fallo"
               required
             ></textarea>
             <div *ngIf="isLast" class="float-end ms-2">

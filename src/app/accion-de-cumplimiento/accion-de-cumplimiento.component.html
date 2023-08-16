@@ -1,5 +1,13 @@
 <div class="container mt-5">
-  <h3>Diligencie el siguiente formulario</h3>
+  <h3>Acción de cumplimiento</h3>
+  <p>
+    Una acción de cumplimiento se refiere a un proceso legal mediante el cual se
+    busca asegurar que una persona, entidad o empresa cumpla con ciertas
+    obligaciones, normativas o requerimientos establecidos por leyes,
+    regulaciones, contratos u otras disposiciones legales. Estas acciones son
+    utilizadas para garantizar que se lleven a cabo ciertos comportamientos o
+    acciones específicas que están establecidos en una ley o acuerdo.
+  </p>
 
   <form [formGroup]="AccionDeCumplimiento" (ngSubmit)="onSubmit()">
     <!-- Numeral 1-->
@@ -90,21 +98,21 @@
               "
             />
             <!-- Icono de alerta y mensaje de ayuda -->
-           <div>
-            <button
-              type="button"
-              class="btn btn-primary"
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              data-bs-custom-class="custom-tooltip"
-              data-bs-title="IMPORTANTE: La fecha más relevante es aquella en la que se presenta en la petición ante la entidad. La fecha en la que se envía por correo electrónico o la fecha en la que se presenta en la ventanilla."
-            >
-              <i
-                class="fas fa-exclamation-circle text-white"
-                style="width: 25px; height: 25px"
-              ></i>
-            </button>
-          </div>
+            <div>
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="IMPORTANTE: La fecha más relevante es aquella en la que se presenta en la petición ante la entidad. La fecha en la que se envía por correo electrónico o la fecha en la que se presenta en la ventanilla."
+              >
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
+              </button>
+            </div>
           </div>
           <small
             *ngIf="
@@ -444,7 +452,7 @@
           class="form-control"
           formControlName="normaIncumplida"
           id="normaIncumplida"
-          placeholder="Especifique los artículos de la ley o el acto administrativo que se demanda como incumplido."
+          placeholder="Especifique los artículos de la ley o el acto administrativo que se demanda como incumplido. Ejemplo: Artículo 8.º de la Ley 393 del 29 de julio de 1997"
           required
           [class.is-invalid]="
             AccionDeCumplimiento.get('normaIncumplida')?.invalid &&
@@ -483,8 +491,10 @@
       <label for="hechos"> <strong>HECHOS </strong> - </label
       ><label class="text-primary"><strong>(requerido)</strong> </label>
       <!-- Icono de alerta y mensaje de ayuda -->
-      <div id="destinatarioHelpBlock" class="form-text">
-        Para agregar mas hechos use el boton de + para eliminar use -
+      <div id="destinatarioHelpBlock" class="form-text" style="font-size: 18px">
+        Para agregar mas hechos use el boton de
+        <strong class="text-primary"> + </strong> para eliminar use
+        <strong class="text-danger"> - </strong>
       </div>
       <ng-container
         formArrayName="hechos"
@@ -538,13 +548,13 @@
                   <i class="fas fa-plus"></i>
                 </button>
                 <div *ngIf="isLast" class="float-end ms-1">
-                <button
-                type="button"
-                class="btn btn-danger mt-2"
-                (click)="eliminarHecho()"
-              >
-                <i class="fas fa-minus"></i>
-              </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger mt-2"
+                    (click)="eliminarHecho()"
+                  >
+                    <i class="fas fa-minus"></i>
+                  </button>
                 </div>
               </div>
             </div>
@@ -586,14 +596,14 @@
                 <i class="fas fa-plus"></i>
               </button>
               <div *ngIf="isLast" class="float-end ms-1">
-              <button
-              type="button"
-              class="btn btn-danger mt-2"
-              (click)="eliminarHecho()"
-            >
-              <i class="fas fa-minus"></i>
-            </button>
-          </div>
+                <button
+                  type="button"
+                  class="btn btn-danger mt-2"
+                  (click)="eliminarHecho()"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
             </div>
           </div>
           <small

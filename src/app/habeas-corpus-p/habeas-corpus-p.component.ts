@@ -1,5 +1,11 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray, FormControl} from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormArray,
+  FormControl,
+} from '@angular/forms';
 
 import { DocgeneratorService } from '../services/docgenerator.service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
@@ -9,10 +15,9 @@ declare var bootstrap: any;
 @Component({
   selector: 'app-habeas-corpus-p',
   templateUrl: './habeas-corpus-p.component.html',
-  styleUrls: ['./habeas-corpus-p.component.css']
+  styleUrls: ['./habeas-corpus-p.component.css'],
 })
 export class HabeasCorpusPComponent {
-
   model: string | null = null; // Para almacenar la fecha seleccionada
 
   toggleDatepicker() {
@@ -27,13 +32,12 @@ export class HabeasCorpusPComponent {
     this.model = dateInput.value; // Almacena la fecha seleccionada en la variable 'model'
   }
 
-
   HabeasCorpusP!: FormGroup;
 
   constructor(
     private readonly fb: FormBuilder,
-    private docGenerator: DocgeneratorService,
-  ) { }
+    private docGenerator: DocgeneratorService
+  ) {}
 
   ngOnInit(): void {
     this.HabeasCorpusP = this.initForm();
@@ -41,10 +45,14 @@ export class HabeasCorpusPComponent {
 
   ngAfterViewInit(): void {
     // Inicializar los tooltips
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-    const tooltipList = Array.from(tooltipTriggerList).map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+    const tooltipTriggerList = document.querySelectorAll(
+      '[data-bs-toggle="tooltip"]'
+    );
+    const tooltipList = Array.from(tooltipTriggerList).map(
+      (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+    );
   }
-initForm(): FormGroup {
+  initForm(): FormGroup {
     return this.fb.group({
       ciudad_2: ['', Validators.required],
       fecha_2: ['', Validators.required],
@@ -65,49 +73,39 @@ initForm(): FormGroup {
       telefonoSolicitante_2: ['', Validators.required],
       correoSolicitante_2: ['', Validators.required],
     });
-
-
-
   }
 
   onSubmit() {
     this.docGenerator.generateDocx(
-        'http://localhost:4200/assets/formats/template-habeas-corpus-2.docx',
-        //"https://drive.google.com/uc?id=1JMQiqx0ORMZsz57C4SSRNLoFnb8NmQ1_",
-        this.HabeasCorpusP.value,
-        'habeas-corpus-2.docx');
+      'http://localhost:4200/assets/formats/template-habeas-corpus-2.docx',
+      //"https://drive.google.com/uc?id=1JMQiqx0ORMZsz57C4SSRNLoFnb8NmQ1_",
+      this.HabeasCorpusP.value,
+      'habeas-corpus-prolongación.docx'
+    );
 
     console.log('Formulario enviado', this.HabeasCorpusP.value);
-}
-
-crearHechoFormGroup(): FormGroup {
-  return this.fb.group({
-    contenido: ['', Validators.required]
-  });
-}
-
-agregarHecho() {
-  const hechosArray = this.HabeasCorpusP.get('hechos') as FormArray;
-  hechosArray.push(this.crearHechoFormGroup());
-  console.log(this.HabeasCorpusP.controls)
-}
-
-
-
-eliminarHecho(){
-  const hechosArray = this.HabeasCorpusP.get('hechos') as FormArray;
-  if(hechosArray.length > 1){
-    hechosArray.removeAt(hechosArray.length - 1);
   }
-}
 
+  crearHechoFormGroup(): FormGroup {
+    return this.fb.group({
+      contenido: ['', Validators.required],
+    });
+  }
 
+  agregarHecho() {
+    const hechosArray = this.HabeasCorpusP.get('hechos') as FormArray;
+    hechosArray.push(this.crearHechoFormGroup());
+    console.log(this.HabeasCorpusP.controls);
+  }
 
-get hechos(): FormArray {
-  return this.HabeasCorpusP.get('hechos') as FormArray;
-}
+  eliminarHecho() {
+    const hechosArray = this.HabeasCorpusP.get('hechos') as FormArray;
+    if (hechosArray.length > 1) {
+      hechosArray.removeAt(hechosArray.length - 1);
+    }
+  }
 
-
-
-
+  get hechos(): FormArray {
+    return this.HabeasCorpusP.get('hechos') as FormArray;
+  }
 }

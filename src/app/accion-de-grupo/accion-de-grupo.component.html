@@ -1,5 +1,14 @@
 <div class="container mt-5">
-  <h3>Diligencie el siguiente formulario</h3>
+  <h3>Acción de grupo</h3>
+  <p>
+    Una acción de grupo, también conocida como acción colectiva o acción de
+    clase, se refiere a un proceso legal en el cual un grupo de personas con
+    intereses, que han sufrido daños o perjuicios similares debido a las mismas
+    circunstancias, se unen para presentar una demanda conjunta contra una parte
+    responsable. En lugar de presentar múltiples demandas individuales, los
+    miembros del grupo se agrupan en una sola demanda para buscar reparación por
+    los daños sufridos.
+  </p>
 
   <form [formGroup]="AccionDeGrupo" (ngSubmit)="onSubmit()">
     <!-- Numeral 1-->
@@ -97,38 +106,38 @@
       </div>
 
       <div class="col-md-6">
-      <div class="form-group ">
-        <label for="nombreDemandado"
-          ><strong>Persona o entidad a la que demanda</strong>-</label
-        ><label class="text-primary"><strong>(requerido)</strong></label>
-        <!-- Icono de alerta y mensaje de ayuda -->
-        <div class="input-group">
-          <input
-            type="text"
-            class="form-control"
-            formControlName="nombreDemandado"
-            id="nombreDemandado"
-            placeholder="Nombre de la persona o entidad a la que demanda"
-                [class.is-invalid]="
+        <div class="form-group">
+          <label for="nombreDemandado"
+            ><strong>Persona o entidad a la que demanda</strong>-</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <!-- Icono de alerta y mensaje de ayuda -->
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="nombreDemandado"
+              id="nombreDemandado"
+              placeholder="Nombre de la persona o entidad a la que demanda"
+              [class.is-invalid]="
                 AccionDeGrupo.get('nombreDemandado')?.invalid &&
                 AccionDeGrupo.get('nombreDemandado')?.touched
               "
-          />
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            data-bs-custom-class="custom-tooltip"
-            data-bs-title="Al ser una persona ingrese los nombres y apellidos, si es una empresa su respectivo nombre."
-          >
-            <i
-              class="fas fa-exclamation-circle text-white"
-              style="width: 25px; height: 25px"
-            ></i>
-          </button>
-        </div>
-         <small
+            />
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="Al ser una persona ingrese los nombres y apellidos, si es una empresa su respectivo nombre."
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+          <small
             *ngIf="
               AccionDeGrupo.get('nombreDemandado')?.invalid &&
               AccionDeGrupo.get('nombreDemandado')?.touched
@@ -137,9 +146,8 @@
           >
             El nombre del demandado es obligatorio
           </small>
+        </div>
       </div>
-    </div>
-
     </div>
 
     <div class="row">
@@ -188,9 +196,7 @@
 
       <div class="col-md-6">
         <div class="form-group">
-          <label for="ciudad"
-            ><strong>¿Por que se demanda?</strong> -</label
-          >
+          <label for="ciudad"><strong>¿Por que se demanda?</strong> -</label>
           <label class="text-primary"><strong>(requerido)</strong></label>
           <div class="form-check">
             <input
@@ -216,78 +222,74 @@
           </div>
         </div>
       </div>
-
     </div>
 
-
     <div class="d-flex align-items-start mt-5">
-        <div
-          class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
-          style="width: 25px; height: 25px"
-        >
-          <strong>2</strong>
-        </div>
-        <div class="form-group">
-          <!-- Label: ¿A quién va dirigida esta acción de grupo? -->
-          <label class="text-primary" for="destinatario">
-            <strong>Datos del demandante</strong>
-          </label>
-          <div id="destinatarioHelpBlock" class="form-text">
-            Seleccion la opcion segun los daos del abogado demandante
-          </div>
+      <div
+        class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+        style="width: 25px; height: 25px"
+      >
+        <strong>2</strong>
+      </div>
+      <div class="form-group">
+        <!-- Label: ¿A quién va dirigida esta acción de grupo? -->
+        <label class="text-primary" for="destinatario">
+          <strong>Datos del demandante</strong>
+        </label>
+        <div id="destinatarioHelpBlock" class="form-text">
+          Seleccion la opcion segun los daos del abogado demandante
         </div>
       </div>
+    </div>
 
-
-
-      <div class="row">
-        <!-- Input para la Ciudad -->
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="ciudad"><strong>Nombre del demandante</strong> -</label>
-            <label class="text-primary"><strong>(requerido)</strong></label>
-            <div class="input-group">
-              <input
-                type="text"
-                class="form-control"
-                formControlName="nombreDemandante"
-                id="nombre"
-                placeholder="nombre de la persona que demanda"
-                [class.is-invalid]="
-                  AccionDeGrupo.get('nombreDemandante')?.invalid &&
-                  AccionDeGrupo.get('nombreDemandante')?.touched
-                "
-                required
-              />
-              <!-- Icono de alerta y mensaje de ayuda -->
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                data-bs-custom-class="custom-tooltip"
-                data-bs-title="Nombre de la persona que realiza la accion de grupo."
-              >
-                <i
-                  class="fas fa-exclamation-circle text-white"
-                  style="width: 25px; height: 25px"
-                ></i>
-              </button>
-            </div>
-            <small
-              *ngIf="
+    <div class="row">
+      <!-- Input para la Ciudad -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="ciudad"><strong>Nombre del demandante</strong> -</label>
+          <label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="nombreDemandante"
+              id="nombre"
+              placeholder="nombre de la persona que demanda"
+              [class.is-invalid]="
                 AccionDeGrupo.get('nombreDemandante')?.invalid &&
                 AccionDeGrupo.get('nombreDemandante')?.touched
               "
-              class="text-danger"
+              required
+            />
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="Nombre de la persona que realiza la accion de grupo."
             >
-              La ciudad es obligatoria
-            </small>
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
           </div>
+          <small
+            *ngIf="
+              AccionDeGrupo.get('nombreDemandante')?.invalid &&
+              AccionDeGrupo.get('nombreDemandante')?.touched
+            "
+            class="text-danger"
+          >
+            La ciudad es obligatoria
+          </small>
         </div>
-  
-        <div class="col-md-6">
-        <div class="form-group ">
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
           <label for="nombreDemandado"
             ><strong>Nombre del abogado</strong>-</label
           ><label class="text-primary"><strong>(requerido)</strong></label>
@@ -299,10 +301,10 @@
               formControlName="nombreAbogado"
               id="nombreAbogado"
               placeholder="Nombre de el abogado responsable de la accion de grupo"
-                  [class.is-invalid]="
-                  AccionDeGrupo.get('nombreAbogado')?.invalid &&
-                  AccionDeGrupo.get('nombreAbogado')?.touched
-                "
+              [class.is-invalid]="
+                AccionDeGrupo.get('nombreAbogado')?.invalid &&
+                AccionDeGrupo.get('nombreAbogado')?.touched
+              "
             />
             <button
               type="button"
@@ -318,73 +320,68 @@
               ></i>
             </button>
           </div>
-           <small
-              *ngIf="
-                AccionDeGrupo.get('nombreAbogado')?.invalid &&
-                AccionDeGrupo.get('nombreAbogado')?.touched
-              "
-              class="text-danger"
-            >
-              El nombre del abogado es obligatorio
-            </small>
+          <small
+            *ngIf="
+              AccionDeGrupo.get('nombreAbogado')?.invalid &&
+              AccionDeGrupo.get('nombreAbogado')?.touched
+            "
+            class="text-danger"
+          >
+            El nombre del abogado es obligatorio
+          </small>
         </div>
       </div>
-  
-      </div>
+    </div>
 
-
-
-
-      <div class="row">
-        <!-- Input para la Ciudad -->
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="ciudad"><strong>Ciudad</strong> -</label>
-            <label class="text-primary"><strong>(requerido)</strong></label>
-            <div class="input-group">
-              <input
-                type="text"
-                class="form-control"
-                formControlName="ciudadAbogado"
-                id="ciudadAbogado"
-                placeholder="ciudad del abogado."
-                [class.is-invalid]="
-                  AccionDeGrupo.get('ciudadAbogado')?.invalid &&
-                  AccionDeGrupo.get('ciudadAbogado')?.touched
-                "
-                required
-              />
-              <!-- Icono de alerta y mensaje de ayuda -->
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                data-bs-custom-class="custom-tooltip"
-                data-bs-title="Ciudad donde reside el abogado responsable de la accion de grupo."
-              >
-                <i
-                  class="fas fa-exclamation-circle text-white"
-                  style="width: 25px; height: 25px"
-                ></i>
-              </button>
-            </div>
-            <small
-              *ngIf="
+    <div class="row">
+      <!-- Input para la Ciudad -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="ciudad"><strong>Ciudad</strong> -</label>
+          <label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="ciudadAbogado"
+              id="ciudadAbogado"
+              placeholder="ciudad del abogado."
+              [class.is-invalid]="
                 AccionDeGrupo.get('ciudadAbogado')?.invalid &&
                 AccionDeGrupo.get('ciudadAbogado')?.touched
               "
-              class="text-danger"
+              required
+            />
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="Ciudad donde reside el abogado responsable de la accion de grupo."
             >
-              La ciudad del abogado es obligatoria
-            </small>
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
           </div>
+          <small
+            *ngIf="
+              AccionDeGrupo.get('ciudadAbogado')?.invalid &&
+              AccionDeGrupo.get('ciudadAbogado')?.touched
+            "
+            class="text-danger"
+          >
+            La ciudad del abogado es obligatoria
+          </small>
         </div>
-  
-        <div class="col-md-6">
-        <div class="form-group ">
-          <label for="nombreDemandado"
-            ><strong>Cedula</strong>-</label
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="nombreDemandado"><strong>Cedula</strong>-</label
           ><label class="text-primary"><strong>(requerido)</strong></label>
           <!-- Icono de alerta y mensaje de ayuda -->
           <div class="input-group">
@@ -394,10 +391,10 @@
               formControlName="cedulaAbogado"
               id="cedulaAbogado"
               placeholder="cedula del abogado"
-                  [class.is-invalid]="
-                  AccionDeGrupo.get('cedulaAbogado')?.invalid &&
-                  AccionDeGrupo.get('cedulaAbogado')?.touched
-                "
+              [class.is-invalid]="
+                AccionDeGrupo.get('cedulaAbogado')?.invalid &&
+                AccionDeGrupo.get('cedulaAbogado')?.touched
+              "
             />
             <button
               type="button"
@@ -413,71 +410,67 @@
               ></i>
             </button>
           </div>
-           <small
-              *ngIf="
-                AccionDeGrupo.get('cedulaAbogado')?.invalid &&
-                AccionDeGrupo.get('cedulaAbogado')?.touched
-              "
-              class="text-danger"
-            >
-              La ciudad del abogado es obligatorio
-            </small>
+          <small
+            *ngIf="
+              AccionDeGrupo.get('cedulaAbogado')?.invalid &&
+              AccionDeGrupo.get('cedulaAbogado')?.touched
+            "
+            class="text-danger"
+          >
+            La ciudad del abogado es obligatorio
+          </small>
         </div>
       </div>
-  
-      </div>
+    </div>
 
-
-
-
-      <div class="row">
-        <!-- Input para la Ciudad -->
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="ciudad"><strong>Ciudad expedicion</strong> -</label>
-            <label class="text-primary"><strong>(requerido)</strong></label>
-            <div class="input-group">
-              <input
-                type="text"
-                class="form-control"
-                formControlName="ciudadExpedicionAbogado"
-                id="ciudadExpedicionAbogado"
-                placeholder="ciudad del abogado."
-                [class.is-invalid]="
-                  AccionDeGrupo.get('ciudadExpedicionAbogado')?.invalid &&
-                  AccionDeGrupo.get('ciudadExpedicionAbogado')?.touched
-                "
-                required
-              />
-              <!-- Icono de alerta y mensaje de ayuda -->
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                data-bs-custom-class="custom-tooltip"
-                data-bs-title="Ciudad donde se expidio la cedula."
-              >
-                <i
-                  class="fas fa-exclamation-circle text-white"
-                  style="width: 25px; height: 25px"
-                ></i>
-              </button>
-            </div>
-            <small
-              *ngIf="
+    <div class="row">
+      <!-- Input para la Ciudad -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="ciudad"><strong>Ciudad expedicion</strong> -</label>
+          <label class="text-primary"><strong>(requerido)</strong></label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="ciudadExpedicionAbogado"
+              id="ciudadExpedicionAbogado"
+              placeholder="ciudad del abogado."
+              [class.is-invalid]="
                 AccionDeGrupo.get('ciudadExpedicionAbogado')?.invalid &&
                 AccionDeGrupo.get('ciudadExpedicionAbogado')?.touched
               "
-              class="text-danger"
+              required
+            />
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="Ciudad donde se expidio la cedula."
             >
-              La ciudad de expedicion del abogado es obligatoria
-            </small>
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
           </div>
+          <small
+            *ngIf="
+              AccionDeGrupo.get('ciudadExpedicionAbogado')?.invalid &&
+              AccionDeGrupo.get('ciudadExpedicionAbogado')?.touched
+            "
+            class="text-danger"
+          >
+            La ciudad de expedicion del abogado es obligatoria
+          </small>
         </div>
-  
-        <div class="col-md-6">
-        <div class="form-group ">
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
           <label for="nombreDemandado"
             ><strong>tarjeta profesional</strong>-</label
           ><label class="text-primary"><strong>(requerido)</strong></label>
@@ -489,10 +482,10 @@
               formControlName="tarjetaProfesional"
               id="tarjetaProfesional"
               placeholder="cedula del abogado"
-                  [class.is-invalid]="
-                  AccionDeGrupo.get('tarjetaProfesional')?.invalid &&
-                  AccionDeGrupo.get('tarjetaProfesional')?.touched
-                "
+              [class.is-invalid]="
+                AccionDeGrupo.get('tarjetaProfesional')?.invalid &&
+                AccionDeGrupo.get('tarjetaProfesional')?.touched
+              "
             />
             <button
               type="button"
@@ -508,76 +501,74 @@
               ></i>
             </button>
           </div>
-           <small
-              *ngIf="
-                AccionDeGrupo.get('tarjetaProfesional')?.invalid &&
-                AccionDeGrupo.get('tarjetaProfesional')?.touched
-              "
-              class="text-danger"
-            >
-              La tarjeta profesional abogado es obligatoria
-              
-            </small>
+          <small
+            *ngIf="
+              AccionDeGrupo.get('tarjetaProfesional')?.invalid &&
+              AccionDeGrupo.get('tarjetaProfesional')?.touched
+            "
+            class="text-danger"
+          >
+            La tarjeta profesional abogado es obligatoria
+          </small>
         </div>
       </div>
-  
-      </div>
+    </div>
 
-
-
-
-      <div class="d-flex align-items-start mt-5">
-        <div
-          class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
-          style="width: 25px; height: 25px"
-        >
-          <strong>3</strong>
-        </div>
-        <div class="form-group">
-          <!-- Label: ¿A quién va dirigida esta acción de grupo? -->
-          <label class="text-primary" for="destinatario">
-            <strong>Relacion de los demandantes</strong>
-          </label>
-          <div id="destinatarioHelpBlock" class="form-text">
-            Rellene cada una de las personas involucradas, recuerde, son minimo 20 personas
-          </div>
-        </div>
-      </div>
-
-
-
-      <ng-container
-        formArrayName="demandantes"
-        *ngFor="
-          let row of demandantes.controls;
-          index as i;
-          first as isFirst;
-          last as isLast
-        "
-        class="input-group"
+    <div class="d-flex align-items-start mt-5">
+      <div
+        class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+        style="width: 25px; height: 25px"
       >
+        <strong>3</strong>
+      </div>
+      <div class="form-group">
+        <!-- Label: ¿A quién va dirigida esta acción de grupo? -->
+        <label class="text-primary" for="destinatario">
+          <strong>Relacion de los demandantes</strong>
+        </label>
+        <div id="destinatarioHelpBlock" class="form-text">
+          Rellene cada una de las personas involucradas, recuerde, son minimo 20
+          personas
+        </div>
+        <div
+          id="destinatarioHelpBlock"
+          class="form-text"
+          style="font-size: 18px"
+        >
+          Para agregar mas campos use el botón de
+          <strong class="text-primary"> + </strong> para eliminar use
+          <strong class="text-danger"> - </strong>
+        </div>
+      </div>
+    </div>
 
+    <ng-container
+      formArrayName="demandantes"
+      *ngFor="
+        let row of demandantes.controls;
+        index as i;
+        first as isFirst;
+        last as isLast
+      "
+      class="input-group"
+    >
       <div class="row">
         <!-- Input para la Ciudad -->
-        <div class="col-md-6  d-flex">
-
+        <div class="col-md-6 d-flex">
           <div
-          class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
-          style="width: 25px; height: 25px"
-        >
-          <strong>{{ i + 1 }}</strong>
-        </div>
+            class="rounded-circle bg-primary text-white p-1 mr-2 d-flex align-items-center justify-content-center"
+            style="width: 25px; height: 25px"
+          >
+            <strong>{{ i + 1 }}</strong>
+          </div>
 
           <div class="form-group w-100">
-
-
-
             <label for="ciudad"><strong>Nombre</strong> -</label>
             <label class="text-primary"><strong>(requerido)</strong></label>
             <div class="input-group" [formGroupName]="i">
               <input
                 type="text"
-                class="form-control "
+                class="form-control"
                 formControlName="nombre"
                 id="nombre"
                 placeholder="nombre del demandante."
@@ -601,7 +592,6 @@
                   style="width: 25px; height: 25px"
                 ></i>
               </button>
-              
             </div>
 
             <small
@@ -615,64 +605,63 @@
             </small>
           </div>
         </div>
-  
+
         <div class="col-md-6">
-        <div class="form-group ">
-          <label for="nombreDemandado"
-            ><strong>Cedula</strong>-</label
-          ><label class="text-primary"><strong>(requerido)</strong></label>
-          <!-- Icono de alerta y mensaje de ayuda -->
-          <div class="input-group"  [formGroupName]="i">
-            <input
-              type="text"
-              class="form-control"
-              formControlName="cedula"
-              id="tarjetaProfesional"
-              placeholder="cedula del demandante"
-                  [class.is-invalid]="
+          <div class="form-group">
+            <label for="nombreDemandado"
+              ><strong>Cédula de Ciudadanía</strong>-</label
+            ><label class="text-primary"><strong>(requerido)</strong></label>
+            <!-- Icono de alerta y mensaje de ayuda -->
+            <div class="input-group" [formGroupName]="i">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="cedula"
+                id="tarjetaProfesional"
+                placeholder="cedula del demandante"
+                [class.is-invalid]="
                   AccionDeGrupo.get('cedula')?.invalid &&
                   AccionDeGrupo.get('cedula')?.touched
                 "
-            />
-            <button
-              type="button"
-              class="btn btn-primary"
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              data-bs-custom-class="custom-tooltip"
-              data-bs-title="cedula"
-            >
-              <i
-                class="fas fa-exclamation-circle text-white"
-                style="width: 25px; height: 25px"
-              ></i>
-            </button>
-            
-            <div *ngIf="isLast" class="float-end ms-2">
-              <!-- Botón para agregar un nuevo campo -->
+              />
               <button
                 type="button"
-                class="btn btn-primary mt-2"
-                (click)="agregarDemandante()"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="cedula"
               >
-                <i class="fas fa-plus"></i>
+                <i
+                  class="fas fa-exclamation-circle text-white"
+                  style="width: 25px; height: 25px"
+                ></i>
               </button>
+
+              <div *ngIf="isLast" class="float-end ms-2">
+                <!-- Botón para agregar un nuevo campo -->
+                <button
+                  type="button"
+                  class="btn btn-primary mt-2"
+                  (click)="agregarDemandante()"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+
+              <div *ngIf="isLast" class="float-end ms-2">
+                <!-- Botón para eliminar un campo -->
+                <button
+                  type="button"
+                  class="btn btn-danger mt-2"
+                  (click)="eliminarDemandante()"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
             </div>
 
-            <div *ngIf="isLast" class="float-end ms-2">
-              <!-- Botón para eliminar un campo -->
-              <button
-                type="button"
-                class="btn btn-danger mt-2"
-                (click)="eliminarDemandante()"
-              >
-                <i class="fas fa-minus"></i>
-              </button>
-            </div>
-          
-          </div>
-
-           <small
+            <small
               *ngIf="
                 AccionDeGrupo.get('cedula')?.invalid &&
                 AccionDeGrupo.get('cedula')?.touched
@@ -680,20 +669,11 @@
               class="text-danger"
             >
               La tarjeta profesional abogado es obligatoria
-              
             </small>
+          </div>
         </div>
       </div>
-  
-      </div>
-
     </ng-container>
-
-
-
-
-
-
 
     <div class="d-flex align-items-start mt-5">
       <div
@@ -708,11 +688,20 @@
           <strong>Datos de las acciones</strong>
         </label>
         <div id="destinatarioHelpBlock" class="form-text">
-          Rellene cada una de las personas involucradas, recuerde, son minimo 20 personas
+          Rellene cada una de las personas involucradas, recuerde, son minimo 20
+          personas
+        </div>
+        <div
+          id="destinatarioHelpBlock"
+          class="form-text"
+          style="font-size: 18px"
+        >
+          Para agregar mas campos use el botón de
+          <strong class="text-primary"> + </strong> para eliminar use
+          <strong class="text-danger"> - </strong>
         </div>
       </div>
     </div>
-
 
     <div class="form-group mt-2">
       <label for="hechos"> <strong>HECHOS </strong> - </label
@@ -733,15 +722,15 @@
           <div class="input-group">
             <textarea
               [class.is-invalid]="
-              AccionDeGrupo.get('hechos')?.invalid &&
-              AccionDeGrupo.get('hechos')?.touched &&
+                AccionDeGrupo.get('hechos')?.invalid &&
+                AccionDeGrupo.get('hechos')?.touched &&
                 isLast
               "
               rows="6"
               class="form-control"
               formControlName="contenido"
               id="hechos{{ i }}"
-              placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma"
+              placeholder="Descripción cronológica de los hechos, actos, acciones u omisiones que generaron el daño a los demandantes y que motivan la interposición de la acción de grupo"
               required
             ></textarea>
 
@@ -753,7 +742,7 @@
                   data-bs-toggle="tooltip"
                   data-bs-placement="top"
                   data-bs-custom-class="custom-tooltip"
-                  data-bs-title="Hacer el relato de los hechos que configuran el incumplimiento de la norma."
+                  data-bs-title="Descripción cronológica de los hechos, actos, acciones u omisiones que generaron el daño a los demandantes y que motivan la interposición de la acción de grupo."
                 >
                   <i
                     class="fas fa-exclamation-circle text-white"
@@ -785,8 +774,8 @@
           </div>
           <small
             *ngIf="
-            AccionDeGrupo.get('hechos')?.invalid &&
-            AccionDeGrupo.get('hechos')?.touched &&
+              AccionDeGrupo.get('hechos')?.invalid &&
+              AccionDeGrupo.get('hechos')?.touched &&
               isLast
             "
             class="text-danger"
@@ -799,15 +788,15 @@
           <div class="input-group">
             <textarea
               [class.is-invalid]="
-              AccionDeGrupo.get('hechos')?.invalid &&
-              AccionDeGrupo.get('hechos')?.touched &&
+                AccionDeGrupo.get('hechos')?.invalid &&
+                AccionDeGrupo.get('hechos')?.touched &&
                 isLast
               "
               rows="6"
               class="form-control"
               formControlName="contenido"
               id="hechos{{ i }}"
-              placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma"
+              placeholder="Descripción cronológica de los hechos, actos, acciones u omisiones que generaron el daño a los demandantes y que motivan la interposición de la acción de grupo"
               required
             ></textarea>
             <div *ngIf="isLast" class="float-end ms-2">
@@ -833,20 +822,17 @@
           </div>
           <small
             *ngIf="
-            AccionDeGrupo.get('hechos')?.invalid &&
-            AccionDeGrupo.get('hechos')?.touched &&
+              AccionDeGrupo.get('hechos')?.invalid &&
+              AccionDeGrupo.get('hechos')?.touched &&
               isLast
             "
             class="text-danger"
           >
-            Los hechos son obliogatorios
+            Los hechos son obligatorios
           </small>
         </ng-container>
       </ng-container>
     </div>
-
-
-
 
     <div class="form-group mt-2">
       <label for="pretension"><strong>PRETENSIÓN </strong> - </label
@@ -855,7 +841,7 @@
       <div class="input-group">
         <textarea
           [class.is-invalid]="
-          AccionDeGrupo.get('pretension')?.invalid &&
+            AccionDeGrupo.get('pretension')?.invalid &&
             AccionDeGrupo.get('pretension')?.touched
           "
           rows="6"
@@ -883,17 +869,14 @@
       </div>
       <small
         *ngIf="
-        AccionDeGrupo.get('pretension')?.invalid &&
-        AccionDeGrupo.get('pretension')?.touched
+          AccionDeGrupo.get('pretension')?.invalid &&
+          AccionDeGrupo.get('pretension')?.touched
         "
         class="text-danger"
       >
         La pretension es obligatoria
       </small>
     </div>
-
-
-
 
     <div class="form-group mt-2">
       <label for="pretension"><strong>Valor </strong> - </label
@@ -902,15 +885,15 @@
       <div class="input-group">
         <input
           [class.is-invalid]="
-          AccionDeGrupo.get('valorPretension')?.invalid &&
+            AccionDeGrupo.get('valorPretension')?.invalid &&
             AccionDeGrupo.get('valorPretension')?.touched
           "
           class="form-control"
           formControlName="valorPretension"
           id="valorPretension"
-          placeholder="valor pretension"
+          placeholder="Valor pretension"
           required
-        >
+        />
         <div>
           <button
             type="button"
@@ -918,7 +901,7 @@
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             data-bs-custom-class="custom-tooltip"
-            data-bs-title="valor pretension."
+            data-bs-title="Valor pretension."
           >
             <i
               class="fas fa-exclamation-circle text-white"
@@ -929,18 +912,14 @@
       </div>
       <small
         *ngIf="
-        AccionDeGrupo.get('valorPretension')?.invalid &&
-        AccionDeGrupo.get('valorPretension')?.touched
+          AccionDeGrupo.get('valorPretension')?.invalid &&
+          AccionDeGrupo.get('valorPretension')?.touched
         "
         class="text-danger"
       >
         La pretension es obligatoria
       </small>
     </div>
-
-
-
-
 
     <div class="form-group mt-2">
       <label for="perjuicios"><strong>Perjuicios causados </strong> - </label
@@ -949,14 +928,14 @@
       <div class="input-group">
         <textarea
           [class.is-invalid]="
-          AccionDeGrupo.get('perjuicios')?.invalid &&
+            AccionDeGrupo.get('perjuicios')?.invalid &&
             AccionDeGrupo.get('perjuicios')?.touched
           "
           rows="6"
           class="form-control"
           formControlName="perjuicios"
           id="perjuicios"
-          placeholder="perjuicios"
+          placeholder="Hacer el estimativo del valor en pesos de los daños ocasionados por la vulneración, explicitándolos y discriminándolos de la manera más amplia posible"
           required
         ></textarea>
         <div>
@@ -966,7 +945,7 @@
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             data-bs-custom-class="custom-tooltip"
-            data-bs-title="perjuicios."
+            data-bs-title="Hacer el estimativo del valor en pesos de los daños ocasionados por la vulneración, explicitándolos y discriminándolos de la manera más amplia posible."
           >
             <i
               class="fas fa-exclamation-circle text-white"
@@ -977,8 +956,8 @@
       </div>
       <small
         *ngIf="
-        AccionDeGrupo.get('perjuicios')?.invalid &&
-        AccionDeGrupo.get('perjuicios')?.touched
+          AccionDeGrupo.get('perjuicios')?.invalid &&
+          AccionDeGrupo.get('perjuicios')?.touched
         "
         class="text-danger"
       >
@@ -986,22 +965,25 @@
       </small>
     </div>
 
-
     <div class="form-group mt-2">
-      <label for="criterios"><strong>Criterios para identificar a los integrantes del grupo </strong> - </label
+      <label for="criterios"
+        ><strong
+          >Criterios para identificar a los integrantes del grupo
+        </strong>
+        - </label
       ><label class="text-primary"><strong>(requerido)</strong></label>
       <!-- Icono de alerta y mensaje de ayuda -->
       <div class="input-group">
         <textarea
           [class.is-invalid]="
-          AccionDeGrupo.get('criterios')?.invalid &&
+            AccionDeGrupo.get('criterios')?.invalid &&
             AccionDeGrupo.get('criterios')?.touched
           "
           rows="6"
           class="form-control"
           formControlName="criterios"
           id="criterios"
-          placeholder="criterios"
+          placeholder="Señalar los criterios para su industrialización, así como para que el juez tase las indemnizaciones individuales y la colectiva"
           required
         ></textarea>
         <div>
@@ -1011,7 +993,7 @@
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             data-bs-custom-class="custom-tooltip"
-            data-bs-title="criterios."
+            data-bs-title="Señalar los criterios para su industrialización, así como para que el juez tase las indemnizaciones individuales y la colectiva."
           >
             <i
               class="fas fa-exclamation-circle text-white"
@@ -1022,8 +1004,8 @@
       </div>
       <small
         *ngIf="
-        AccionDeGrupo.get('criterios')?.invalid &&
-        AccionDeGrupo.get('criterios')?.touched
+          AccionDeGrupo.get('criterios')?.invalid &&
+          AccionDeGrupo.get('criterios')?.touched
         "
         class="text-danger"
       >
@@ -1031,23 +1013,22 @@
       </small>
     </div>
 
-
-
     <div class="form-group mt-2">
-      <label for="idefAccionada"><strong>Identificacion de la parte accionada</strong> - </label
+      <label for="idefAccionada"
+        ><strong>Identificacion de la parte accionada</strong> - </label
       ><label class="text-primary"><strong>(requerido)</strong></label>
       <!-- Icono de alerta y mensaje de ayuda -->
       <div class="input-group">
         <textarea
           [class.is-invalid]="
-          AccionDeGrupo.get('idefAccionada')?.invalid &&
+            AccionDeGrupo.get('idefAccionada')?.invalid &&
             AccionDeGrupo.get('idefAccionada')?.touched
           "
           rows="6"
           class="form-control"
           formControlName="idefAccionada"
           id="idefAccionada"
-          placeholder="identificacion"
+          placeholder="Si se trata de una entidad pública indicar si es del orden nacional, departamental o municipal, el domicilio, el representante legal, su identificación"
           required
         ></textarea>
         <div>
@@ -1057,7 +1038,7 @@
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             data-bs-custom-class="custom-tooltip"
-            data-bs-title="criterios."
+            data-bs-title="Si se trata de una entidad pública indicar si es del orden nacional, departamental o municipal, el domicilio, el representante legal, su identificación."
           >
             <i
               class="fas fa-exclamation-circle text-white"
@@ -1068,27 +1049,18 @@
       </div>
       <small
         *ngIf="
-        AccionDeGrupo.get('idefAccionada')?.invalid &&
-        AccionDeGrupo.get('idefAccionada')?.touched
+          AccionDeGrupo.get('idefAccionada')?.invalid &&
+          AccionDeGrupo.get('idefAccionada')?.touched
         "
         class="text-danger"
       >
-      La identificacion de la parte accionada es obligatoria
+        La identificacion de la parte accionada es obligatoria
       </small>
     </div>
 
-
-
-
-
-
-
-
-
-
-
     <div class="form-group mt-2">
-      <label for="procedencia"> <strong>Procedencia de la accion de grupo </strong> - </label
+      <label for="procedencia">
+        <strong>Procedencia de la accion de grupo </strong> - </label
       ><label class="text-primary"><strong>(requerido)</strong> </label>
       <!-- Icono de alerta y mensaje de ayuda -->
 
@@ -1106,15 +1078,15 @@
           <div class="input-group">
             <textarea
               [class.is-invalid]="
-              AccionDeGrupo.get('procedencia')?.invalid &&
-              AccionDeGrupo.get('procedencia')?.touched &&
+                AccionDeGrupo.get('procedencia')?.invalid &&
+                AccionDeGrupo.get('procedencia')?.touched &&
                 isLast
               "
               rows="6"
               class="form-control"
               formControlName="contenido"
               id="procedencia{{ i }}"
-              placeholder="Hacer el relato de los hechos que configuran el incumplimiento de la norma"
+              placeholder="Argumentos para que el juez acceda a las pretensiones de la demanda"
               required
             ></textarea>
 
@@ -1126,7 +1098,7 @@
                   data-bs-toggle="tooltip"
                   data-bs-placement="top"
                   data-bs-custom-class="custom-tooltip"
-                  data-bs-title="Procedencia de la accion."
+                  data-bs-title="Argumentos para que el juez acceda a las pretensiones de la demanda."
                 >
                   <i
                     class="fas fa-exclamation-circle text-white"
@@ -1155,14 +1127,12 @@
                   <i class="fas fa-minus"></i>
                 </button>
               </div>
-
-              
             </div>
           </div>
           <small
             *ngIf="
-            AccionDeGrupo.get('procedencia')?.invalid &&
-            AccionDeGrupo.get('procedencia')?.touched &&
+              AccionDeGrupo.get('procedencia')?.invalid &&
+              AccionDeGrupo.get('procedencia')?.touched &&
               isLast
             "
             class="text-danger"
@@ -1175,15 +1145,15 @@
           <div class="input-group">
             <textarea
               [class.is-invalid]="
-              AccionDeGrupo.get('procedencia')?.invalid &&
-              AccionDeGrupo.get('procedencia')?.touched &&
+                AccionDeGrupo.get('procedencia')?.invalid &&
+                AccionDeGrupo.get('procedencia')?.touched &&
                 isLast
               "
               rows="6"
               class="form-control"
               formControlName="contenido"
               id="procedencia{{ i }}"
-              placeholder="Procedencia de la accion"
+              placeholder="Argumentos para que el juez acceda a las pretensiones de la demanda"
               required
             ></textarea>
             <div *ngIf="isLast" class="float-end ms-2">
@@ -1206,28 +1176,21 @@
               >
                 <i class="fas fa-minus"></i>
               </button>
-
             </div>
-
           </div>
           <small
             *ngIf="
-            AccionDeGrupo.get('procedencia')?.invalid &&
-            AccionDeGrupo.get('procedencia')?.touched &&
+              AccionDeGrupo.get('procedencia')?.invalid &&
+              AccionDeGrupo.get('procedencia')?.touched &&
               isLast
             "
             class="text-danger"
           >
-            La procedencia son obliogatorios
+            La procedencia son obligatorios
           </small>
         </ng-container>
       </ng-container>
     </div>
-
-
-
-
-
 
     <div class="form-group mt-2">
       <label for="caducidad"><strong>Fecha caducidad </strong> - </label
@@ -1236,16 +1199,16 @@
       <div class="input-group">
         <input
           [class.is-invalid]="
-          AccionDeGrupo.get('caducidad')?.invalid &&
+            AccionDeGrupo.get('caducidad')?.invalid &&
             AccionDeGrupo.get('caducidad')?.touched
           "
           type="date"
           class="form-control"
           formControlName="caducidad"
           id="caducidad"
-          placeholder="fecha de la caducidad"
+          placeholder="Fecha de la caducidad"
           required
-        >
+        />
         <div>
           <button
             type="button"
@@ -1253,7 +1216,7 @@
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             data-bs-custom-class="custom-tooltip"
-            data-bs-title="la fecha del hecho o de la ultima acción que produjo el daño"
+            data-bs-title="La fecha del hecho o de la ultima acción que produjo el daño"
           >
             <i
               class="fas fa-exclamation-circle text-white"
@@ -1264,19 +1227,14 @@
       </div>
       <small
         *ngIf="
-        AccionDeGrupo.get('caducidad')?.invalid &&
-        AccionDeGrupo.get('caducidad')?.touched
+          AccionDeGrupo.get('caducidad')?.invalid &&
+          AccionDeGrupo.get('caducidad')?.touched
         "
         class="text-danger"
       >
-        La pretension es obligatoria
+        La fecha de caducidad es obligatoria
       </small>
     </div>
-
-
-
-
-
 
     <div class="d-flex align-items-start mt-5">
       <div
@@ -1291,21 +1249,15 @@
           <strong>Pruebas</strong>
         </label>
         <div id="destinatarioHelpBlock" class="form-text">
-          Enumerar una a una las pruebas que se aportan y las que se solicitan al Juez que decrete por no tenerlas en su poder
+          Enumerar una a una las pruebas que se aportan y las que se solicitan
+          al Juez que decrete por no tenerlas en su poder
         </div>
       </div>
     </div>
 
-
-    
-
-
-
-
-
-
     <div class="form-group mt-2">
-      <label for="documentales"> <strong>Documentales aportados</strong> - </label
+      <label for="documentales">
+        <strong>Documentales aportados</strong> - </label
       ><label class="text-primary"><strong>(requerido)</strong> </label>
       <!-- Icono de alerta y mensaje de ayuda -->
 
@@ -1323,15 +1275,15 @@
           <div class="input-group">
             <textarea
               [class.is-invalid]="
-              AccionDeGrupo.get('documentales')?.invalid &&
-              AccionDeGrupo.get('documentales')?.touched &&
+                AccionDeGrupo.get('documentales')?.invalid &&
+                AccionDeGrupo.get('documentales')?.touched &&
                 isLast
               "
               rows="6"
               class="form-control"
               formControlName="contenido"
               id="documentales{{ i }}"
-              placeholder="documentales de la accion"
+              placeholder="Documentales de la acción"
               required
             ></textarea>
 
@@ -1343,7 +1295,7 @@
                   data-bs-toggle="tooltip"
                   data-bs-placement="top"
                   data-bs-custom-class="custom-tooltip"
-                  data-bs-title="Procedencia de la accion."
+                  data-bs-title="Documentales de la acción."
                 >
                   <i
                     class="fas fa-exclamation-circle text-white"
@@ -1372,18 +1324,17 @@
                   <i class="fas fa-minus"></i>
                 </button>
               </div>
-
             </div>
           </div>
           <small
             *ngIf="
-            AccionDeGrupo.get('documentales')?.invalid &&
-            AccionDeGrupo.get('documentales')?.touched &&
+              AccionDeGrupo.get('documentales')?.invalid &&
+              AccionDeGrupo.get('documentales')?.touched &&
               isLast
             "
             class="text-danger"
           >
-            Los documentales son obliogatorios
+            Los documentales son obligatorios
           </small>
         </ng-container>
 
@@ -1391,15 +1342,15 @@
           <div class="input-group">
             <textarea
               [class.is-invalid]="
-              AccionDeGrupo.get('documentales')?.invalid &&
-              AccionDeGrupo.get('documentales')?.touched &&
+                AccionDeGrupo.get('documentales')?.invalid &&
+                AccionDeGrupo.get('documentales')?.touched &&
                 isLast
               "
               rows="6"
               class="form-control"
               formControlName="contenido"
               id="documentales{{ i }}"
-              placeholder="documentales de la accion"
+              placeholder="Documentales de la acción"
               required
             ></textarea>
             <div *ngIf="isLast" class="float-end ms-2">
@@ -1423,12 +1374,11 @@
                 <i class="fas fa-minus"></i>
               </button>
             </div>
-
           </div>
           <small
             *ngIf="
-            AccionDeGrupo.get('documentales')?.invalid &&
-            AccionDeGrupo.get('documentales')?.touched &&
+              AccionDeGrupo.get('documentales')?.invalid &&
+              AccionDeGrupo.get('documentales')?.touched &&
               isLast
             "
             class="text-danger"
@@ -1439,15 +1389,9 @@
       </ng-container>
     </div>
 
-
-
-
-
-
-
-
     <div class="form-group mt-2">
-      <label for="documentalesSOLI"> <strong>Documentales Solicitados</strong> - </label
+      <label for="documentalesSOLI">
+        <strong>Documentales Solicitados</strong> - </label
       ><label class="text-primary"><strong>(requerido)</strong> </label>
       <!-- Icono de alerta y mensaje de ayuda -->
 
@@ -1465,15 +1409,15 @@
           <div class="input-group">
             <textarea
               [class.is-invalid]="
-              AccionDeGrupo.get('documentalesSOLI')?.invalid &&
-              AccionDeGrupo.get('documentalesSOLI')?.touched &&
+                AccionDeGrupo.get('documentalesSOLI')?.invalid &&
+                AccionDeGrupo.get('documentalesSOLI')?.touched &&
                 isLast
               "
               rows="6"
               class="form-control"
               formControlName="contenido"
               id="documentalesSOLI{{ i }}"
-              placeholder="documentales solicitados"
+              placeholder="Documentales solicitados"
               required
             ></textarea>
 
@@ -1485,7 +1429,7 @@
                   data-bs-toggle="tooltip"
                   data-bs-placement="top"
                   data-bs-custom-class="custom-tooltip"
-                  data-bs-title="documental asociado."
+                  data-bs-title="Documental asociado."
                 >
                   <i
                     class="fas fa-exclamation-circle text-white"
@@ -1514,13 +1458,12 @@
                   <i class="fas fa-minus"></i>
                 </button>
               </div>
-
             </div>
           </div>
           <small
             *ngIf="
-            AccionDeGrupo.get('documentalesSOLI')?.invalid &&
-            AccionDeGrupo.get('documentalesSOLI')?.touched &&
+              AccionDeGrupo.get('documentalesSOLI')?.invalid &&
+              AccionDeGrupo.get('documentalesSOLI')?.touched &&
               isLast
             "
             class="text-danger"
@@ -1533,15 +1476,15 @@
           <div class="input-group">
             <textarea
               [class.is-invalid]="
-              AccionDeGrupo.get('documentalesSOLI')?.invalid &&
-              AccionDeGrupo.get('documentalesSOLI')?.touched &&
+                AccionDeGrupo.get('documentalesSOLI')?.invalid &&
+                AccionDeGrupo.get('documentalesSOLI')?.touched &&
                 isLast
               "
               rows="6"
               class="form-control"
               formControlName="contenido"
               id="documentalesSOLI{{ i }}"
-              placeholder="documentales asociados"
+              placeholder="Documentales asociados"
               required
             ></textarea>
             <div *ngIf="isLast" class="float-end ms-2">
@@ -1565,12 +1508,11 @@
                 <i class="fas fa-minus"></i>
               </button>
             </div>
-
           </div>
           <small
             *ngIf="
-            AccionDeGrupo.get('documentalesSOLI')?.invalid &&
-            AccionDeGrupo.get('documentalesSOLI')?.touched &&
+              AccionDeGrupo.get('documentalesSOLI')?.invalid &&
+              AccionDeGrupo.get('documentalesSOLI')?.touched &&
               isLast
             "
             class="text-danger"
@@ -1580,15 +1522,6 @@
         </ng-container>
       </ng-container>
     </div>
-
-
-
-
-
-
-
-
-
 
     <div class="form-group mt-2">
       <label for="periciales"> <strong>Periciales o tecnicas</strong> - </label
@@ -1609,15 +1542,15 @@
           <div class="input-group">
             <textarea
               [class.is-invalid]="
-              AccionDeGrupo.get('periciales')?.invalid &&
-              AccionDeGrupo.get('periciales')?.touched &&
+                AccionDeGrupo.get('periciales')?.invalid &&
+                AccionDeGrupo.get('periciales')?.touched &&
                 isLast
               "
               rows="6"
               class="form-control"
               formControlName="contenido"
               id="periciales{{ i }}"
-              placeholder="periciales solicitados"
+              placeholder="Periciales solicitados"
               required
             ></textarea>
 
@@ -1629,7 +1562,7 @@
                   data-bs-toggle="tooltip"
                   data-bs-placement="top"
                   data-bs-custom-class="custom-tooltip"
-                  data-bs-title="pericial asociado."
+                  data-bs-title="Pericial asociado."
                 >
                   <i
                     class="fas fa-exclamation-circle text-white"
@@ -1657,15 +1590,13 @@
                 >
                   <i class="fas fa-minus"></i>
                 </button>
-
               </div>
-
             </div>
           </div>
           <small
             *ngIf="
-            AccionDeGrupo.get('periciales')?.invalid &&
-            AccionDeGrupo.get('periciales')?.touched &&
+              AccionDeGrupo.get('periciales')?.invalid &&
+              AccionDeGrupo.get('periciales')?.touched &&
               isLast
             "
             class="text-danger"
@@ -1678,15 +1609,15 @@
           <div class="input-group">
             <textarea
               [class.is-invalid]="
-              AccionDeGrupo.get('periciales')?.invalid &&
-              AccionDeGrupo.get('periciales')?.touched &&
+                AccionDeGrupo.get('periciales')?.invalid &&
+                AccionDeGrupo.get('periciales')?.touched &&
                 isLast
               "
               rows="6"
               class="form-control"
               formControlName="contenido"
               id="periciales{{ i }}"
-              placeholder="periciales asociados"
+              placeholder="Periciales asociados"
               required
             ></textarea>
             <div *ngIf="isLast" class="float-end ms-2">
@@ -1710,12 +1641,11 @@
                 <i class="fas fa-minus"></i>
               </button>
             </div>
-
           </div>
           <small
             *ngIf="
-            AccionDeGrupo.get('periciales')?.invalid &&
-            AccionDeGrupo.get('periciales')?.touched &&
+              AccionDeGrupo.get('periciales')?.invalid &&
+              AccionDeGrupo.get('periciales')?.touched &&
               isLast
             "
             class="text-danger"
@@ -1725,13 +1655,6 @@
         </ng-container>
       </ng-container>
     </div>
-
-
-
-
-
-
-
 
     <div class="form-group mt-2">
       <label for="testimoniales"> <strong>Testimoniales</strong> - </label
@@ -1752,15 +1675,15 @@
           <div class="input-group">
             <textarea
               [class.is-invalid]="
-              AccionDeGrupo.get('testimoniales')?.invalid &&
-              AccionDeGrupo.get('testimoniales')?.touched &&
+                AccionDeGrupo.get('testimoniales')?.invalid &&
+                AccionDeGrupo.get('testimoniales')?.touched &&
                 isLast
               "
               rows="6"
               class="form-control"
               formControlName="contenido"
               id="testimoniales{{ i }}"
-              placeholder="testimoniales solicitados"
+              placeholder="Testimoniales solicitados"
               required
             ></textarea>
 
@@ -1772,7 +1695,7 @@
                   data-bs-toggle="tooltip"
                   data-bs-placement="top"
                   data-bs-custom-class="custom-tooltip"
-                  data-bs-title="testimonial asociado."
+                  data-bs-title="Testimonial asociado."
                 >
                   <i
                     class="fas fa-exclamation-circle text-white"
@@ -1801,13 +1724,12 @@
                   <i class="fas fa-minus"></i>
                 </button>
               </div>
-
             </div>
           </div>
           <small
             *ngIf="
-            AccionDeGrupo.get('testimoniales')?.invalid &&
-            AccionDeGrupo.get('testimoniales')?.touched &&
+              AccionDeGrupo.get('testimoniales')?.invalid &&
+              AccionDeGrupo.get('testimoniales')?.touched &&
               isLast
             "
             class="text-danger"
@@ -1820,15 +1742,15 @@
           <div class="input-group">
             <textarea
               [class.is-invalid]="
-              AccionDeGrupo.get('testimoniales')?.invalid &&
-              AccionDeGrupo.get('testimoniales')?.touched &&
+                AccionDeGrupo.get('testimoniales')?.invalid &&
+                AccionDeGrupo.get('testimoniales')?.touched &&
                 isLast
               "
               rows="6"
               class="form-control"
               formControlName="contenido"
               id="testimoniales{{ i }}"
-              placeholder="testimoniales asociados"
+              placeholder="Testimoniales asociados"
               required
             ></textarea>
             <div *ngIf="isLast" class="float-end ms-2">
@@ -1851,12 +1773,11 @@
                 <i class="fas fa-minus"></i>
               </button>
             </div>
-
           </div>
           <small
             *ngIf="
-            AccionDeGrupo.get('testimoniales')?.invalid &&
-            AccionDeGrupo.get('testimoniales')?.touched &&
+              AccionDeGrupo.get('testimoniales')?.invalid &&
+              AccionDeGrupo.get('testimoniales')?.touched &&
               isLast
             "
             class="text-danger"
@@ -1866,12 +1787,6 @@
         </ng-container>
       </ng-container>
     </div>
-
-
-
-
-
-
 
     <div class="d-flex align-items-start mt-5">
       <div
@@ -1891,15 +1806,13 @@
       </div>
     </div>
 
-
-
-
-
     <div class="row">
       <!-- Input para la Ciudad -->
       <div class="col-md-6">
         <div class="form-group">
-          <label for="domicilioDemandado"><strong>Domicilio demandado</strong> -</label>
+          <label for="domicilioDemandado"
+            ><strong>Domicilio demandado</strong> -</label
+          >
           <label class="text-primary"><strong>(requerido)</strong></label>
           <div class="input-group">
             <input
@@ -1921,7 +1834,7 @@
               data-bs-toggle="tooltip"
               data-bs-placement="top"
               data-bs-custom-class="custom-tooltip"
-              data-bs-title="El domicilio."
+              data-bs-title="Ingresa el domicilio del demandado."
             >
               <i
                 class="fas fa-exclamation-circle text-white"
@@ -1942,38 +1855,37 @@
       </div>
 
       <div class="col-md-6">
-      <div class="form-group ">
-        <label for="ciudadDemandado"
-          ><strong>Ciudad demandado</strong>-</label
-        ><label class="text-primary"><strong>(requerido)</strong></label>
-        <!-- Icono de alerta y mensaje de ayuda -->
-        <div class="input-group">
-          <input
-            type="text"
-            class="form-control"
-            formControlName="ciudadDemandado"
-            id="ciudadDemandado"
-            placeholder="Ciudad en la que reside el demandado"
-                [class.is-invalid]="
+        <div class="form-group">
+          <label for="ciudadDemandado"><strong>Ciudad demandado</strong>-</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <!-- Icono de alerta y mensaje de ayuda -->
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="ciudadDemandado"
+              id="ciudadDemandado"
+              placeholder="Ciudad en la que reside el demandado"
+              [class.is-invalid]="
                 AccionDeGrupo.get('ciudadDemandado')?.invalid &&
                 AccionDeGrupo.get('ciudadDemandado')?.touched
               "
-          />
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            data-bs-custom-class="custom-tooltip"
-            data-bs-title="ciudad del demandado."
-          >
-            <i
-              class="fas fa-exclamation-circle text-white"
-              style="width: 25px; height: 25px"
-            ></i>
-          </button>
-        </div>
-         <small
+            />
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="Ciudad en la que reside el demandado."
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+          <small
             *ngIf="
               AccionDeGrupo.get('ciudadDemandado')?.invalid &&
               AccionDeGrupo.get('ciudadDemandado')?.touched
@@ -1982,20 +1894,17 @@
           >
             La ciudad del demandado es obligatorio
           </small>
+        </div>
       </div>
     </div>
-
-    </div>
-
-
-
-
 
     <div class="row">
       <!-- Input para la Ciudad -->
       <div class="col-md-6">
         <div class="form-group">
-          <label for="domicilioDemandante"><strong>Domicilio demandante</strong> -</label>
+          <label for="domicilioDemandante"
+            ><strong>Domicilio demandante</strong> -</label
+          >
           <label class="text-primary"><strong>(requerido)</strong></label>
           <div class="input-group">
             <input
@@ -2017,7 +1926,7 @@
               data-bs-toggle="tooltip"
               data-bs-placement="top"
               data-bs-custom-class="custom-tooltip"
-              data-bs-title="El domicilio."
+              data-bs-title="Ingresa el domicilio del demandante."
             >
               <i
                 class="fas fa-exclamation-circle text-white"
@@ -2038,38 +1947,38 @@
       </div>
 
       <div class="col-md-6">
-      <div class="form-group ">
-        <label for="ciudadDemandante"
-          ><strong>Ciudad demandante</strong>-</label
-        ><label class="text-primary"><strong>(requerido)</strong></label>
-        <!-- Icono de alerta y mensaje de ayuda -->
-        <div class="input-group">
-          <input
-            type="text"
-            class="form-control"
-            formControlName="ciudadDemandante"
-            id="ciudadDemandante"
-            placeholder="Ciudad en la que reside el demandante"
-                [class.is-invalid]="
+        <div class="form-group">
+          <label for="ciudadDemandante"
+            ><strong>Ciudad demandante</strong>-</label
+          ><label class="text-primary"><strong>(requerido)</strong></label>
+          <!-- Icono de alerta y mensaje de ayuda -->
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="ciudadDemandante"
+              id="ciudadDemandante"
+              placeholder="Ciudad en la que reside el demandante"
+              [class.is-invalid]="
                 AccionDeGrupo.get('ciudadDemandante')?.invalid &&
                 AccionDeGrupo.get('ciudadDemandante')?.touched
               "
-          />
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            data-bs-custom-class="custom-tooltip"
-            data-bs-title="ciudad del demandante."
-          >
-            <i
-              class="fas fa-exclamation-circle text-white"
-              style="width: 25px; height: 25px"
-            ></i>
-          </button>
-        </div>
-         <small
+            />
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="Ciudad en la que reside el demandante."
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+          <small
             *ngIf="
               AccionDeGrupo.get('ciudadDemandante')?.invalid &&
               AccionDeGrupo.get('ciudadDemandante')?.touched
@@ -2078,33 +1987,27 @@
           >
             La ciudad del demandante es obligatorio
           </small>
+        </div>
       </div>
     </div>
 
-    </div>
-
-
-
-
-
-
-    
     <div class="form-group mt-2">
-      <label for="abogadoSuscrito"><strong>Lugar subscripcion abogado </strong> - </label
+      <label for="abogadoSuscrito"
+        ><strong>Lugar subscripcion abogado </strong> - </label
       ><label class="text-primary"><strong>(requerido)</strong></label>
       <!-- Icono de alerta y mensaje de ayuda -->
       <div class="input-group">
         <input
           [class.is-invalid]="
-          AccionDeGrupo.get('abogadoSuscrito')?.invalid &&
+            AccionDeGrupo.get('abogadoSuscrito')?.invalid &&
             AccionDeGrupo.get('abogadoSuscrito')?.touched
           "
           class="form-control"
           formControlName="abogadoSuscrito"
           id="abogadoSuscrito"
-          placeholder="donde esta suscrito el abogado"
+          placeholder="Donde esta suscrito el abogado"
           required
-        >
+        />
         <div>
           <button
             type="button"
@@ -2112,7 +2015,7 @@
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             data-bs-custom-class="custom-tooltip"
-            data-bs-title="donde esta suscrito el abogado."
+            data-bs-title="Donde esta suscrito el abogado."
           >
             <i
               class="fas fa-exclamation-circle text-white"
@@ -2123,20 +2026,14 @@
       </div>
       <small
         *ngIf="
-        AccionDeGrupo.get('abogadoSuscrito')?.invalid &&
-        AccionDeGrupo.get('abogadoSuscrito')?.touched
+          AccionDeGrupo.get('abogadoSuscrito')?.invalid &&
+          AccionDeGrupo.get('abogadoSuscrito')?.touched
         "
         class="text-danger"
       >
-        el lugar es obligatorio
+        Lugar subscripcion abogado es obligatorio
       </small>
     </div>
-
-
-
-
-
-
 
     <!-- Botón de envío -->
     <div class="d-flex justify-content-center align-items-center mt-3 p-5">
@@ -2148,8 +2045,5 @@
         <i class="fas fa-file-alt me-2"></i> Descargar documento
       </button>
     </div>
-  
-
-
-</form>
+  </form>
 </div>

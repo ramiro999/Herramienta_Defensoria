@@ -96,7 +96,7 @@ export class HabeasCorpusComponent implements OnInit {
         'http://localhost:4200/assets/formats/template-habeas-corpus-1.docx',
         //"https://drive.google.com/uc?id=1JMQiqx0ORMZsz57C4SSRNLoFnb8NmQ1_",
         this.HabeasCorpus.value,
-        'habeas-corpus-1.docx');
+        'habeas-corpus-privación.docx');
 
     console.log('Formulario enviado', this.HabeasCorpus.value);
 }
