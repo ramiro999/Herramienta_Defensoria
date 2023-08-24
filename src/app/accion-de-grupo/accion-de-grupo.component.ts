@@ -48,47 +48,56 @@ export class AccionDeGrupoComponent {
 
     onSubmit() {
 
-      if (this.AccionDeGrupo.value.legalmenteConstituido == "entidad publica") {
+      if (this.AccionDeGrupo.value.competencia_1 == "Persona natural") {
+
+        this.AccionDeGrupo.patchValue({
+          competencia: "Es usted señor juez el competente para tramitar la presente acción de grupo, teniendo en cuenta que el demandado es una (persona natural o jurídica) particular."
+        });
+
+
+      }else if (this.AccionDeGrupo.value.competencia_1 == "Autoridad") {
 
         this.AccionDeGrupo.patchValue({
           competencia: "Es usted señor juez el competente para tramitar la presente acción de grupo, teniendo en cuenta que dentro de los demandados se encuentra una autoridad pública."
         });
 
-
-      }else if (this.AccionDeGrupo.value.legalmenteConstituido == "persona juridica") {
-
-        this.AccionDeGrupo.patchValue({
-          competencia: "Es usted señor juez el competente para tramitar la presente acción de grupo, teniendo en cuenta que el demandado es una jurídica."
-        });
-
-      
-
-      }else if (this.AccionDeGrupo.value.legalmenteConstituido == "persona natural") {
-
-        this.AccionDeGrupo.patchValue({
-          competencia: "Es usted señor juez el competente para tramitar la presente acción de grupo, teniendo en cuenta que el demandado es una persona natural."
-        });
       }
+    
 
+      const docData = { ...this.AccionDeGrupo.value }; // Clonar los datos del formulario
 
-      this.docGenerator.generateDocx(
-        'http://localhost:4200/assets/formats/template-accion-de-grupo.docx',
-        //"https://drive.google.com/uc?id=1JMQiqx0ORMZsz57C4SSRNLoFnb8NmQ1_",
-        this.AccionDeGrupo.value,
-        'accion-de-grupo');
-  
-  
-      console.log('Formulario enviado', this.AccionDeGrupo.value);
-    }
+  // Eliminar campos opcionales vacíos del objeto docData
+  if (!docData.documentalesSOLI.some((item: any) => item.contenido)) {
+    delete docData.documentalesSOLI;
+  }
+
+  if (!docData.periciales.some((item: any) => item.contenido)) {
+    delete docData.periciales;
+  }
+
+  if (!docData.testimoniales.some((item: any) => item.contenido)) {
+    delete docData.testimoniales;
+  }
+
+  // Generar el documento Word con docData
+  this.docGenerator.generateDocx(
+    'http://localhost:4200/assets/formats/template-accion-de-grupo.docx',
+    docData,
+    'accion-de-grupo'
+  );
+
+  console.log('Formulario enviado', docData);
+}
   
 
     initForm(): FormGroup {
       return this.fb.group({
         dirigido: ['', Validators.required],
         ciudad: ['', Validators.required],
-        nombreDemandado: ['', Validators.required],
+        entidadDemandada: ['', Validators.required],
+        representanteEntidad: ['', Validators.required],
         legalmenteConstituido: ['', Validators.required],
-        competencia: [''],
+        competencia_1: ['', Validators.required],
         razonDemanda: ['', Validators.required],
         nombreDemandante: ['', Validators.required],
         nombreAbogado: ['', Validators.required],
@@ -103,7 +112,8 @@ export class AccionDeGrupoComponent {
           day: 'numeric',
         }),
         hechos: this.fb.array( [ this.fb.group({contenido: ''}) ] ),
-        pretension: ['', Validators.required],
+        pretension_1: ['', Validators.required],
+        pretension_2: ['', Validators.required],
         valorPretension: ['', Validators.required],
         perjuicios: ['', Validators.required],
         criterios: ['', Validators.required],
@@ -288,10 +298,6 @@ export class AccionDeGrupoComponent {
     get testimoniales(): FormArray {
       return this.AccionDeGrupo.get('testimoniales') as FormArray;
     }
-
-
-
-
 
 
 }

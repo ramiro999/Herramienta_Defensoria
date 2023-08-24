@@ -1,13 +1,19 @@
 <div class="container mt-5">
   <h3>Acción de grupo</h3>
   <p>
-    Una acción de grupo, también conocida como acción colectiva o acción de
-    clase, se refiere a un proceso legal en el cual un grupo de personas con
-    intereses, que han sufrido daños o perjuicios similares debido a las mismas
-    circunstancias, se unen para presentar una demanda conjunta contra una parte
-    responsable. En lugar de presentar múltiples demandas individuales, los
-    miembros del grupo se agrupan en una sola demanda para buscar reparación por
-    los daños sufridos.
+    La acción de grupo o de clase es un mecanismo constitucional de defensa
+    judicial, interpuesta por un número plural o un conjunto de personas que
+    reúnen condiciones uniformes respeto de una misma causa que originó un
+    perjuicio o daño individual y, pretende el pago de una indemnización por los
+    daños causados. En lugar de presentar múltiples demandas individuales, los
+    miembros del grupo se agrupan en una sola demanda para buscar la reparación
+    por los daños sufridos. ¿A quien va dirigida la acción? Puede ser contra una
+    autoridad pública, un particular o contra los dos. Hay que dejar la opción
+    para seleccionar los dos. Cuando es contra autoridad pública, se presenta
+    ante Juez administrativo circuito (reparto) Cuando es contra un particular,
+    se presenta ante Juez Civil Circuito (reparto) Cuando se demandan los dos
+    (autoridad pública y particular) se presenta ante Juez administrativo
+    circuito
   </p>
 
   <form [formGroup]="AccionDeGrupo" (ngSubmit)="onSubmit()">
@@ -35,15 +41,23 @@
         ><strong>¿A quién va dirigida esta acción de grupo?</strong> -</label
       >
       <label class="text-primary"><strong>(requerido)</strong></label>
+      <div id="destinatarioHelpBlock" class="form-text" style="font-size: 14px">
+        Cuando es contra <strong>autoridad pública</strong>, se presenta ante
+        <strong>Juez administrativo circuito (reparto).</strong> Cuando es
+        contra un <strong>particular</strong>, se presenta ante
+        <strong>Juez Civil Circuito (reparto).</strong> Cuando se demandan los
+        dos (autoridad pública y particular) se presenta ante
+        <strong>Juez administrativo circuito.</strong>
+      </div>
       <div class="form-check">
         <input
           class="form-check-input"
           type="radio"
           formControlName="dirigido"
-          value="Juez administrativo"
+          value="Juez administrativo circuito (reparto)"
         />
         <label class="form-check-label" for="flexRadioDefault1">
-          Una autoridad publica
+          Juez administrativo circuito (reparto)
         </label>
       </div>
       <div class="form-check">
@@ -51,10 +65,22 @@
           class="form-check-input"
           type="radio"
           formControlName="dirigido"
-          value="Juez civil de circuito"
+          value="Juez Civil Circuito (reparto)"
         />
         <label class="form-check-label" for="flexRadioDefault2">
-          Un particular
+          Juez Civil Circuito (reparto)
+        </label>
+      </div>
+
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          formControlName="dirigido"
+          value="Juez administrativo circuito"
+        />
+        <label class="form-check-label" for="flexRadioDefault3">
+          Juez administrativo circuito
         </label>
       </div>
     </div>
@@ -107,20 +133,20 @@
 
       <div class="col-md-6">
         <div class="form-group">
-          <label for="nombreDemandado"
-            ><strong>Persona o entidad a la que demanda</strong>-</label
+          <label for="entidadDemandada"
+            ><strong>Entidad a la que demanda</strong>-</label
           ><label class="text-primary"><strong>(requerido)</strong></label>
           <!-- Icono de alerta y mensaje de ayuda -->
           <div class="input-group">
             <input
               type="text"
               class="form-control"
-              formControlName="nombreDemandado"
-              id="nombreDemandado"
-              placeholder="Nombre de la persona o entidad a la que demanda"
+              formControlName="entidadDemandada"
+              id="entidadDemandada"
+              placeholder="Entidad a la que demanda"
               [class.is-invalid]="
-                AccionDeGrupo.get('nombreDemandado')?.invalid &&
-                AccionDeGrupo.get('nombreDemandado')?.touched
+                AccionDeGrupo.get('entidadDemandada')?.invalid &&
+                AccionDeGrupo.get('entidadDemandada')?.touched
               "
             />
             <button
@@ -139,8 +165,8 @@
           </div>
           <small
             *ngIf="
-              AccionDeGrupo.get('nombreDemandado')?.invalid &&
-              AccionDeGrupo.get('nombreDemandado')?.touched
+              AccionDeGrupo.get('entidadDemandada')?.invalid &&
+              AccionDeGrupo.get('entidadDemandada')?.touched
             "
             class="text-danger"
           >
@@ -150,52 +176,50 @@
       </div>
     </div>
 
-    <div class="row">
-      <!-- Input para la Ciudad -->
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="ciudad"
-            ><strong>¿Como esta legalmente constituido?</strong> -</label
-          >
-          <label class="text-primary"><strong>(requerido)</strong></label>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              formControlName="legalmenteConstituido"
-              value="persona natural"
-            />
-            <label class="form-check-label" for="flexRadioDefault1">
-              Persona natural
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              formControlName="legalmenteConstituido"
-              value="persona juridica"
-            />
-            <label class="form-check-label" for="flexRadioDefault2">
-              Persona juridica
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              formControlName="legalmenteConstituido"
-              value="entidad publica"
-            />
-            <label class="form-check-label" for="flexRadioDefault2">
-              Entidad publica
-            </label>
-          </div>
-        </div>
+    <div class="form-group mt-2">
+      <label for="representanteEntidad">
+        <strong>Representante legal de la entidad demandada</strong> -
+      </label>
+      <label class="text-primary"><strong>(requerido)</strong></label>
+      <!-- Icono de alerta y mensaje de ayuda -->
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="representanteEntidad"
+          id="representanteEntidad"
+          placeholder="Representante legal de la entidad demandada"
+          [class.is-invalid]="
+            AccionDeGrupo.get('representanteEntidad')?.invalid &&
+            AccionDeGrupo.get('representanteEntidad')?.touched
+          "
+        />
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-custom-class="custom-tooltip"
+          data-bs-title="Nombre del representante legal de la entidad demandada"
+        >
+          <i
+            class="fas fa-exclamation-circle text-white"
+            style="width: 25px; height: 25px"
+          ></i>
+        </button>
       </div>
+      <small
+        *ngIf="
+          AccionDeGrupo.get('representanteEntidad')?.invalid &&
+          AccionDeGrupo.get('representanteEntidad')?.touched
+        "
+        class="text-danger"
+      >
+        El nombre del representante de la entidad es obligatorio
+      </small>
+    </div>
 
-      <div class="col-md-6">
-        <div class="form-group">
+        <div class="form-group mt-2">
           <label for="ciudad"><strong>¿Por que se demanda?</strong> -</label>
           <label class="text-primary"><strong>(requerido)</strong></label>
           <div class="form-check">
@@ -214,15 +238,14 @@
               class="form-check-input"
               type="radio"
               formControlName="razonDemanda"
-              value="omiciones"
+              value="omisiones"
             />
             <label class="form-check-label" for="flexRadioDefault2">
-              Por omiciones
+              Por omisiones
             </label>
           </div>
         </div>
-      </div>
-    </div>
+      
 
     <div class="d-flex align-items-start mt-5">
       <div
@@ -835,20 +858,73 @@
     </div>
 
     <div class="form-group mt-2">
-      <label for="pretension"><strong>PRETENSIÓN </strong> - </label
-      ><label class="text-primary"><strong>(requerido)</strong></label>
-      <!-- Icono de alerta y mensaje de ayuda -->
+      <label for="pretension"><strong>PRETENSIONES </strong> </label>
+      <div
+        id="destinatarioHelpBlock"
+        class="form-text"
+        style="font-size: 16px; color: black"
+      >
+        <strong>Primera pretensión:</strong> Condenar a la parte demandada
+      </div>
+      <div class="form-group mt-2">
+        <label for="pretension"><strong>Valor </strong> - </label
+        ><label class="text-primary"><strong>(requerido)</strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+        <div class="input-group">
+          <input
+            [class.is-invalid]="
+              AccionDeGrupo.get('valorPretension')?.invalid &&
+              AccionDeGrupo.get('valorPretension')?.touched
+            "
+            class="form-control"
+            formControlName="valorPretension"
+            id="valorPretension"
+            placeholder="Valor pretension"
+            required
+          />
+          <div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="Valor pretension."
+            >
+              <i
+                class="fas fa-exclamation-circle text-white"
+                style="width: 25px; height: 25px"
+              ></i>
+            </button>
+          </div>
+        </div>
+        <small
+          *ngIf="
+            AccionDeGrupo.get('valorPretension')?.invalid &&
+            AccionDeGrupo.get('valorPretension')?.touched
+          "
+          class="text-danger"
+        >
+          La pretension es obligatoria
+        </small>
+      </div>
+
+      <div class="form-group mt-2">
+        <label for="pretension_1"><strong>Causas pretensión</strong> -</label>
+        <label class="text-primary"><strong> (requerido) </strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+      </div>
       <div class="input-group">
         <textarea
           [class.is-invalid]="
-            AccionDeGrupo.get('pretension')?.invalid &&
-            AccionDeGrupo.get('pretension')?.touched
+            AccionDeGrupo.get('pretension_1')?.invalid &&
+            AccionDeGrupo.get('pretension_1')?.touched
           "
           rows="6"
           class="form-control"
-          formControlName="pretension"
-          id="pretension"
-          placeholder="Autoridad o particular encargada de cumplir o hacer cumplir la norma"
+          formControlName="pretension_1"
+          id="pretension_1"
+          placeholder="Causas presentandas en la pretensión."
           required
         ></textarea>
         <div>
@@ -858,7 +934,7 @@
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             data-bs-custom-class="custom-tooltip"
-            data-bs-title="Autoridad o particular encargada de cumplir o hacer cumplir la norma."
+            data-bs-title="Causas presentandas en la pretensión."
           >
             <i
               class="fas fa-exclamation-circle text-white"
@@ -869,31 +945,46 @@
       </div>
       <small
         *ngIf="
-          AccionDeGrupo.get('pretension')?.invalid &&
-          AccionDeGrupo.get('pretension')?.touched
+          AccionDeGrupo.get('pretension_1')?.invalid &&
+          AccionDeGrupo.get('pretension_1')?.touched
         "
         class="text-danger"
       >
         La pretension es obligatoria
       </small>
-    </div>
 
-    <div class="form-group mt-2">
-      <label for="pretension"><strong>Valor </strong> - </label
-      ><label class="text-primary"><strong>(requerido)</strong></label>
-      <!-- Icono de alerta y mensaje de ayuda -->
+      <div
+        id="destinatarioHelpBlock"
+        class="form-text"
+        style="font-size: 16px; color: black"
+      >
+        <strong>Segunda pretensión:</strong> Señalar los requisitos que deben
+        cumplir las personas que consideran haber sufrido un daño por los mismos
+        hechos y que no intervinieron en el proceso de acción de grupo, para que
+        se adhieran a los efectos de la sentencia y reclamar la indemnización
+        correspondiente.
+      </div>
+
+      <div class="form-group mt-2">
+        <label for="pretension_2"
+          ><strong>Requisitos pretensión</strong> -</label
+        >
+        <label class="text-primary"><strong> (requerido) </strong></label>
+        <!-- Icono de alerta y mensaje de ayuda -->
+      </div>
       <div class="input-group">
-        <input
+        <textarea
           [class.is-invalid]="
-            AccionDeGrupo.get('valorPretension')?.invalid &&
-            AccionDeGrupo.get('valorPretension')?.touched
+            AccionDeGrupo.get('pretension_2')?.invalid &&
+            AccionDeGrupo.get('pretension_2')?.touched
           "
+          rows="6"
           class="form-control"
-          formControlName="valorPretension"
-          id="valorPretension"
-          placeholder="Valor pretension"
+          formControlName="pretension_2"
+          id="pretension_2"
+          placeholder=" Señalar los requisitos que deben cumplir las personas que consideran haber sufrido un daño por los mismos hechos."
           required
-        />
+        ></textarea>
         <div>
           <button
             type="button"
@@ -901,7 +992,8 @@
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             data-bs-custom-class="custom-tooltip"
-            data-bs-title="Valor pretension."
+            data-bs-title=" Señalar los requisitos que deben cumplir las
+            personas que consideran haber sufrido un daño por los mismos hechos."
           >
             <i
               class="fas fa-exclamation-circle text-white"
@@ -912,18 +1004,28 @@
       </div>
       <small
         *ngIf="
-          AccionDeGrupo.get('valorPretension')?.invalid &&
-          AccionDeGrupo.get('valorPretension')?.touched
+          AccionDeGrupo.get('pretension_2')?.invalid &&
+          AccionDeGrupo.get('pretension_2')?.touched
         "
         class="text-danger"
       >
-        La pretension es obligatoria
+        Los requisitos de la pretension son obligatorios.
       </small>
     </div>
 
     <div class="form-group mt-2">
       <label for="perjuicios"><strong>Perjuicios causados </strong> - </label
       ><label class="text-primary"><strong>(requerido)</strong></label>
+      <div
+        id="destinatarioHelpBlock"
+        class="form-text"
+        style="font-size: 16px; color: black"
+      >
+        Estimación en pesos del daño colectivo e individual por cada persona que
+        demandó y de aquellos que eventualmente se adhieran a los efectos de la
+        sentencia
+      </div>
+
       <!-- Icono de alerta y mensaje de ayuda -->
       <div class="input-group">
         <textarea
@@ -972,6 +1074,24 @@
         </strong>
         - </label
       ><label class="text-primary"><strong>(requerido)</strong></label>
+
+      <div
+        id="destinatarioHelpBlock"
+        class="form-text"
+        style="font-size: 16px; color: black"
+      >
+        En este campo se debe:
+        <br />
+        1. Individualizar a los afectados, con nombre, documento de identidad y
+        domicilio.
+        <br />
+        2. Informar al despacho sobre el número de personas que pueden llegar a
+        adherirse a los efectos de la sentencia.
+        <br />
+        3. Señalar los criterios para su individualización, así como para que el
+        juez tase las indemnizaciones individuales y la colectiva.
+      </div>
+
       <!-- Icono de alerta y mensaje de ayuda -->
       <div class="input-group">
         <textarea
@@ -1009,7 +1129,7 @@
         "
         class="text-danger"
       >
-        El perjuicio es obligatorio
+        Los criterios son obligatorios.
       </small>
     </div>
 
@@ -1017,6 +1137,19 @@
       <label for="idefAccionada"
         ><strong>Identificacion de la parte accionada</strong> - </label
       ><label class="text-primary"><strong>(requerido)</strong></label>
+      <div
+        id="destinatarioHelpBlock"
+        class="form-text"
+        style="font-size: 16px; color: black"
+      >
+        Relacionar las personas naturales, jurídicas o entidades demandadas,
+        individualizándolas, esto es si se trata de una empresa, el nombre de
+        esta, el del representante legal, el domicilio: si se trata de una
+        entidad pública indicar si se trata de orden nacional, departamental o
+        municipal, el domicilio, el representante legal, su identificación,
+        domicilio.
+      </div>
+
       <!-- Icono de alerta y mensaje de ayuda -->
       <div class="input-group">
         <textarea
@@ -1062,6 +1195,15 @@
       <label for="procedencia">
         <strong>Procedencia de la accion de grupo </strong> - </label
       ><label class="text-primary"><strong>(requerido)</strong> </label>
+      <div
+      id="destinatarioHelpBlock"
+      class="form-text"
+      style="font-size: 16px; color: black"
+    >
+      Describa los argumentos de hecho y de derecho que considere necesarios
+      para que el juez acceda a las pretensiones de la demanda.
+
+    </div>
       <!-- Icono de alerta y mensaje de ayuda -->
 
       <ng-container
@@ -1137,7 +1279,7 @@
             "
             class="text-danger"
           >
-            La procedencia son obliogatoria
+            La procedencia es obligatoria
           </small>
         </ng-container>
 
@@ -1195,6 +1337,13 @@
     <div class="form-group mt-2">
       <label for="caducidad"><strong>Fecha caducidad </strong> - </label
       ><label class="text-primary"><strong>(requerido)</strong></label>
+      <div
+      id="destinatarioHelpBlock"
+      class="form-text"
+      style="font-size: 16px; color: black"
+    >
+      La fecha que se escribe es la de los hechos que causaron el daño.
+      </div>
       <!-- Icono de alerta y mensaje de ayuda -->
       <div class="input-group">
         <input
@@ -1392,7 +1541,7 @@
     <div class="form-group mt-2">
       <label for="documentalesSOLI">
         <strong>Documentales Solicitados</strong> - </label
-      ><label class="text-primary"><strong>(requerido)</strong> </label>
+      ><label class="text-primary"><strong>(opcional)</strong> </label>
       <!-- Icono de alerta y mensaje de ayuda -->
 
       <ng-container
@@ -1408,11 +1557,7 @@
         <ng-container *ngIf="isFirst" [formGroupName]="i">
           <div class="input-group">
             <textarea
-              [class.is-invalid]="
-                AccionDeGrupo.get('documentalesSOLI')?.invalid &&
-                AccionDeGrupo.get('documentalesSOLI')?.touched &&
-                isLast
-              "
+              
               rows="6"
               class="form-control"
               formControlName="contenido"
@@ -1460,26 +1605,11 @@
               </div>
             </div>
           </div>
-          <small
-            *ngIf="
-              AccionDeGrupo.get('documentalesSOLI')?.invalid &&
-              AccionDeGrupo.get('documentalesSOLI')?.touched &&
-              isLast
-            "
-            class="text-danger"
-          >
-            Los documentales son obligatorios
-          </small>
         </ng-container>
 
         <ng-container *ngIf="!isFirst" [formGroupName]="i">
           <div class="input-group">
             <textarea
-              [class.is-invalid]="
-                AccionDeGrupo.get('documentalesSOLI')?.invalid &&
-                AccionDeGrupo.get('documentalesSOLI')?.touched &&
-                isLast
-              "
               rows="6"
               class="form-control"
               formControlName="contenido"
@@ -1509,23 +1639,13 @@
               </button>
             </div>
           </div>
-          <small
-            *ngIf="
-              AccionDeGrupo.get('documentalesSOLI')?.invalid &&
-              AccionDeGrupo.get('documentalesSOLI')?.touched &&
-              isLast
-            "
-            class="text-danger"
-          >
-            Los documentales son obligatorios
-          </small>
         </ng-container>
       </ng-container>
     </div>
 
     <div class="form-group mt-2">
       <label for="periciales"> <strong>Periciales o tecnicas</strong> - </label
-      ><label class="text-primary"><strong>(requerido)</strong> </label>
+      ><label class="text-primary"><strong>(opcional)</strong> </label>
       <!-- Icono de alerta y mensaje de ayuda -->
 
       <ng-container
@@ -1541,11 +1661,6 @@
         <ng-container *ngIf="isFirst" [formGroupName]="i">
           <div class="input-group">
             <textarea
-              [class.is-invalid]="
-                AccionDeGrupo.get('periciales')?.invalid &&
-                AccionDeGrupo.get('periciales')?.touched &&
-                isLast
-              "
               rows="6"
               class="form-control"
               formControlName="contenido"
@@ -1593,26 +1708,12 @@
               </div>
             </div>
           </div>
-          <small
-            *ngIf="
-              AccionDeGrupo.get('periciales')?.invalid &&
-              AccionDeGrupo.get('periciales')?.touched &&
-              isLast
-            "
-            class="text-danger"
-          >
-            Los periciales son obligatorios
-          </small>
+          
         </ng-container>
 
         <ng-container *ngIf="!isFirst" [formGroupName]="i">
           <div class="input-group">
             <textarea
-              [class.is-invalid]="
-                AccionDeGrupo.get('periciales')?.invalid &&
-                AccionDeGrupo.get('periciales')?.touched &&
-                isLast
-              "
               rows="6"
               class="form-control"
               formControlName="contenido"
@@ -1642,23 +1743,14 @@
               </button>
             </div>
           </div>
-          <small
-            *ngIf="
-              AccionDeGrupo.get('periciales')?.invalid &&
-              AccionDeGrupo.get('periciales')?.touched &&
-              isLast
-            "
-            class="text-danger"
-          >
-            Los periciales son obligatorios
-          </small>
+          
         </ng-container>
       </ng-container>
     </div>
 
     <div class="form-group mt-2">
       <label for="testimoniales"> <strong>Testimoniales</strong> - </label
-      ><label class="text-primary"><strong>(requerido)</strong> </label>
+      ><label class="text-primary"><strong>(opcional)</strong> </label>
       <!-- Icono de alerta y mensaje de ayuda -->
 
       <ng-container
@@ -1674,11 +1766,6 @@
         <ng-container *ngIf="isFirst" [formGroupName]="i">
           <div class="input-group">
             <textarea
-              [class.is-invalid]="
-                AccionDeGrupo.get('testimoniales')?.invalid &&
-                AccionDeGrupo.get('testimoniales')?.touched &&
-                isLast
-              "
               rows="6"
               class="form-control"
               formControlName="contenido"
@@ -1726,26 +1813,12 @@
               </div>
             </div>
           </div>
-          <small
-            *ngIf="
-              AccionDeGrupo.get('testimoniales')?.invalid &&
-              AccionDeGrupo.get('testimoniales')?.touched &&
-              isLast
-            "
-            class="text-danger"
-          >
-            Los testimoniales son obligatorios
-          </small>
         </ng-container>
 
         <ng-container *ngIf="!isFirst" [formGroupName]="i">
           <div class="input-group">
             <textarea
-              [class.is-invalid]="
-                AccionDeGrupo.get('testimoniales')?.invalid &&
-                AccionDeGrupo.get('testimoniales')?.touched &&
-                isLast
-              "
+              
               rows="6"
               class="form-control"
               formControlName="contenido"
@@ -1774,19 +1847,52 @@
               </button>
             </div>
           </div>
-          <small
-            *ngIf="
-              AccionDeGrupo.get('testimoniales')?.invalid &&
-              AccionDeGrupo.get('testimoniales')?.touched &&
-              isLast
-            "
-            class="text-danger"
-          >
-            Los testimoniales son obligatorios
-          </small>
         </ng-container>
       </ng-container>
     </div>
+
+    <!-- Competencia-->
+    <div class="form-group mt-2">
+      <label for="competencia_1">
+        <strong>Competencia</strong> - </label
+      ><label class="text-primary"><strong>(requerido)</strong> </label>
+      <div
+      id="destinatarioHelpBlock"
+      class="form-text"
+      style="font-size: 16px; color: black"
+      >
+      Si el demandado es una persona natural o jurídica particular, la competencia la tiene el juez civil del circuito. 
+        <br>
+      Si el demandado es una autoridad o el daño lo causaron con particular, la competencia la tiene el juez administrativo del circuito.
+
+      <select
+            class="form-control"
+            formControlName="competencia_1"
+            id="competencia_1"
+            required
+          >
+            <option value="" disabled selected>
+              Seleccione una opción
+            </option>
+            <option value="Persona natural">Persona natural o juridica particular</option>
+            <option value="Autoridad">Autoridad o el daño lo causaron con particular</option>
+          </select>
+          <small
+            *ngIf="
+              AccionDeGrupo.get('competencia_1')?.invalid &&
+              AccionDeGrupo.get('competencia_1')?.touched
+            "
+            class="text-danger"
+          >
+            Por favor, seleccione una opción
+          </small>
+        </div>
+      </div>
+    
+
+
+
+
 
     <div class="d-flex align-items-start mt-5">
       <div
