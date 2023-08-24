@@ -88,6 +88,7 @@ export class AccionDeGrupoComponent {
 
   console.log('Formulario enviado', docData);
 }
+
   
 
     initForm(): FormGroup {

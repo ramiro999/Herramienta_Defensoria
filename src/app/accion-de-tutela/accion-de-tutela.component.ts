@@ -49,7 +49,7 @@ export class AccionDeTutelaComponent {
 
       onSubmit() {
         this.docGenerator.generateDocx(
-          'http://localhost:4200/assets/formats/template-accion-de-tutela.docx',
+          'assets/formats/template-accion-de-tutela.docx',
           this.AccionDeTutela.value,
           'accion-de-tutlea');
     

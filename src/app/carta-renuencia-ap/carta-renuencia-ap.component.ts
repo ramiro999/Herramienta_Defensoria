@@ -46,7 +46,7 @@ export class CartaRenuenciaApComponent {
 
     onSubmit() {
         this.docGenerator.generateDocx(
-            'http://localhost:4200/assets/formats/template-carta-renuencia-ap.docx',
+            'assets/formats/template-carta-renuencia-ap.docx',
             //"https://drive.google.com/uc?id=1JMQiqx0ORMZsz57C4SSRNLoFnb8NmQ1_",
             this.CartaRenuenciaAp.value,
             'carta-renuencia-acción-popular.docx');

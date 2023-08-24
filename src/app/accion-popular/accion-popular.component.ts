@@ -48,7 +48,7 @@ export class AccionPopularComponent {
 
   onSubmit() {
     this.docGenerator.generateDocx(
-      'http://localhost:4200/assets/formats/template-accion-popular.docx',
+      'assets/formats/template-accion-popular.docx',
       this.AccionPopular.value,
       'accion-popular');
     

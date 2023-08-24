@@ -50,7 +50,7 @@ export class AccionDeCumplimientoComponent {
 
   onSubmit() {
     this.docGenerator.generateDocx(
-      'http://localhost:4200/assets/formats/template-accion-de-cumplimiento.docx',
+      'assets/formats/template-accion-de-cumplimiento.docx',
       //"https://drive.google.com/uc?id=1JMQiqx0ORMZsz57C4SSRNLoFnb8NmQ1_",
       this.AccionDeCumplimiento.value,
       'accion-de-cumplimiento');

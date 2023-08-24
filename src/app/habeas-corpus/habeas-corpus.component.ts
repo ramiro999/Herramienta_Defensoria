@@ -93,7 +93,7 @@ export class HabeasCorpusComponent implements OnInit {
 
   onSubmit() {
     this.docGenerator.generateDocx(
-        'http://localhost:4200/assets/formats/template-habeas-corpus-1.docx',
+        'assets/formats/template-habeas-corpus-1.docx',
         //"https://drive.google.com/uc?id=1JMQiqx0ORMZsz57C4SSRNLoFnb8NmQ1_",
         this.HabeasCorpus.value,
         'habeas-corpus-privación.docx');
