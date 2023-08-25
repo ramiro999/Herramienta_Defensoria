@@ -51,42 +51,82 @@ export class AccionDeGrupoComponent {
       if (this.AccionDeGrupo.value.competencia_1 == "Persona natural") {
 
         this.AccionDeGrupo.patchValue({
-          competencia: "Es usted señor juez el competente para tramitar la presente acción de grupo, teniendo en cuenta que el demandado es una (persona natural o jurídica) particular."
+          competencia_1: "Es usted señor juez el competente para tramitar la presente acción de grupo, teniendo en cuenta que el demandado es una (persona natural o jurídica) particular."
         });
 
 
       }else if (this.AccionDeGrupo.value.competencia_1 == "Autoridad") {
 
         this.AccionDeGrupo.patchValue({
-          competencia: "Es usted señor juez el competente para tramitar la presente acción de grupo, teniendo en cuenta que dentro de los demandados se encuentra una autoridad pública."
+          competencia_1: "Es usted señor juez el competente para tramitar la presente acción de grupo, teniendo en cuenta que dentro de los demandados se encuentra una autoridad pública."
         });
 
       }
+
+
+      //documentalesSOLI
+      if (this.AccionDeGrupo.value.documentalesSOLI[0].contenido == "") {
+          
+        this.AccionDeGrupo.patchValue({
+          hasdocumentalesSOLI: false
+        });
+      }
+      else {
+        this.AccionDeGrupo.patchValue({
+          hasdocumentalesSOLI: true
+        });
+      }
+
+      //periciales
+      if (this.AccionDeGrupo.value.periciales[0].contenido == "") {
+          
+        this.AccionDeGrupo.patchValue({
+          haspericiales: false
+        });
+      }
+      else {
+        this.AccionDeGrupo.patchValue({
+          haspericiales: true
+        });
+      }
+
+      //testimoniales
+      if (this.AccionDeGrupo.value.testimoniales[0].contenido == "") {
+          
+        this.AccionDeGrupo.patchValue({
+          hastestimoniales: false
+        });
+      }
+      else {
+        this.AccionDeGrupo.patchValue({
+          hastestimoniales: true
+        });
+      }
     
 
-      const docData = { ...this.AccionDeGrupo.value }; // Clonar los datos del formulario
+      // const docData = { ...this.AccionDeGrupo.value }; // Clonar los datos del formulario
 
   // Eliminar campos opcionales vacíos del objeto docData
-  if (!docData.documentalesSOLI.some((item: any) => item.contenido)) {
-    delete docData.documentalesSOLI;
-  }
+ // if (!docData.documentalesSOLI.some((item: any) => item.contenido)) {
+   // delete docData.documentalesSOLI;
+  //}
 
-  if (!docData.periciales.some((item: any) => item.contenido)) {
-    delete docData.periciales;
-  }
+//  if (!docData.periciales.some((item: any) => item.contenido)) {
+ //   delete docData.periciales;
+  //}
 
-  if (!docData.testimoniales.some((item: any) => item.contenido)) {
-    delete docData.testimoniales;
-  }
+  //if (!docData.testimoniales.some((item: any) => item.contenido)) {
+   // delete docData.testimoniales;
+ // }
 
   // Generar el documento Word con docData
   this.docGenerator.generateDocx(
     'http://localhost:4200/assets/formats/template-accion-de-grupo.docx',
-    docData,
+    this.AccionDeGrupo.value,
     'accion-de-grupo'
   );
 
-  console.log('Formulario enviado', docData);
+  console.log('Formulario enviado', this.AccionDeGrupo.value);
 }
 
   
@@ -97,7 +137,6 @@ export class AccionDeGrupoComponent {
         ciudad: ['', Validators.required],
         entidadDemandada: ['', Validators.required],
         representanteEntidad: ['', Validators.required],
-        legalmenteConstituido: ['', Validators.required],
         competencia_1: ['', Validators.required],
         razonDemanda: ['', Validators.required],
         nombreDemandante: ['', Validators.required],
@@ -123,8 +162,11 @@ export class AccionDeGrupoComponent {
         procedencia: this.fb.array( [ this.fb.group({contenido: ''}) ] ),
         documentales: this.fb.array( [ this.fb.group({contenido: ''}) ] ),
         documentalesSOLI: this.fb.array( [ this.fb.group({contenido: ''}) ] ),
+        hasdocumentalesSOLI: [''],
         periciales: this.fb.array( [ this.fb.group({contenido: ''}) ] ),
+        haspericiales: [''],
         testimoniales: this.fb.array( [ this.fb.group({contenido: ''}) ] ),
+        hastestimoniales: [''],
         domicilioDemandado: ['', Validators.required],
         ciudadDemandado: ['', Validators.required],
         domicilioDemandante: ['', Validators.required],
@@ -161,19 +203,19 @@ export class AccionDeGrupoComponent {
 
     crearDocumentalSOLIFormGroup(): FormGroup {
       return this.fb.group({
-        contenido: ['', Validators.required]
+        contenido: ['']
       });
     }
 
     crearPericialFormGroup(): FormGroup {
       return this.fb.group({
-        contenido: ['', Validators.required]
+        contenido: ['']
       });
     }
 
     crearTestimonialFormGroup(): FormGroup {
       return this.fb.group({
-        contenido: ['', Validators.required]
+        contenido: ['']
       });
     }
 
